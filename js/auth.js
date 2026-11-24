@@ -39,6 +39,19 @@
     box.className = "alert alert-" + type + " auth-alert";
     box.textContent = message;
     box.hidden = false;
+
+    if (window.ParipulseNotify && message) {
+      window.ParipulseNotify.show(message, {
+        type:
+          type === "danger"
+            ? "error"
+            : type === "warning"
+              ? "warning"
+              : type === "success"
+                ? "success"
+                : "info"
+      });
+    }
   }
 
   function clearAlert() {
@@ -254,6 +267,12 @@
           if (forgotSuccess) {
             forgotSuccess.hidden = false;
           }
+          if (window.ParipulseNotify) {
+            window.ParipulseNotify.success(
+              "Password reset email sent. Check your inbox.",
+              { title: "Email sent" }
+            );
+          }
         });
     });
 
@@ -322,6 +341,11 @@
           resetForm.hidden = true;
           if (resetSuccess) {
             resetSuccess.hidden = false;
+          }
+          if (window.ParipulseNotify) {
+            window.ParipulseNotify.success("Your password has been updated.", {
+              title: "Password updated"
+            });
           }
           clearAlert();
         })

@@ -870,6 +870,11 @@
     var onCopied = function () {
       if (!copyAddressButton) return;
       copyAddressButton.textContent = "Copied";
+      if (window.ParipulseNotify) {
+        window.ParipulseNotify.success("Deposit address copied.", {
+          title: "Copied"
+        });
+      }
       window.setTimeout(function () {
         copyAddressButton.textContent = "Copy";
       }, 1600);

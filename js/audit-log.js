@@ -238,6 +238,11 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    if (window.ParipulseNotify) {
+      window.ParipulseNotify.success("Audit log CSV downloaded.", {
+        title: "Export"
+      });
+    }
     window.setTimeout(function () {
       URL.revokeObjectURL(url);
     }, 1000);
