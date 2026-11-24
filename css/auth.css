@@ -81,6 +81,11 @@ body::-webkit-scrollbar {
 
 .auth-brand__poster {
   opacity: 0.72;
+  transition: opacity 0.7s ease;
+}
+
+.auth-brand__media.is-ready .auth-brand__poster {
+  opacity: 0;
 }
 
 .auth-brand__video {
@@ -90,7 +95,7 @@ body::-webkit-scrollbar {
 }
 
 .auth-brand__video.is-ready {
-  opacity: 0.58;
+  opacity: 0.7;
 }
 
 .auth-brand__media::after {

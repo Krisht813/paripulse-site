@@ -9,6 +9,7 @@
 
   var video = document.getElementById("loginBackdrop");
   if (!video) return;
+  var media = video.closest(".auth-brand__media");
 
   var desktop = window.matchMedia("(min-width: 901px)");
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -27,6 +28,7 @@
 
   function showVideo() {
     video.classList.add("is-ready");
+    if (media) media.classList.add("is-ready");
   }
 
   video.addEventListener("playing", showVideo, { once: true });
@@ -34,6 +36,7 @@
     "error",
     function () {
       video.classList.remove("is-ready");
+      if (media) media.classList.remove("is-ready");
       video.removeAttribute("src");
       video.load();
     },
