@@ -219,8 +219,16 @@
       }
 
       setBusy(forgotSubmit, true, "Sending link…");
+      var resetOrigin = window.location.origin;
+      if (!resetOrigin || resetOrigin === "null") {
+        resetOrigin = "https://paripulsemanagement.com";
+      }
+      var actionCodeSettings = {
+        url: resetOrigin + "/reset-password/",
+        handleCodeInApp: true
+      };
       auth
-        .sendPasswordResetEmail(email)
+        .sendPasswordResetEmail(email, actionCodeSettings)
         .then(function () {
           forgotForm.hidden = true;
           if (forgotSuccess) {
