@@ -184,7 +184,7 @@
 
     setNote(
       data.staff
-        ? "Live data from Firestore. Users, wallets, transactions, reports and support are still demo."
+        ? "Live data from Firestore. Simulated funds only - no real crypto is accepted."
         : "Live data from Firestore.",
       false
     );

@@ -2,16 +2,15 @@
    Runtime configuration.
 
    dataMode:
-   - "demo"     localStorage demo data (current live site)
-   - "firebase" Firestore + callable functions
+   - "demo"     localStorage demo data
+   - "firebase" Firestore reads + Cloudflare Worker writes
 
-   Keep "demo" until the Firestore database and functions are
-   deployed. Change to "firebase" for the live rollout.
+   apiBase is the Worker URL. Leave it empty only if Cloud
+   Functions are deployed instead.
    ============================================================ */
 
 window.PARIPULSE_RUNTIME = {
-  dataMode: "demo",
-  // When set, callable writes go to the Cloudflare Worker instead of Firebase Functions.
-  // Example: "https://paripulse-api.example.workers.dev"
-  apiBase: ""
+  dataMode: "firebase",
+  // Cloudflare Worker API for all Firestore writes.
+  apiBase: "https://paripulse-api.paripulse-worker.workers.dev"
 };
