@@ -1128,7 +1128,7 @@
                       </span>
                       <input type="checkbox" id="prefWeeklySummary" />
                     </label>
-                    <p class="deposit-note">Preferences are saved locally until the backend is connected.</p>
+                    <p class="deposit-note" id="preferencesNote">Preferences are saved locally in this demo.</p>
                   </div>
                 </section>
               </div>
@@ -1156,7 +1156,7 @@
                     <div class="settings-row">
                       <span>
                         <strong>Active session</strong>
-                        <small>This browser · demo workspace</small>
+                        <small id="sessionNote">This browser · demo workspace</small>
                       </span>
                       <span class="status-pill status-pill--active">Current</span>
                     </div>
@@ -1173,7 +1173,7 @@
                   </div>
                 </section>
 
-                <section class="card page-panel">
+                <section class="card page-panel" id="demoDataCard">
                   <header class="card-header">
                     <h2 class="card-title">Demo data</h2>
                   </header>

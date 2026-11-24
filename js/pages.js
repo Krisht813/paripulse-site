@@ -946,6 +946,23 @@
       if (weeklySummary) weeklySummary.checked = !!admin.prefs.weeklySummary;
     }
 
+    var preferencesNote = document.getElementById("preferencesNote");
+    if (preferencesNote) {
+      preferencesNote.textContent = isLive
+        ? "Preferences are saved to your profile. Email delivery is not enabled yet."
+        : "Preferences are saved locally in this demo.";
+    }
+
+    var sessionNote = document.getElementById("sessionNote");
+    if (sessionNote) {
+      sessionNote.textContent = isLive
+        ? "This browser session"
+        : "This browser · demo workspace";
+    }
+
+    var demoDataCard = document.getElementById("demoDataCard");
+    if (demoDataCard) demoDataCard.hidden = isLive;
+
     var topbarName = document.querySelector(".user-name");
     var displayName = isLive
       ? live && live.fullName

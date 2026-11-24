@@ -3641,3 +3641,59 @@ body.deposit-modal-open {
 .settings-row > span:first-child {
   gap: 4px;
 }
+
+/* ---------- Settings page rhythm ---------- */
+
+#settingsView .page-panel .card-body {
+  padding: 20px;
+}
+
+#settingsView .page-panel:last-child {
+  margin-bottom: 0;
+}
+
+#settingsView .form-grid {
+  gap: 16px;
+}
+
+#settingsView .form-field {
+  gap: 7px;
+}
+
+#settingsView .form-actions {
+  margin-top: 4px;
+}
+
+#settingsView .settings-row {
+  gap: 18px;
+  padding: 14px 0;
+}
+
+#settingsView .settings-row > span:first-child {
+  gap: 3px;
+}
+
+#settingsView .settings-row .btn {
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+#settingsView .settings-row input[type="checkbox"] {
+  margin: 0;
+}
+
+#settingsView .settings-list .deposit-note {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--app-line);
+}
+
+@media (max-width: 575.98px) {
+  #settingsView .page-panel .card-body {
+    padding: 18px 16px;
+  }
+
+  #settingsView .settings-row {
+    gap: 12px;
+  }
+}
