@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/styles.css?v=20261124-10" />
+  <link rel="stylesheet" href="css/styles.css?v=20261124-11" />
 </head>
 <body>
   <div class="page">
@@ -387,6 +387,35 @@
                 <div class="request-list" id="requestList"></div>
               </div>
             </section>
+
+            <section class="card panel-card deposit-address-card" id="depositAddressCard">
+              <header class="card-header">
+                <h2 class="card-title">Deposit addresses</h2>
+                <span class="demo-badge ms-auto">Demo admin</span>
+              </header>
+              <div class="card-body">
+                <p class="deposit-note">Change the receiving address for each asset. Requests already submitted keep the address they used.</p>
+                <p class="request-feedback" id="addressFeedback" role="status" hidden></p>
+                <div class="address-grid">
+                  <label class="address-field" for="address-USDT-TRC20">
+                    <span>USDT · TRC20</span>
+                    <input class="deposit-receipt address-input" id="address-USDT-TRC20" type="text" autocomplete="off" spellcheck="false" />
+                  </label>
+                  <label class="address-field" for="address-BTC">
+                    <span>Bitcoin</span>
+                    <input class="deposit-receipt address-input" id="address-BTC" type="text" autocomplete="off" spellcheck="false" />
+                  </label>
+                  <label class="address-field" for="address-ETH">
+                    <span>Ethereum</span>
+                    <input class="deposit-receipt address-input" id="address-ETH" type="text" autocomplete="off" spellcheck="false" />
+                  </label>
+                </div>
+                <div class="address-card-foot">
+                  <p class="deposit-note">Demo validation only. Changing an address does not update requests already submitted.</p>
+                  <button class="btn btn-primary" type="button" id="saveAddresses">Save addresses</button>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </main>
@@ -522,6 +551,14 @@
             </div>
           </div>
 
+          <div class="deposit-warning" role="note">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 18 17H2L10 2.5Z" /><path d="M10 7.5v4" /><path d="M10 14.5h.01" /></svg>
+            <div>
+              <strong id="depositWarningTitle">Send only USDT on the TRC20 network.</strong>
+              <span id="depositWarningText">Any other asset or network may be lost permanently. Minimum demo deposit is $1.00. Demo rates may vary.</span>
+            </div>
+          </div>
+
           <label class="deposit-field-label" for="depositReceipt">Payment receipt / transaction ID</label>
           <input class="deposit-receipt" id="depositReceipt" type="text" autocomplete="off" placeholder="Paste receipt or tx ID" aria-describedby="depositReceiptHint" />
           <p class="deposit-field-hint" id="depositReceiptHint">Demo only. Duplicate receipt IDs are rejected.</p>
@@ -555,7 +592,8 @@
   <script src="js/firebase-config.js"></script>
   <script src="js/auth-guard.js"></script>
   <script src="js/logout-modal.js?v=20261124-3"></script>
-  <script src="js/deposits.js?v=20261124-4"></script>
+  <script src="js/deposits.js?v=20261124-5"></script>
   <script src="js/app.js?v=20261124"></script>
 </body>
 </html>
+

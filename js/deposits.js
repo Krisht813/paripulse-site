@@ -33,11 +33,22 @@
     }
   };
 
+  var DEFAULT_ADDRESSES = {
+    "USDT-TRC20": "DEMO-USDT-TRC20-NOT-VALID",
+    BTC: "DEMO-BTC-ADDRESS-NOT-VALID",
+    ETH: "DEMO-ETH-ADDRESS-NOT-VALID"
+  };
+
   function freshState() {
     return {
       balanceCents: DEFAULT_STATE.balanceCents,
       transactions: [],
-      requests: []
+      requests: [],
+      addresses: {
+        "USDT-TRC20": DEFAULT_ADDRESSES["USDT-TRC20"],
+        BTC: DEFAULT_ADDRESSES.BTC,
+        ETH: DEFAULT_ADDRESSES.ETH
+      }
     };
   }
 
@@ -57,6 +68,17 @@
       if (!Array.isArray(parsed.requests)) {
         parsed.requests = [];
       }
+      if (!parsed.addresses || typeof parsed.addresses !== "object") {
+        parsed.addresses = {};
+      }
+      Object.keys(DEFAULT_ADDRESSES).forEach(function (key) {
+        if (
+          typeof parsed.addresses[key] !== "string" ||
+          !parsed.addresses[key].trim()
+        ) {
+          parsed.addresses[key] = DEFAULT_ADDRESSES[key];
+        }
+      });
       return parsed;
     } catch (error) {
       return freshState();
@@ -93,6 +115,13 @@
       month: "short",
       year: "numeric"
     });
+  }
+
+  function getAddress(key) {
+    if (state.addresses && typeof state.addresses[key] === "string") {
+      return state.addresses[key];
+    }
+    return DEFAULT_ADDRESSES[key] || "";
   }
 
   function makeCell(text) {
@@ -228,6 +257,16 @@
       meta.appendChild(receipt);
       main.appendChild(meta);
 
+      if (request.address) {
+        var addressLine = document.createElement("span");
+        addressLine.className = "request-address";
+        addressLine.appendChild(document.createTextNode("To "));
+        var addressCode = document.createElement("code");
+        addressCode.textContent = request.address;
+        addressLine.appendChild(addressCode);
+        main.appendChild(addressLine);
+      }
+
       var date = document.createElement("small");
       date.className = "request-date";
       date.textContent = formatDate(request.date);
@@ -271,6 +310,7 @@
     renderDashboard();
     renderDepositTable();
     renderRequests();
+    renderAddressSettings();
 
     var depositBalance = document.getElementById("demoBalance");
     if (depositBalance) {
@@ -312,6 +352,15 @@
     if (navDepositsItem) {
       navDepositsItem.classList.toggle("active", showDeposits);
     }
+  }
+
+  function renderAddressSettings() {
+    Object.keys(DEFAULT_ADDRESSES).forEach(function (key) {
+      var input = document.getElementById("address-" + key);
+      if (input) {
+        input.value = getAddress(key);
+      }
+    });
   }
 
   function closeMobileDrawer() {
@@ -374,7 +423,10 @@
   var receiptInput = document.getElementById("depositReceipt");
   var pendingReceipt = document.getElementById("depositPendingReceipt");
   var creditedAmount = document.getElementById("depositCreditedAmount");
+  var warningTitle = document.getElementById("depositWarningTitle");
+  var warningText = document.getElementById("depositWarningText");
   var requestList = document.getElementById("requestList");
+  var saveAddressesButton = document.getElementById("saveAddresses");
   var lastFocused = null;
   var currentAmountCents = 0;
   var currentAssetKey = "USDT-TRC20";
@@ -529,7 +581,16 @@
     if (payAmount) payAmount.textContent = formatUSD(currentAmountCents);
     if (payAsset) payAsset.textContent = asset.label;
     if (payNetwork) payNetwork.textContent = asset.network;
-    if (payAddress) payAddress.textContent = asset.address;
+    if (payAddress) payAddress.textContent = getAddress(currentAssetKey);
+
+    if (warningTitle) {
+      warningTitle.textContent =
+        "Send only " + asset.label + " on the " + asset.network + " network.";
+    }
+    if (warningText) {
+      warningText.textContent =
+        "Any other asset or network may be lost permanently. Minimum demo deposit is $1.00. Demo rates may vary.";
+    }
 
     if (receiptInput) receiptInput.value = "";
     clearPayError();
@@ -586,6 +647,7 @@
       assetKey: currentAssetKey,
       asset: asset.display,
       network: asset.network,
+      address: getAddress(currentAssetKey),
       amountCents: currentAmountCents,
       status: "pending",
       date: now.toISOString()
@@ -617,6 +679,49 @@
     showFeedback.timer = window.setTimeout(function () {
       element.hidden = true;
     }, 4000);
+  }
+
+  function showAddressFeedback(message, isError) {
+    var element = document.getElementById("addressFeedback");
+    if (!element) return;
+    element.textContent = message;
+    element.hidden = false;
+    element.className =
+      "request-feedback" + (isError ? " is-error" : "");
+    window.clearTimeout(showAddressFeedback.timer);
+    showAddressFeedback.timer = window.setTimeout(function () {
+      element.hidden = true;
+    }, 4000);
+  }
+
+  function saveAddresses() {
+    var next = {};
+    var invalidInput = null;
+
+    Object.keys(DEFAULT_ADDRESSES).forEach(function (key) {
+      var input = document.getElementById("address-" + key);
+      var value = input ? input.value.trim() : "";
+      next[key] = value;
+      if (!/^[A-Za-z0-9:_-]{8,128}$/.test(value) && !invalidInput) {
+        invalidInput = input;
+      }
+    });
+
+    if (invalidInput) {
+      showAddressFeedback(
+        "Enter a valid address for each asset (8–128 characters).",
+        true
+      );
+      invalidInput.focus();
+      return;
+    }
+
+    state.addresses = next;
+    saveState();
+    render();
+    showAddressFeedback(
+      "Deposit addresses updated. New requests will use the new addresses."
+    );
   }
 
   function approveRequest(id) {
@@ -772,6 +877,10 @@
 
   if (copyAddressButton) {
     copyAddressButton.addEventListener("click", copyAddress);
+  }
+
+  if (saveAddressesButton) {
+    saveAddressesButton.addEventListener("click", saveAddresses);
   }
 
   if (requestList) {
