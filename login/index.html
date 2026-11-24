@@ -12,12 +12,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/auth.css?v=20261124-2" />
+  <link rel="stylesheet" href="css/auth.css?v=20261124-3" />
   <link rel="stylesheet" href="css/notifications.css?v=20261124-4" />
 </head>
 <body class="auth-body">
   <div class="auth-shell">
     <aside class="auth-brand">
+      <div class="auth-brand__media" aria-hidden="true">
+        <img class="auth-brand__poster" src="assets/login/ocean-waves-poster.jpg" alt="" />
+        <video
+          class="auth-brand__video"
+          id="loginBackdrop"
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="assets/login/ocean-waves-poster.jpg"
+        ></video>
+      </div>
+
       <a class="auth-logo" href="/" aria-label="Paripulse Management home">
         <img src="brand-mark.svg?v=20261124" alt="" />
         <span class="auth-wordmark">
@@ -82,6 +95,7 @@
   <script src="vendor/firebase/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/notifications.js?v=20261124-4"></script>
+  <script src="js/login-video.js?v=1"></script>
   <script src="js/auth.js?v=20261124-7"></script>
 </body>
 </html>
