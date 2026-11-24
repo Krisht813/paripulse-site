@@ -344,9 +344,9 @@ input {
   padding: clamp(38px, 5.2vh, 64px) 0 clamp(36px, 4.8vh, 58px);
   background:
     radial-gradient(
-      ellipse 30% 70% at 76% 44%,
-      rgba(255, 226, 222, 0.5) 0%,
-      rgba(255, 240, 238, 0.22) 45%,
+      ellipse 40% 80% at 68% 44%,
+      rgba(255, 220, 214, 0.55) 0%,
+      rgba(255, 235, 232, 0.3) 45%,
       rgba(255, 255, 255, 0) 72%
     ),
     #fff;
