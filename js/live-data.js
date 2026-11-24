@@ -262,6 +262,17 @@
     });
   }
 
+  function updateDepositMethod(input) {
+    return call("updateDepositMethod", {
+      asset: input.asset,
+      network: input.network,
+      minCents: input.minCents,
+      maxCents: input.maxCents,
+      enabled: input.enabled,
+      warning: input.warning
+    });
+  }
+
   function createTicket(input) {
     requireLive();
     var user = requireUser();
@@ -350,6 +361,7 @@
     setUserRole: setUserRole,
     updateProfile: updateProfile,
     updateDepositAddress: updateDepositAddress,
+    updateDepositMethod: updateDepositMethod,
     createTicket: createTicket,
     updateTicket: updateTicket,
     addUserNote: addUserNote,

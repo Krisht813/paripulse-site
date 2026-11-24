@@ -2788,6 +2788,23 @@ body.deposit-modal-open {
   border-color: var(--brand-red);
 }
 
+.method-settings {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--app-line);
+}
+
+.method-settings__title {
+  margin: 0 0 12px;
+  color: var(--app-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.method-settings .form-field {
+  margin-bottom: 0;
+}
+
 .status-pill--active {
   border-color: #abefc6;
   background: #ecfdf3;

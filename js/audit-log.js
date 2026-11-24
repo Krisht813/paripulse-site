@@ -26,6 +26,7 @@
     "user.role_change": "Role changed",
     "user.profile_update": "Profile updated",
     "deposit_method.update": "Deposit address updated",
+    "deposit_method.limits_update": "Deposit limits updated",
     "demo.seed": "Demo data seeded"
   };
 

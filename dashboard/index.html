@@ -136,7 +136,7 @@
 
         <div class="navbar-nav flex-row align-items-center ms-auto">
           <div class="nav-item dropdown">
-            <a class="nav-link user-chip" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link user-chip" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Account menu">
               <span class="avatar avatar-sm user-avatar">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6" /><path d="M4.8 20.4c.8-4 3.7-6.2 7.2-6.2s6.4 2.2 7.2 6.2" /></svg>
               </span>
@@ -419,6 +419,41 @@
                 <div class="address-card-foot">
                   <p class="deposit-note">Demo validation only. Changing an address does not update requests already submitted.</p>
                   <button class="btn btn-primary" type="button" id="saveAddresses">Save addresses</button>
+                </div>
+
+                <div class="method-settings" id="methodSettings" hidden>
+                  <h3 class="method-settings__title">Limits &amp; warnings</h3>
+                  <div class="form-grid">
+                    <label class="form-field">
+                      <span>Asset</span>
+                      <select id="methodAssetSelect">
+                        <option value="USDT-TRC20">USDT · TRC20</option>
+                        <option value="BTC-Bitcoin">Bitcoin</option>
+                        <option value="ETH-Ethereum">Ethereum</option>
+                      </select>
+                    </label>
+                    <label class="form-field">
+                      <span>Minimum (USD)</span>
+                      <input id="methodMin" type="text" inputmode="decimal" autocomplete="off" placeholder="1.00" />
+                    </label>
+                    <label class="form-field">
+                      <span>Maximum (USD)</span>
+                      <input id="methodMax" type="text" inputmode="decimal" autocomplete="off" placeholder="10000.00" />
+                    </label>
+                    <label class="form-field">
+                      <span>Enabled</span>
+                      <select id="methodEnabled">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                    </label>
+                    <label class="form-field form-field--full">
+                      <span>Warning</span>
+                      <textarea id="methodWarning" rows="2" maxlength="300" placeholder="Shown at checkout"></textarea>
+                    </label>
+                  </div>
+                  <p class="request-feedback" id="methodFeedback" role="status" hidden></p>
+                  <button class="btn btn-primary" type="button" id="saveMethod">Save limits</button>
                 </div>
               </div>
             </section>

@@ -308,6 +308,113 @@
       input.value = method ? method.address || "" : "";
       input.disabled = !method;
     });
+
+    var settings = document.getElementById("methodSettings");
+    if (settings) {
+      settings.hidden = methods.length === 0;
+      if (methods.length) fillMethodEditor();
+    }
+  }
+
+  function moneyToCents(value) {
+    var cleaned = String(value || "").replace(/,/g, "").trim();
+    if (!/^\d+(\.\d{1,2})?$/.test(cleaned)) return null;
+    var cents = Math.round(parseFloat(cleaned) * 100);
+    return cents > 0 ? cents : null;
+  }
+
+  function showMethodFeedback(message, isError) {
+    var element = document.getElementById("methodFeedback");
+    if (!element) return;
+    element.textContent = message || "";
+    element.hidden = !message;
+    element.className =
+      "request-feedback" + (isError ? " is-error" : "");
+  }
+
+  function fillMethodEditor() {
+    var select = document.getElementById("methodAssetSelect");
+    var min = document.getElementById("methodMin");
+    var max = document.getElementById("methodMax");
+    var enabled = document.getElementById("methodEnabled");
+    var warning = document.getElementById("methodWarning");
+    if (!select) return;
+
+    var method = methodsByKey[select.value];
+    if (!method) return;
+
+    if (min) min.value = ((method.minCents || 0) / 100).toFixed(2);
+    if (max) max.value = ((method.maxCents || 0) / 100).toFixed(2);
+    if (enabled) enabled.value = method.enabled === true ? "true" : "false";
+    if (warning) warning.value = method.warning || "";
+  }
+
+  function saveMethod() {
+    if (!isAdmin) return;
+
+    var select = document.getElementById("methodAssetSelect");
+    var minInput = document.getElementById("methodMin");
+    var maxInput = document.getElementById("methodMax");
+    var enabledInput = document.getElementById("methodEnabled");
+    var warningInput = document.getElementById("methodWarning");
+    var button = document.getElementById("saveMethod");
+
+    var method = select ? methodsByKey[select.value] : null;
+    if (!method) {
+      showMethodFeedback("Select a deposit method.", true);
+      return;
+    }
+
+    var minCents = moneyToCents(minInput ? minInput.value : "");
+    var maxCents = moneyToCents(maxInput ? maxInput.value : "");
+    var warning = warningInput ? warningInput.value.trim() : "";
+    var enabled = enabledInput ? enabledInput.value === "true" : true;
+
+    if (!minCents || !maxCents) {
+      showMethodFeedback("Enter valid minimum and maximum amounts.", true);
+      return;
+    }
+    if (minCents > maxCents) {
+      showMethodFeedback("Minimum cannot exceed maximum.", true);
+      return;
+    }
+    if (warning.length < 10 || warning.length > 300) {
+      showMethodFeedback("Enter a warning between 10 and 300 characters.", true);
+      return;
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.dataset.idleLabel = button.textContent;
+      button.textContent = "Saving…";
+    }
+
+    live
+      .updateDepositMethod({
+        asset: method.asset,
+        network: method.network,
+        minCents: minCents,
+        maxCents: maxCents,
+        enabled: enabled,
+        warning: warning
+      })
+      .then(function () {
+        showMethodFeedback("Deposit method updated.");
+        refresh();
+        window.dispatchEvent(new CustomEvent("paripulse:live-data-changed"));
+      })
+      .catch(function (error) {
+        showMethodFeedback(
+          (error && error.message) || "Could not update the deposit method.",
+          true
+        );
+      })
+      .then(function () {
+        if (button) {
+          button.disabled = false;
+          button.textContent = button.dataset.idleLabel || "Save limits";
+        }
+      });
   }
 
   function renderNotes() {
@@ -934,6 +1041,16 @@
   var saveAddressesButton = document.getElementById("saveAddresses");
   if (saveAddressesButton) {
     saveAddressesButton.addEventListener("click", saveAddresses);
+  }
+
+  var methodAssetSelect = document.getElementById("methodAssetSelect");
+  if (methodAssetSelect) {
+    methodAssetSelect.addEventListener("change", fillMethodEditor);
+  }
+
+  var saveMethodButton = document.getElementById("saveMethod");
+  if (saveMethodButton) {
+    saveMethodButton.addEventListener("click", saveMethod);
   }
 
   document.addEventListener("click", function (event) {
