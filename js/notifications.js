@@ -32,7 +32,9 @@
     "ticketFeedback",
     "profileFeedback",
     "userModalFeedback",
-    "walletAdjustError"
+    "walletAdjustError",
+    "depositError",
+    "depositPayError"
   ];
 
   var FEEDBACK_TITLES = {
@@ -43,7 +45,9 @@
     ticketFeedback: "Support",
     profileFeedback: "Settings",
     userModalFeedback: "User",
-    walletAdjustError: "Wallet"
+    walletAdjustError: "Wallet",
+    depositError: "Deposit",
+    depositPayError: "Deposit"
   };
 
   var ICONS = {

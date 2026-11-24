@@ -225,7 +225,8 @@
    render duplicate success/error banners. */
 body.pp-notifications-ready .request-feedback,
 body.pp-notifications-ready .form-feedback,
-body.pp-notifications-ready .auth-alert {
+body.pp-notifications-ready .auth-alert,
+body.pp-notifications-ready .deposit-error {
   display: none !important;
 }
 
