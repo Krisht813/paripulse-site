@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Paripulse pulse mark">
+  <rect width="512" height="512" rx="96" fill="#F65C5C" />
+  <circle cx="256" cy="256" r="158" fill="#FFFFFF" />
+
+  <!-- central split -->
+  <path d="M235 92 L253 92 L264 420 L236 420 Z" fill="#F65C5C" />
+
+  <!-- heartbeat cutout -->
+  <path
+    d="M98 256 H188 L208 300 L228 210 L240 90 L258 416 L278 256 L296 292 L314 256 H414"
+    fill="none"
+    stroke="#F65C5C"
+    stroke-width="20"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
