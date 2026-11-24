@@ -10,5 +10,8 @@
    ============================================================ */
 
 window.PARIPULSE_RUNTIME = {
-  dataMode: "demo"
+  dataMode: "demo",
+  // When set, callable writes go to the Cloudflare Worker instead of Firebase Functions.
+  // Example: "https://paripulse-api.example.workers.dev"
+  apiBase: ""
 };

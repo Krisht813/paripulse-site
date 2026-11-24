@@ -116,6 +116,19 @@
 
     ensureLiveSdk()
       .then(function () {
+        if (
+          window.ParipulseLive &&
+          window.PARIPULSE_RUNTIME &&
+          window.PARIPULSE_RUNTIME.apiBase
+        ) {
+          return withTimeout(
+            window.ParipulseLive.call("bootstrapUser", {
+              fullName: user.displayName || ""
+            }),
+            10000
+          );
+        }
+
         var bootstrap = firebase.functions().httpsCallable("bootstrapUser");
         return withTimeout(
           bootstrap({ fullName: user.displayName || "" }),
@@ -123,8 +136,8 @@
         );
       })
       .then(function (result) {
-        var profile =
-          result && result.data ? result.data.profile : null;
+        var payload = result && result.data ? result.data : result;
+        var profile = payload && payload.profile ? payload.profile : null;
         publish(user, profile);
       })
       .catch(function (error) {

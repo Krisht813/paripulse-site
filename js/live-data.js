@@ -215,6 +215,57 @@
 
   function call(name, data) {
     requireLive();
+    var runtime = window.PARIPULSE_RUNTIME || {};
+    var apiBase = runtime.apiBase;
+
+    if (apiBase) {
+      var user = window.firebase.auth().currentUser;
+      if (!user) return Promise.reject(new Error("Sign in required."));
+
+      return user
+        .getIdToken()
+        .then(function (token) {
+          return fetch(
+            String(apiBase).replace(/\/+$/, "") + "/api/" + name,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token
+              },
+              body: JSON.stringify({ data: data || {} })
+            }
+          );
+        })
+        .then(function (response) {
+          return response.text().then(function (text) {
+            var body = null;
+            try {
+              body = text ? JSON.parse(text) : null;
+            } catch (parseError) {
+              body = null;
+            }
+
+            if (!response.ok) {
+              var error = new Error(
+                (body && body.error && body.error.message) ||
+                  "The operation could not be completed."
+              );
+              error.code =
+                body && body.error && body.error.code
+                  ? body.error.code
+                  : "internal";
+              throw error;
+            }
+
+            if (!body || !Object.prototype.hasOwnProperty.call(body, "result")) {
+              throw new Error("The server returned an unexpected response.");
+            }
+            return body.result;
+          });
+        });
+    }
+
     var callable = window.firebase.functions().httpsCallable(name);
     return callable(data || {}).then(function (result) {
       return result.data;
