@@ -7,7 +7,11 @@
   "use strict";
 
   var STORAGE_KEY = "paripulse_demo_wallet_v1";
-  var DEFAULT_STATE = { balanceCents: 100000, transactions: [] };
+  var DEFAULT_STATE = {
+    balanceCents: 100000,
+    transactions: [],
+    requests: []
+  };
   var ASSETS = {
     "USDT-TRC20": {
       label: "USDT",
@@ -29,30 +33,37 @@
     }
   };
 
-  var state = loadState();
-
-  var dashboardView = document.getElementById("dashboardView");
-  var depositsView = document.getElementById("depositsView");
-  var navDashboardItem = document.getElementById("navDashboardItem");
-  var navDepositsItem = document.getElementById("navDepositsItem");
-  var navDashboard = document.getElementById("navDashboard");
-  var navDeposits = document.getElementById("navDeposits");
+  function freshState() {
+    return {
+      balanceCents: DEFAULT_STATE.balanceCents,
+      transactions: [],
+      requests: []
+    };
+  }
 
   function loadState() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) {
-        return { balanceCents: DEFAULT_STATE.balanceCents, transactions: [] };
+        return freshState();
       }
       var parsed = JSON.parse(raw);
-      if (typeof parsed.balanceCents !== "number" || !Array.isArray(parsed.transactions)) {
-        return { balanceCents: DEFAULT_STATE.balanceCents, transactions: [] };
+      if (
+        typeof parsed.balanceCents !== "number" ||
+        !Array.isArray(parsed.transactions)
+      ) {
+        return freshState();
+      }
+      if (!Array.isArray(parsed.requests)) {
+        parsed.requests = [];
       }
       return parsed;
     } catch (error) {
-      return { balanceCents: DEFAULT_STATE.balanceCents, transactions: [] };
+      return freshState();
     }
   }
+
+  var state = loadState();
 
   function saveState() {
     try {
@@ -90,6 +101,28 @@
     return td;
   }
 
+  var dashboardView = document.getElementById("dashboardView");
+  var depositsView = document.getElementById("depositsView");
+  var navDashboardItem = document.getElementById("navDashboardItem");
+  var navDepositsItem = document.getElementById("navDepositsItem");
+  var navDashboard = document.getElementById("navDashboard");
+  var navDeposits = document.getElementById("navDeposits");
+
+  function statusLabel(status) {
+    if (status === "approved") return "Approved";
+    if (status === "rejected") return "Rejected";
+    return "Pending review";
+  }
+
+  function findRequest(id) {
+    for (var i = 0; i < state.requests.length; i += 1) {
+      if (state.requests[i].id === id) {
+        return state.requests[i];
+      }
+    }
+    return null;
+  }
+
   function renderDepositTable() {
     var body = document.getElementById("depositRows");
     if (!body) {
@@ -102,7 +135,7 @@
       var emptyRow = document.createElement("tr");
       var emptyCell = document.createElement("td");
       emptyCell.colSpan = 5;
-      emptyCell.textContent = "No demo deposits yet.";
+      emptyCell.textContent = "No completed deposits yet.";
       emptyRow.appendChild(emptyCell);
       body.appendChild(emptyRow);
       return;
@@ -155,13 +188,111 @@
     }
   }
 
+  function renderRequests() {
+    var card = document.getElementById("depositReviewCard");
+    var list = document.getElementById("requestList");
+    if (!card || !list) {
+      return;
+    }
+
+    card.hidden = state.requests.length === 0;
+    list.innerHTML = "";
+
+    state.requests.forEach(function (request) {
+      var row = document.createElement("div");
+      row.className = "request-row";
+      row.setAttribute("data-request-id", request.id);
+
+      var main = document.createElement("div");
+      main.className = "request-main";
+
+      var status = document.createElement("span");
+      status.className =
+        "request-status request-status--" + (request.status || "pending");
+      status.textContent = statusLabel(request.status);
+      main.appendChild(status);
+
+      var title = document.createElement("strong");
+      title.className = "request-title";
+      title.textContent =
+        formatUSD(request.amountCents) +
+        " · " +
+        (request.asset || "USDT · TRC20");
+      main.appendChild(title);
+
+      var meta = document.createElement("span");
+      meta.className = "request-meta";
+      meta.appendChild(document.createTextNode("Receipt "));
+      var receipt = document.createElement("code");
+      receipt.textContent = request.receiptId;
+      meta.appendChild(receipt);
+      main.appendChild(meta);
+
+      var date = document.createElement("small");
+      date.className = "request-date";
+      date.textContent = formatDate(request.date);
+      main.appendChild(date);
+
+      var actions = document.createElement("div");
+      actions.className = "request-actions";
+
+      if (request.status === "pending") {
+        var approve = document.createElement("button");
+        approve.type = "button";
+        approve.className = "btn btn-sm btn-primary";
+        approve.setAttribute("data-approve", "true");
+        approve.textContent = "Approve";
+
+        var reject = document.createElement("button");
+        reject.type = "button";
+        reject.className = "btn btn-sm btn-light";
+        reject.setAttribute("data-reject", "true");
+        reject.textContent = "Reject";
+
+        actions.appendChild(approve);
+        actions.appendChild(reject);
+      } else {
+        var reviewed = document.createElement("span");
+        reviewed.className = "request-reviewed";
+        reviewed.textContent =
+          request.status === "approved"
+            ? "Funds credited"
+            : "No funds added";
+        actions.appendChild(reviewed);
+      }
+
+      row.appendChild(main);
+      row.appendChild(actions);
+      list.appendChild(row);
+    });
+  }
+
   function render() {
     renderDashboard();
     renderDepositTable();
+    renderRequests();
 
     var depositBalance = document.getElementById("demoBalance");
     if (depositBalance) {
       depositBalance.textContent = formatUSD(state.balanceCents);
+    }
+
+    var pendingTotal = 0;
+    state.requests.forEach(function (request) {
+      if (request.status === "pending") {
+        pendingTotal += request.amountCents;
+      }
+    });
+
+    var pendingLine = document.getElementById("demoPending");
+    if (pendingLine) {
+      if (pendingTotal > 0) {
+        pendingLine.hidden = false;
+        pendingLine.textContent = "Pending review: " + formatUSD(pendingTotal);
+      } else {
+        pendingLine.hidden = true;
+        pendingLine.textContent = "";
+      }
     }
   }
 
@@ -229,8 +360,9 @@
   var assetLabel = document.getElementById("depositAssetLabel");
   var assetNetwork = document.getElementById("depositAssetNetwork");
   var errorBox = document.getElementById("depositError");
+  var payErrorBox = document.getElementById("depositPayError");
   var continueButton = document.getElementById("depositContinue");
-  var simulateButton = document.getElementById("depositSimulate");
+  var submitButton = document.getElementById("depositSubmitRequest");
   var doneButton = document.getElementById("depositDone");
   var backButton = modal.querySelector("[data-deposit-back]");
   var quickAmounts = modal.querySelectorAll("[data-amount]");
@@ -238,7 +370,11 @@
   var payAsset = document.getElementById("depositPayAsset");
   var payNetwork = document.getElementById("depositPayNetwork");
   var payAddress = document.getElementById("depositAddress");
+  var copyAddressButton = document.getElementById("copyDepositAddress");
+  var receiptInput = document.getElementById("depositReceipt");
+  var pendingReceipt = document.getElementById("depositPendingReceipt");
   var creditedAmount = document.getElementById("depositCreditedAmount");
+  var requestList = document.getElementById("requestList");
   var lastFocused = null;
   var currentAmountCents = 0;
   var currentAssetKey = "USDT-TRC20";
@@ -249,16 +385,31 @@
     if (successStep) successStep.hidden = step !== "success";
   }
 
+  function setError(element, message) {
+    if (!element) return;
+    if (message) {
+      element.textContent = message;
+      element.hidden = false;
+    } else {
+      element.textContent = "";
+      element.hidden = true;
+    }
+  }
+
   function showError(message) {
-    if (!errorBox) return;
-    errorBox.textContent = message;
-    errorBox.hidden = false;
+    setError(errorBox, message);
   }
 
   function clearError() {
-    if (!errorBox) return;
-    errorBox.textContent = "";
-    errorBox.hidden = true;
+    setError(errorBox, "");
+  }
+
+  function showPayError(message) {
+    setError(payErrorBox, message);
+  }
+
+  function clearPayError() {
+    setError(payErrorBox, "");
   }
 
   function closeAssetMenu() {
@@ -309,19 +460,25 @@
     clearError();
   }
 
-  function openModal() {
-    lastFocused = document.activeElement;
+  function resetModal() {
     currentAmountCents = 0;
     currentAssetKey = "USDT-TRC20";
 
     if (amountInput) amountInput.value = "";
+    if (receiptInput) receiptInput.value = "";
     setAsset("USDT-TRC20");
     closeAssetMenu();
     Array.prototype.forEach.call(quickAmounts, function (button) {
       button.classList.remove("is-active");
     });
     clearError();
+    clearPayError();
     showStep("form");
+  }
+
+  function openModal() {
+    lastFocused = document.activeElement;
+    resetModal();
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
@@ -374,49 +531,156 @@
     if (payNetwork) payNetwork.textContent = asset.network;
     if (payAddress) payAddress.textContent = asset.address;
 
+    if (receiptInput) receiptInput.value = "";
+    clearPayError();
     showStep("pay");
+
+    if (receiptInput) {
+      window.setTimeout(function () {
+        receiptInput.focus();
+      }, 80);
+    }
   }
 
-  function simulatePayment() {
+  function submitRequest() {
+    clearPayError();
+
     if (!currentAmountCents) {
+      showStep("form");
       return;
     }
 
-    var amount = currentAmountCents;
-    var asset = ASSETS[currentAssetKey] || ASSETS["USDT-TRC20"];
-    var originalLabel = simulateButton ? simulateButton.textContent : "";
-
-    if (simulateButton) {
-      simulateButton.disabled = true;
-      simulateButton.textContent = "Confirming…";
+    var receipt = receiptInput ? receiptInput.value.trim() : "";
+    if (receipt.length < 6) {
+      showPayError("Enter the payment receipt or transaction ID.");
+      if (receiptInput) receiptInput.focus();
+      return;
+    }
+    if (receipt.length > 120) {
+      showPayError("Receipt ID is too long.");
+      if (receiptInput) receiptInput.focus();
+      return;
     }
 
-    window.setTimeout(function () {
-      var now = new Date();
-      var tx = {
-        id: "DEMO-" + String(now.getTime()).slice(-6),
-        asset: asset.display,
-        amountCents: amount,
-        status: "Completed",
-        date: now.toISOString()
-      };
-
-      state.balanceCents += amount;
-      state.transactions.unshift(tx);
-      saveState();
-      render();
-
-      if (creditedAmount) {
-        creditedAmount.textContent = formatUSD(amount);
+    var normalized = receipt.toUpperCase();
+    var duplicate = false;
+    state.requests.forEach(function (request) {
+      if (
+        String(request.receiptId || "").toUpperCase() === normalized
+      ) {
+        duplicate = true;
       }
-      showStep("success");
+    });
 
-      if (simulateButton) {
-        simulateButton.disabled = false;
-        simulateButton.textContent = originalLabel;
-      }
-      currentAmountCents = 0;
-    }, 1200);
+    if (duplicate) {
+      showPayError("This receipt ID has already been submitted.");
+      if (receiptInput) receiptInput.focus();
+      return;
+    }
+
+    var asset = ASSETS[currentAssetKey] || ASSETS["USDT-TRC20"];
+    var now = new Date();
+    var request = {
+      id: "REQ-" + String(now.getTime()).slice(-6),
+      receiptId: receipt,
+      assetKey: currentAssetKey,
+      asset: asset.display,
+      network: asset.network,
+      amountCents: currentAmountCents,
+      status: "pending",
+      date: now.toISOString()
+    };
+
+    state.requests.unshift(request);
+    saveState();
+    render();
+
+    if (creditedAmount) {
+      creditedAmount.textContent = formatUSD(request.amountCents);
+    }
+    if (pendingReceipt) {
+      pendingReceipt.textContent = "Receipt: " + request.receiptId;
+    }
+
+    showStep("success");
+    currentAmountCents = 0;
+  }
+
+  function showFeedback(message, isError) {
+    var element = document.getElementById("requestFeedback");
+    if (!element) return;
+    element.textContent = message;
+    element.hidden = false;
+    element.className =
+      "request-feedback" + (isError ? " is-error" : "");
+    window.clearTimeout(showFeedback.timer);
+    showFeedback.timer = window.setTimeout(function () {
+      element.hidden = true;
+    }, 4000);
+  }
+
+  function approveRequest(id) {
+    var request = findRequest(id);
+    if (!request || request.status !== "pending") {
+      return;
+    }
+
+    var now = new Date();
+    request.status = "approved";
+    request.reviewedAt = now.toISOString();
+
+    var tx = {
+      id: "DEP-" + request.id.replace(/^REQ-/, ""),
+      asset: request.asset,
+      amountCents: request.amountCents,
+      status: "Completed",
+      date: now.toISOString(),
+      receiptId: request.receiptId
+    };
+
+    state.balanceCents += request.amountCents;
+    state.transactions.unshift(tx);
+    saveState();
+    render();
+    showFeedback(
+      "Approved " + formatUSD(request.amountCents) + ". Demo balance updated."
+    );
+  }
+
+  function rejectRequest(id) {
+    var request = findRequest(id);
+    if (!request || request.status !== "pending") {
+      return;
+    }
+
+    request.status = "rejected";
+    request.reviewedAt = new Date().toISOString();
+    saveState();
+    render();
+    showFeedback("Request rejected. No funds were added.", true);
+  }
+
+  function copyAddress() {
+    if (!payAddress) return;
+    var text = payAddress.textContent;
+    if (!text) return;
+
+    var onCopied = function () {
+      if (!copyAddressButton) return;
+      copyAddressButton.textContent = "Copied";
+      window.setTimeout(function () {
+        copyAddressButton.textContent = "Copy";
+      }, 1600);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onCopied).catch(function () {
+        onCopied();
+      });
+      return;
+    }
+
+    onCopied();
   }
 
   if (openButton) {
@@ -431,17 +695,24 @@
     continueButton.addEventListener("click", continueToPay);
   }
 
-  if (simulateButton) {
-    simulateButton.addEventListener("click", simulatePayment);
+  if (submitButton) {
+    submitButton.addEventListener("click", submitRequest);
   }
 
   if (doneButton) {
-    doneButton.addEventListener("click", closeModal);
+    doneButton.addEventListener("click", function () {
+      closeModal();
+      var reviewCard = document.getElementById("depositReviewCard");
+      if (reviewCard && !reviewCard.hidden) {
+        reviewCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
   }
 
   if (backButton) {
     backButton.addEventListener("click", function () {
       closeAssetMenu();
+      clearPayError();
       showStep("form");
     });
   }
@@ -486,6 +757,41 @@
         );
       });
       clearError();
+    });
+  }
+
+  if (receiptInput) {
+    receiptInput.addEventListener("input", clearPayError);
+    receiptInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        submitRequest();
+      }
+    });
+  }
+
+  if (copyAddressButton) {
+    copyAddressButton.addEventListener("click", copyAddress);
+  }
+
+  if (requestList) {
+    requestList.addEventListener("click", function (event) {
+      var action = event.target.closest
+        ? event.target.closest("[data-approve], [data-reject]")
+        : null;
+      if (!action) return;
+
+      var row = action.closest(".request-row");
+      if (!row) return;
+
+      var id = row.getAttribute("data-request-id");
+      if (!id) return;
+
+      if (action.hasAttribute("data-approve")) {
+        approveRequest(id);
+      } else {
+        rejectRequest(id);
+      }
     });
   }
 

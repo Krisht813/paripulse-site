@@ -2063,3 +2063,247 @@ body.deposit-modal-open {
     font-size: 23px;
   }
 }
+
+/* ============================================================
+   Deposit requests / demo review queue
+   ============================================================ */
+
+.deposit-pending {
+  margin: 10px 0 16px;
+  color: #b54708;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.deposit-review-card {
+  margin-top: 16px;
+}
+
+.deposit-review-card .card-body {
+  padding-top: 14px;
+}
+
+.request-feedback {
+  padding: 9px 12px;
+  margin: 0 0 12px;
+  border: 1px solid #abefc6;
+  border-radius: 8px;
+  background: #ecfdf3;
+  color: #067647;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.request-feedback.is-error {
+  border-color: #fecdca;
+  background: #fef3f2;
+  color: #b42318;
+}
+
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.request-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--app-line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.request-main {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.request-status {
+  display: inline-flex;
+  width: max-content;
+  padding: 2px 7px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.request-status--pending {
+  border-color: #fedf89;
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.request-status--approved {
+  border-color: #abefc6;
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.request-status--rejected {
+  border-color: #fecdca;
+  background: #fef3f2;
+  color: #b42318;
+}
+
+.request-title {
+  color: var(--app-text);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.request-meta {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  color: var(--app-muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.request-meta code {
+  min-width: 0;
+  overflow: hidden;
+  color: #475467;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.request-date {
+  color: var(--app-muted-2);
+  font-size: 9.5px;
+  line-height: 1.3;
+}
+
+.request-actions {
+  display: flex;
+  flex: none;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.request-actions .btn {
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.request-reviewed {
+  color: var(--app-muted);
+  font-size: 10px;
+}
+
+.deposit-receipt {
+  width: 100%;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--app-text);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 12px;
+}
+
+.deposit-receipt::placeholder {
+  color: #98a2b3;
+}
+
+.deposit-receipt:focus {
+  outline: 0;
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 3px rgba(225, 29, 46, 0.09);
+}
+
+.checkout-address__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.checkout-address__row code {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  margin-top: 0;
+}
+
+.checkout-copy {
+  flex: none;
+  padding: 5px 8px;
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #475467;
+  font-size: 9.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.checkout-copy:hover {
+  border-color: #98a2b3;
+  background: #f9fafb;
+}
+
+.deposit-success-icon--pending {
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.deposit-success-icon svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.deposit-receipt-id {
+  margin: 0 0 10px;
+  color: var(--app-muted);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.45;
+  word-break: break-all;
+}
+
+.deposit-demo-hint {
+  margin: 0 0 16px;
+  color: #b54708;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .request-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .request-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .request-actions .btn {
+    flex: 1;
+  }
+}
