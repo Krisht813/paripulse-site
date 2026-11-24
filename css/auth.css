@@ -275,17 +275,19 @@ body::-webkit-scrollbar {
 }
 
 .auth-success {
-  padding: 18px;
-  border: 1px solid #abefc6;
-  border-radius: 8px;
-  background: #ecfdf3;
-  color: #067647;
+  margin-top: 16px;
+  padding: 16px 0 0;
+  border: 0;
+  border-top: 1px solid var(--auth-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--auth-muted);
   font-size: 12px;
   line-height: 1.6;
 }
 
 .auth-success a {
-  color: #067647;
+  color: var(--auth-red);
   font-weight: 600;
 }
 
