@@ -187,6 +187,17 @@
       .then(mapQuery);
   }
 
+  function listUserNotes(userId) {
+    requireLive();
+    return firestore()
+      .collection("userNotes")
+      .where("userId", "==", userId)
+      .orderBy("createdAt", "desc")
+      .limit(20)
+      .get()
+      .then(mapQuery);
+  }
+
   function getDepositMethods() {
     requireLive();
     return firestore()
@@ -290,6 +301,21 @@
     });
   }
 
+  function addUserNote(input) {
+    return call("addUserNote", {
+      userId: input.userId,
+      body: input.body
+    });
+  }
+
+  function updatePreferences(input) {
+    return call("updatePreferences", {
+      depositEmails: input.depositEmails,
+      loginAlerts: input.loginAlerts,
+      weeklySummary: input.weeklySummary
+    });
+  }
+
   function ping() {
     if (!enabled()) return Promise.resolve(false);
     return firestore()
@@ -314,6 +340,7 @@
     listWallets: listWallets,
     listAuditLogs: listAuditLogs,
     listTickets: listTickets,
+    listUserNotes: listUserNotes,
     getDepositMethods: getDepositMethods,
     getSettings: getSettings,
     adjustWallet: adjustWallet,
@@ -325,6 +352,8 @@
     updateDepositAddress: updateDepositAddress,
     createTicket: createTicket,
     updateTicket: updateTicket,
+    addUserNote: addUserNote,
+    updatePreferences: updatePreferences,
     call: call
   };
 })();

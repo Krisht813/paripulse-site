@@ -935,9 +935,16 @@
     var depositEmails = document.getElementById("prefDepositEmails");
     var loginAlerts = document.getElementById("prefLoginAlerts");
     var weeklySummary = document.getElementById("prefWeeklySummary");
-    if (depositEmails) depositEmails.checked = !!admin.prefs.depositEmails;
-    if (loginAlerts) loginAlerts.checked = !!admin.prefs.loginAlerts;
-    if (weeklySummary) weeklySummary.checked = !!admin.prefs.weeklySummary;
+    if (isLive) {
+      var prefs = (live && live.preferences) || {};
+      if (depositEmails) depositEmails.checked = prefs.depositEmails !== false;
+      if (loginAlerts) loginAlerts.checked = prefs.loginAlerts !== false;
+      if (weeklySummary) weeklySummary.checked = !!prefs.weeklySummary;
+    } else {
+      if (depositEmails) depositEmails.checked = !!admin.prefs.depositEmails;
+      if (loginAlerts) loginAlerts.checked = !!admin.prefs.loginAlerts;
+      if (weeklySummary) weeklySummary.checked = !!admin.prefs.weeklySummary;
+    }
 
     var topbarName = document.querySelector(".user-name");
     var displayName = isLive
@@ -1563,6 +1570,32 @@
       var input = document.getElementById(id);
       if (!input) return;
       input.addEventListener("change", function () {
+        if (liveMode()) {
+          var depositEmails = document.getElementById("prefDepositEmails");
+          var loginAlerts = document.getElementById("prefLoginAlerts");
+          var weeklySummary = document.getElementById("prefWeeklySummary");
+          window.ParipulseLive.updatePreferences({
+            depositEmails: depositEmails ? depositEmails.checked : true,
+            loginAlerts: loginAlerts ? loginAlerts.checked : true,
+            weeklySummary: weeklySummary ? weeklySummary.checked : false
+          })
+            .then(function (result) {
+              if (window.PARIPULSE_USER && window.PARIPULSE_USER.profile) {
+                window.PARIPULSE_USER.profile.preferences = result.preferences;
+              }
+              showFeedback("profileFeedback", "Notification preferences saved.");
+            })
+            .catch(function (error) {
+              showFeedback(
+                "profileFeedback",
+                (error && error.message) ||
+                  "Could not save notification preferences.",
+                true
+              );
+            });
+          return;
+        }
+
         var admin = loadAdmin();
         admin.prefs[id.replace("pref", "").charAt(0).toLowerCase() +
           id.replace("pref", "").slice(1)] = input.checked;

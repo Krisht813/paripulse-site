@@ -900,6 +900,13 @@
               <header class="card-header">
                 <h2 class="card-title">Audit log</h2>
                 <span class="demo-badge ms-auto" id="auditBadge">Admin</span>
+                <select class="toolbar__select audit-filter" id="auditActionFilter" aria-label="Filter audit actions">
+                  <option value="">All actions</option>
+                  <option value="wallet">Wallet</option>
+                  <option value="deposit">Deposits</option>
+                  <option value="user">Users</option>
+                  <option value="setting">Settings</option>
+                </select>
                 <button class="btn btn-light toolbar__export ms-2" type="button" id="exportAudit">Export CSV</button>
               </header>
               <div class="card-body page-panel__body">
@@ -1355,10 +1362,20 @@
           </label>
           <button class="btn btn-light" type="button" id="userRoleSave">Update role</button>
         </div>
-        <p class="deposit-note">Demo profile only. Production roles and status changes run through Cloud Functions with audit logs.</p>
+        <div class="user-notes" id="userNotesSection" hidden>
+          <div class="user-notes__head">
+            <strong>Internal notes</strong>
+            <span class="demo-badge">Admin</span>
+          </div>
+          <div class="user-notes__list" id="userNotesList"></div>
+          <textarea class="user-note-input" id="userNoteBody" maxlength="500" rows="2" placeholder="Add an internal note (admin only)"></textarea>
+          <button class="btn btn-light" type="button" id="userNoteAdd">Add note</button>
+        </div>
+        <p class="deposit-note">Role and status changes run through Cloud Functions and are written to the audit log.</p>
       </div>
       <div class="sheet-modal__foot">
         <button class="btn btn-light" type="button" id="userModalCancel">Close</button>
+        <button class="btn btn-light" type="button" id="userSendReset" hidden>Send reset email</button>
         <button class="btn btn-danger" type="button" id="userModalToggle">Block user</button>
       </div>
     </div>

@@ -81,6 +81,23 @@
     return td;
   }
 
+  function visibleEntries() {
+    var filter = document.getElementById("auditActionFilter");
+    var value = filter ? filter.value : "";
+    if (!value) return entries;
+
+    return entries.filter(function (entry) {
+      var action = String(entry.action || "");
+      if (value === "setting") {
+        return (
+          action.indexOf("setting.") === 0 ||
+          action.indexOf("deposit_method.") === 0
+        );
+      }
+      return action.indexOf(value + ".") === 0;
+    });
+  }
+
   function render() {
     var card = document.getElementById("auditCard");
     var body = document.getElementById("auditBody");
@@ -100,8 +117,9 @@
       if (badge) badge.textContent = "Demo";
     }
 
+    var visible = visibleEntries();
     body.innerHTML = "";
-    entries.forEach(function (entry) {
+    visible.forEach(function (entry) {
       var row = document.createElement("tr");
       row.appendChild(makeCell(formatDateTime(entry.time)));
       row.appendChild(makeCell(entry.actor || "—"));
@@ -111,7 +129,7 @@
       body.appendChild(row);
     });
 
-    if (empty) empty.hidden = entries.length > 0;
+    if (empty) empty.hidden = visible.length > 0;
   }
 
   function loadDemo() {
@@ -196,7 +214,7 @@
 
   function exportCsv() {
     var rows = [["Time", "Actor", "Action", "Entity", "Reason"]];
-    entries.forEach(function (entry) {
+    visibleEntries().forEach(function (entry) {
       rows.push([
         formatDateTime(entry.time),
         entry.actor || "",
@@ -226,6 +244,9 @@
 
   var exportButton = document.getElementById("exportAudit");
   if (exportButton) exportButton.addEventListener("click", exportCsv);
+
+  var actionFilter = document.getElementById("auditActionFilter");
+  if (actionFilter) actionFilter.addEventListener("change", render);
 
   window.addEventListener("paripulse:view", function (event) {
     if (event.detail && event.detail.view === "reports") refresh();

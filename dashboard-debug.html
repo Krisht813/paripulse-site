@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" data-bs-navbar-position="vertical">
+<head>
+  <base href="/">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0b1222" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261124" />
+  <title>Dashboard · Paripulse Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
+  <link rel="stylesheet" href="css/styles.css?v=20261124-11" />
+</head>
+<body>
+  <div class="page">
+    <!-- ============ Sidebar ============ -->
+    <aside class="navbar navbar-vertical navbar-expand-lg navbar-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-brand">
+          <a class="brand" href="/dashboard/" aria-label="Paripulse Management home">
+            <img class="brand-mark" src="brand-mark.svg?v=20261124" alt="" width="40" height="40" />
+            <span class="brand-copy">
+              <span class="brand-name">PARIPULSE</span>
+              <span class="brand-sub">MANAGEMENT</span>
+            </span>
+          </a>
+        </div>
+
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12" /><path d="M18 6 6 18" /></svg>
+        </button>
+
+        <div class="collapse navbar-collapse" id="sidebar-menu">
+          <div class="sidebar-label">Main Menu</div>
+
+          <ul class="navbar-nav">
+            <li class="nav-item active" id="navDashboardItem">
+              <a class="nav-link" href="#dashboard" aria-current="page" id="navDashboard">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8" /><path d="M5.5 9.3V20a1 1 0 0 0 1 1H10v-5.5h4V21h3.5a1 1 0 0 0 1-1V9.3" /></svg>
+                </span>
+                <span class="nav-link-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#users">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2" /><path d="M3.4 19.5c.6-3.3 2.8-5.2 5.6-5.2s5 1.9 5.6 5.2" /><path d="M15.5 5.2a3.2 3.2 0 0 1 0 5.6" /><path d="M17.3 14.6c2 .6 3.2 2.2 3.6 4.9" /></svg>
+                </span>
+                <span class="nav-link-title">Users</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#wallets">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v1.5" /><rect x="3" y="8.5" width="18" height="10.5" rx="2.4" /><path d="M16.5 13.7h.01" /></svg>
+                </span>
+                <span class="nav-link-title">Wallets</span>
+              </a>
+            </li>
+            <li class="nav-item" id="navDepositsItem">
+              <a class="nav-link" href="#deposits" id="navDeposits">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M4 21h16" /></svg>
+                </span>
+                <span class="nav-link-title">Deposits</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#transactions">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13" /><path d="m14 5 3 3-3 3" /><path d="M20 16H7" /><path d="m10 13-3 3 3 3" /></svg>
+                </span>
+                <span class="nav-link-title">Transactions</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#reports">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 20V11" /><path d="M12 20V4.5" /><path d="M19.5 20v-6" /></svg>
+                </span>
+                <span class="nav-link-title">Reports</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#support">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6" /><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .9-1 1.7" /><path d="M12 17h.01" /></svg>
+                </span>
+                <span class="nav-link-title">Support</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#settings">
+                <span class="nav-link-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 8.58a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" /></svg>
+                </span>
+                <span class="nav-link-title">Settings</span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="navbar-side">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <button class="nav-link" type="button" id="logoutButton" data-logout-trigger aria-haspopup="dialog" aria-controls="logoutModal">
+                  <span class="nav-link-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><path d="m16 17 5-5-5-5" /><path d="M21 12H9" /></svg>
+                  </span>
+                  <span class="nav-link-title">Logout</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <button class="sidebar-handle" id="sidebarHandle" type="button" aria-label="Collapse sidebar" aria-expanded="true" aria-controls="sidebar-menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
+    </button>
+
+    <!-- ============ Topbar ============ -->
+    <header class="navbar navbar-expand-md topbar d-print-none">
+      <div class="container-fluid">
+        <button class="topbar-icon-btn" id="sidebarToggle" type="button" aria-label="Toggle sidebar" aria-expanded="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg>
+        </button>
+
+        <div class="navbar-nav flex-row align-items-center ms-auto">
+          <div class="nav-item dropdown">
+            <a class="nav-link user-chip" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="avatar avatar-sm user-avatar">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6" /><path d="M4.8 20.4c.8-4 3.7-6.2 7.2-6.2s6.4 2.2 7.2 6.2" /></svg>
+              </span>
+              <span class="user-meta d-none d-sm-flex">
+                <span class="user-name">Mohsin Iqbal</span>
+                <span class="user-status"><span class="online-dot"></span>Online</span>
+              </span>
+              <svg class="user-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a class="dropdown-item" href="#settings">Profile</a>
+              <a class="dropdown-item" href="#settings">Account settings</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item text-danger" type="button" data-logout-trigger>Log out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ Content ============ -->
+    <div class="page-wrapper">
+      <main class="page-body">
+        <div class="container-fluid">
+          <div id="dashboardView">
+          <div class="dashboard-heading">
+            <h1 class="dashboard-title">Dashboard <span>Overview</span></h1>
+            <p class="dashboard-date">Today's Date: <strong id="todayDate">18 Sep 2026</strong></p>
+          </div>
+
+          <p class="live-data-note" id="liveDataNote" hidden></p>
+
+          <!-- KPI cards -->
+          <div class="row row-cards stats-row">
+            <div class="col-12 col-sm-6 col-xxl-3">
+              <article class="card stat-card stat-card--blue h-100">
+                <div class="card-body">
+                  <div class="stat-copy">
+                    <p class="stat-label">Total Balance</p>
+                    <div class="stat-value-row">
+                      <p class="stat-value" id="totalBalanceValue">$1000.00</p>
+                      <span class="stat-trend">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 11.2 6.2 7.5l2.3 2.3 4.7-4.7" /><path d="M9.6 5.1h3.6v3.6" /></svg>
+                        +12.4%
+                      </span>
+                    </div>
+                    <p class="stat-caption">Available Balance</p>
+                  </div>
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v1.5" /><rect x="3" y="8.5" width="18" height="10.5" rx="2.4" /><path d="M16.5 13.7h.01" /></svg>
+                  </span>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3">
+              <article class="card stat-card stat-card--green h-100">
+                <div class="card-body">
+                  <div class="stat-copy">
+                    <p class="stat-label">Total Users</p>
+                    <div class="stat-value-row">
+                      <p class="stat-value" id="totalUsersValue">0</p>
+                    </div>
+                    <p class="stat-caption">Registered Users</p>
+                  </div>
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" /><path d="M3.4 19.5c.6-3.3 2.8-5.2 5.6-5.2s5 1.9 5.6 5.2" /><path d="M15.5 5.2a3.2 3.2 0 0 1 0 5.6" /><path d="M17.3 14.6c2 .6 3.2 2.2 3.6 4.9" /></svg>
+                  </span>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3">
+              <article class="card stat-card stat-card--orange h-100">
+                <div class="card-body">
+                  <div class="stat-copy">
+                    <p class="stat-label">Total Transactions</p>
+                    <div class="stat-value-row">
+                      <p class="stat-value" id="totalTransactionsValue">0</p>
+                    </div>
+                    <p class="stat-caption">All Transactions</p>
+                  </div>
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 8h13" /><path d="m14 5 3 3-3 3" /><path d="M20 16H7" /><path d="m10 13-3 3 3 3" /></svg>
+                  </span>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3">
+              <article class="card stat-card stat-card--indigo h-100">
+                <div class="card-body">
+                  <div class="stat-copy">
+                    <p class="stat-label">Pending Requests</p>
+                    <div class="stat-value-row">
+                      <p class="stat-value" id="pendingRequestsValue">0</p>
+                    </div>
+                    <p class="stat-caption">Requires Attention</p>
+                  </div>
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" /><path d="M12 7.4V12l3.1 2" /></svg>
+                  </span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Panels -->
+          <div class="row row-cards dashboard-panels">
+            <div class="col-12 col-lg-7">
+              <section class="card panel-card h-100" aria-labelledby="transactions-title">
+                <header class="card-header">
+                  <h2 class="card-title" id="transactions-title">Recent Transactions</h2>
+                  <div class="card-actions">
+                    <a class="panel-link" href="#transactions">View All</a>
+                  </div>
+                </header>
+
+                <div class="table-responsive tx-table-wrap">
+                  <table class="table table-vcenter table-nowrap tx-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recentTransactionsBody"></tbody>
+                  </table>
+                </div>
+
+                <div class="tx-empty" id="txEmpty">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 3h14v18l-2.3-1.5L14.4 21l-2.4-1.5L9.6 21l-2.3-1.5L5 21V3Z" />
+                    <path d="M9 8h6" />
+                    <path d="M9 12h6" />
+                  </svg>
+                  <p>No transactions found</p>
+                  <span>New activity will appear here as it happens.</span>
+                </div>
+              </section>
+            </div>
+
+            <div class="col-12 col-lg-5">
+              <section class="card panel-card h-100" aria-labelledby="balance-title">
+                <header class="card-header">
+                  <h2 class="card-title" id="balance-title">Balance Overview</h2>
+                </header>
+
+                <div class="card-body balance-body">
+                  <div class="donut-wrap" role="img" aria-label="Main balance $1000.00 makes up the total balance">
+                    <svg class="donut" viewBox="0 0 200 200" aria-hidden="true">
+                      <circle class="donut-track" cx="100" cy="100" r="74" />
+                      <circle class="donut-value" cx="100" cy="100" r="74" />
+                    </svg>
+                    <div class="donut-center">
+                      <span class="donut-amount" id="donutTotal">$1000.00</span>
+                      <span class="donut-label">Total Balance</span>
+                    </div>
+                  </div>
+
+                  <ul class="balance-list">
+                    <li>
+                      <span class="balance-dot" style="--dot: #1552cc"></span>
+                      <span class="balance-label">Main Balance</span>
+                      <span class="balance-value" id="mainBalanceValue">$1000.00</span>
+                    </li>
+                    <li>
+                      <span class="balance-dot" style="--dot: #16994a"></span>
+                      <span class="balance-label">Bonus Balance</span>
+                      <span class="balance-value" id="bonusBalanceValue">$0.00</span>
+                    </li>
+                    <li>
+                      <span class="balance-dot" style="--dot: #2467dc"></span>
+                      <span class="balance-label">Commission</span>
+                      <span class="balance-value" id="commissionBalanceValue">$0.00</span>
+                    </li>
+                    <li>
+                      <span class="balance-dot" style="--dot: #ef8c00"></span>
+                      <span class="balance-label">Others</span>
+                      <span class="balance-value" id="otherBalanceValue">$0.00</span>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </div>
+          </div>
+          </div><!-- /dashboardView -->
+
+          <!-- ============ Deposits demo ============ -->
+          <div id="depositsView" hidden>
+            <div class="dashboard-heading">
+              <h1 class="dashboard-title">Deposits <span class="demo-badge">Demo mode</span></h1>
+              <p class="dashboard-date">Simulated payments only — no real funds.</p>
+            </div>
+
+            <p class="live-data-note" id="depositsLiveNote" hidden></p>
+
+            <div class="row row-cards deposit-layout">
+              <div class="col-12 col-lg-4">
+                <section class="card panel-card deposit-balance-card h-100">
+                  <header class="card-header">
+                    <h2 class="card-title">Available Balance</h2>
+                  </header>
+                  <div class="card-body deposit-balance-body">
+                    <p class="deposit-balance" id="demoBalance">$1,000.00</p>
+                    <p class="deposit-note">Demo credit only. No real crypto is accepted.</p>
+                    <p class="deposit-pending" id="demoPending" hidden></p>
+                    <button class="btn btn-primary w-100" type="button" id="openDepositModal">Add funds</button>
+                  </div>
+                </section>
+              </div>
+
+              <div class="col-12 col-lg-8">
+                <section class="card panel-card deposit-list-card h-100">
+                  <header class="card-header">
+                    <h2 class="card-title">Deposit Transactions</h2>
+                    <span class="demo-badge ms-auto">Demo</span>
+                  </header>
+                  <div class="table-responsive tx-table-wrap">
+                    <table class="table table-vcenter table-nowrap tx-table deposit-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Asset</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody id="depositRows">
+                        <tr id="depositEmpty">
+                          <td colspan="5">No demo deposits yet.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p class="deposit-note deposit-note--bottom">Simulated gateway. No addresses are real.</p>
+                </section>
+              </div>
+            </div>
+
+            <section class="card panel-card deposit-review-card" id="depositReviewCard" hidden>
+              <header class="card-header">
+                <h2 class="card-title">Deposit requests</h2>
+                <span class="demo-badge ms-auto">Demo admin</span>
+              </header>
+              <div class="card-body">
+                <p class="deposit-note">In production this queue is admin-only, with role checks and audit logs.</p>
+                <p class="request-feedback" id="requestFeedback" role="status" hidden></p>
+                <div class="request-list" id="requestList"></div>
+              </div>
+            </section>
+
+            <section class="card panel-card deposit-address-card" id="depositAddressCard">
+              <header class="card-header">
+                <h2 class="card-title">Deposit addresses</h2>
+                <span class="demo-badge ms-auto">Demo admin</span>
+              </header>
+              <div class="card-body">
+                <p class="deposit-note">Change the receiving address for each asset. Requests already submitted keep the address they used.</p>
+                <p class="request-feedback" id="addressFeedback" role="status" hidden></p>
+                <div class="address-grid">
+                  <label class="address-field" for="address-USDT-TRC20">
+                    <span>USDT · TRC20</span>
+                    <input class="deposit-receipt address-input" id="address-USDT-TRC20" type="text" autocomplete="off" spellcheck="false" />
+                  </label>
+                  <label class="address-field" for="address-BTC">
+                    <span>Bitcoin</span>
+                    <input class="deposit-receipt address-input" id="address-BTC" type="text" autocomplete="off" spellcheck="false" />
+                  </label>
+                  <label class="address-field" for="address-ETH">
+                    <span>Ethereum</span>
+                    <input class="deposit-receipt address-input" id="address-ETH" type="text" autocomplete="off" spellcheck="false" />
+                  </label>
+                </div>
+                <div class="address-card-foot">
+                  <p class="deposit-note">Demo validation only. Changing an address does not update requests already submitted.</p>
+                  <button class="btn btn-primary" type="button" id="saveAddresses">Save addresses</button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ============ Users ============ -->
+          <div id="usersView" hidden>
+            <div class="dashboard-heading">
+              <h1 class="dashboard-title">Users <span>Directory</span></h1>
+              <p class="dashboard-date">Demo accounts · no real customer data</p>
+            </div>
+
+            <div class="row row-cards stats-row">
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--blue h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Total Users</p>
+                      <div class="stat-value-row"><p class="stat-value" id="usersTotalValue">0</p></div>
+                      <p class="stat-caption">All accounts</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" /><path d="M3.4 19.5c.6-3.3 2.8-5.2 5.6-5.2s5 1.9 5.6 5.2" /><path d="M15.5 5.2a3.2 3.2 0 0 1 0 5.6" /><path d="M17.3 14.6c2 .6 3.2 2.2 3.6 4.9" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--green h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Active</p>
+                      <div class="stat-value-row"><p class="stat-value" id="usersActiveValue">0</p></div>
+                      <p class="stat-caption">Can sign in</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" /><path d="m8 12.2 2.6 2.6L16 9.4" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--orange h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Pending</p>
+                      <div class="stat-value-row"><p class="stat-value" id="usersPendingValue">0</p></div>
+                      <p class="stat-caption">Awaiting approval</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" /><path d="M12 7.4V12l3.1 2" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--indigo h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Blocked</p>
+                      <div class="stat-value-row"><p class="stat-value" id="usersBlockedValue">0</p></div>
+                      <p class="stat-caption">Access suspended</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" /><path d="m6.2 6.2 11.6 11.6" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <section class="card page-panel">
+              <header class="card-header">
+                <h2 class="card-title">All users</h2>
+                <span class="demo-badge ms-auto">Demo</span>
+              </header>
+              <div class="card-body page-panel__body">
+                <div class="toolbar">
+                  <label class="toolbar__search">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 4 4" /></svg>
+                    <input id="userSearch" type="search" placeholder="Search name or email" autocomplete="off" />
+                  </label>
+                  <select class="toolbar__select" id="userRoleFilter" aria-label="Filter users by role">
+                    <option value="">All roles</option>
+                    <option value="super_admin">Super admin</option>
+                    <option value="admin">Admin</option>
+                    <option value="support">Support</option>
+                    <option value="user">User</option>
+                  </select>
+                  <select class="toolbar__select" id="userStatusFilter" aria-label="Filter users by status">
+                    <option value="">All statuses</option>
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="blocked">Blocked</option>
+                  </select>
+                  <button class="btn btn-light toolbar__export" type="button" id="exportUsers">Export CSV</button>
+                </div>
+
+                <div class="table-responsive tx-table-wrap">
+                  <table class="table table-vcenter table-nowrap tx-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Balance</th>
+                        <th scope="col">Joined</th>
+                        <th scope="col" class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                  </table>
+                </div>
+
+                <div class="tx-empty" id="usersEmpty" hidden>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2" /><path d="M3.4 19.5c.6-3.3 2.8-5.2 5.6-5.2s5 1.9 5.6 5.2" /><path d="M15.5 5.2a3.2 3.2 0 0 1 0 5.6" /></svg>
+                  <p>No users match</p>
+                  <span>Try a different search or filter.</span>
+                </div>
+                <p class="table-foot" id="usersCount"></p>
+              </div>
+            </section>
+          </div>
+
+          <!-- ============ Wallets ============ -->
+          <div id="walletsView" hidden>
+            <div class="dashboard-heading">
+              <h1 class="dashboard-title">Wallets <span>Balances</span></h1>
+              <p class="dashboard-date">Demo balances only · no real funds</p>
+            </div>
+
+            <div class="row row-cards stats-row">
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--blue h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Total Held</p>
+                      <div class="stat-value-row"><p class="stat-value" id="walletTotalValue">$0.00</p></div>
+                      <p class="stat-caption">Across all demo wallets</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v1.5" /><rect x="3" y="8.5" width="18" height="10.5" rx="2.4" /><path d="M16.5 13.7h.01" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--green h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Main Balance</p>
+                      <div class="stat-value-row"><p class="stat-value" id="walletMainValue">$0.00</p></div>
+                      <p class="stat-caption">Withdrawable demo credit</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 3v18" /><path d="M17 7.5c-.8-1.4-2.4-2.2-4.5-2.2-2.6 0-4.3 1.2-4.3 3 0 1.9 1.7 2.7 4.6 3.3 3 .6 4.7 1.5 4.7 3.4 0 2-1.9 3.3-4.8 3.3-2.4 0-4.2-.9-5.1-2.4" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--orange h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Bonus Balance</p>
+                      <div class="stat-value-row"><p class="stat-value" id="walletBonusValue">$0.00</p></div>
+                      <p class="stat-caption">Promotional demo credit</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 3.5 14.7 9l6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.9 9.3 9 12 3.5Z" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--indigo h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Commission</p>
+                      <div class="stat-value-row"><p class="stat-value" id="walletCommissionValue">$0.00</p></div>
+                      <p class="stat-caption">Earned demo commission</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M4.5 20V11" /><path d="M12 20V4.5" /><path d="M19.5 20v-6" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <section class="card page-panel">
+              <header class="card-header">
+                <h2 class="card-title">Wallet balances</h2>
+                <span class="demo-badge ms-auto">Demo</span>
+              </header>
+              <div class="card-body page-panel__body">
+                <div class="wallet-feedback-wrap">
+                  <p class="request-feedback" id="walletFeedback" role="status" hidden></p>
+                </div>
+                <div class="table-responsive tx-table-wrap">
+                  <table class="table table-vcenter table-nowrap tx-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Main</th>
+                        <th scope="col">Bonus</th>
+                        <th scope="col">Commission</th>
+                        <th scope="col">Other</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="walletsTableBody"></tbody>
+                  </table>
+                </div>
+                <p class="table-foot">Balances are simulated in this browser and reset with demo data.</p>
+              </div>
+            </section>
+          </div>
+
+          <!-- ============ Transactions ============ -->
+          <div id="transactionsView" hidden>
+            <div class="dashboard-heading">
+              <h1 class="dashboard-title">Transactions <span>Ledger</span></h1>
+              <p class="dashboard-date">Every demo credit and debit in one place</p>
+            </div>
+
+            <div class="row row-cards stats-row">
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--green h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Total Credits</p>
+                      <div class="stat-value-row"><p class="stat-value" id="txCreditsValue">$0.00</p></div>
+                      <p class="stat-caption">Money in</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 21V3" /><path d="m6 9 6-6 6 6" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--orange h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Total Debits</p>
+                      <div class="stat-value-row"><p class="stat-value" id="txDebitsValue">$0.00</p></div>
+                      <p class="stat-caption">Money out</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 3v18" /><path d="m6 15 6 6 6-6" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--blue h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Net Flow</p>
+                      <div class="stat-value-row"><p class="stat-value" id="txNetValue">$0.00</p></div>
+                      <p class="stat-caption">Credits minus debits</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M4 8h13" /><path d="m14 5 3 3-3 3" /><path d="M20 16H7" /><path d="m10 13-3 3 3 3" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--indigo h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Entries</p>
+                      <div class="stat-value-row"><p class="stat-value" id="txCountValue">0</p></div>
+                      <p class="stat-caption">Ledger rows</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z" /><path d="M9 8h6" /><path d="M9 12h6" /><path d="M9 16h4" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <section class="card page-panel">
+              <header class="card-header">
+                <h2 class="card-title">All transactions</h2>
+                <span class="demo-badge ms-auto">Demo</span>
+              </header>
+              <div class="card-body page-panel__body">
+                <div class="toolbar">
+                  <label class="toolbar__search">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 4 4" /></svg>
+                    <input id="txSearch" type="search" placeholder="Search ID, user, or asset" autocomplete="off" />
+                  </label>
+                  <select class="toolbar__select" id="txTypeFilter" aria-label="Filter transactions by type">
+                    <option value="">All types</option>
+                    <option value="Deposit">Deposit</option>
+                    <option value="Admin credit">Admin credit</option>
+                    <option value="Admin debit">Admin debit</option>
+                    <option value="Bonus">Bonus</option>
+                    <option value="Commission">Commission</option>
+                    <option value="Adjustment">Adjustment</option>
+                  </select>
+                  <select class="toolbar__select" id="txStatusFilter" aria-label="Filter transactions by status">
+                    <option value="">All statuses</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Reversed">Reversed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+                  <button class="btn btn-light toolbar__export" type="button" id="exportTransactions">Export CSV</button>
+                </div>
+
+                <div class="table-responsive tx-table-wrap">
+                  <table class="table table-vcenter table-nowrap tx-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Asset</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody id="transactionsTableBody"></tbody>
+                  </table>
+                </div>
+
+                <div class="tx-empty" id="transactionsEmpty" hidden>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.3-1.5L14.4 21l-2.4-1.5L9.6 21l-2.3-1.5L5 21V3Z" /><path d="M9 8h6" /><path d="M9 12h6" /></svg>
+                  <p>No transactions match</p>
+                  <span>Try a different search or filter.</span>
+                </div>
+
+                <div class="pager" id="txPager" hidden>
+                  <button class="pager__btn" type="button" id="txPrev">Previous</button>
+                  <span class="pager__info" id="txPageInfo"></span>
+                  <button class="pager__btn" type="button" id="txNext">Next</button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ============ Reports ============ -->
+          <div id="reportsView" hidden>
+            <div class="dashboard-heading">
+              <h1 class="dashboard-title">Reports <span>Summary</span></h1>
+              <p class="dashboard-date">Demo analytics · generated from local data</p>
+            </div>
+
+            <div class="toolbar toolbar--page">
+              <select class="toolbar__select" id="reportPeriod" aria-label="Report period">
+                <option value="all">All time</option>
+                <option value="90">Last 90 days</option>
+                <option value="30">Last 30 days</option>
+              </select>
+              <button class="btn btn-light toolbar__export" type="button" id="exportReport">Export summary</button>
+            </div>
+
+            <div class="row row-cards stats-row">
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--blue h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Deposits</p>
+                      <div class="stat-value-row"><p class="stat-value" id="reportDepositsValue">$0.00</p></div>
+                      <p class="stat-caption">Approved demo deposits</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M4 21h16" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--green h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Credits</p>
+                      <div class="stat-value-row"><p class="stat-value" id="reportCreditsValue">$0.00</p></div>
+                      <p class="stat-caption">All money in</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 21V3" /><path d="m6 9 6-6 6 6" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--orange h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Debits</p>
+                      <div class="stat-value-row"><p class="stat-value" id="reportDebitsValue">$0.00</p></div>
+                      <p class="stat-caption">All money out</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 3v18" /><path d="m6 15 6 6 6-6" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <div class="col-12 col-sm-6 col-xxl-3">
+                <article class="card stat-card stat-card--indigo h-100">
+                  <div class="card-body">
+                    <div class="stat-copy">
+                      <p class="stat-label">Net Flow</p>
+                      <div class="stat-value-row"><p class="stat-value" id="reportNetValue">$0.00</p></div>
+                      <p class="stat-caption">Credits minus debits</p>
+                    </div>
+                    <span class="stat-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M4.5 20V11" /><path d="M12 20V4.5" /><path d="M19.5 20v-6" /></svg>
+                    </span>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="row row-cards">
+              <div class="col-12 col-lg-7">
+                <section class="card page-panel h-100">
+                  <header class="card-header">
+                    <h2 class="card-title">Deposit volume</h2>
+                    <span class="demo-badge ms-auto">Last 6 months</span>
+                  </header>
+                  <div class="card-body">
+                    <div class="report-bars" id="reportBars"></div>
+                  </div>
+                </section>
+              </div>
+              <div class="col-12 col-lg-5">
+                <section class="card page-panel h-100">
+                  <header class="card-header">
+                    <h2 class="card-title">Request status</h2>
+                  </header>
+                  <div class="card-body">
+                    <div class="status-breakdown" id="reportStatus"></div>
+                    <p class="table-foot">Counts include every deposit request stored in this browser.</p>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <section class="card page-panel">
+              <header class="card-header">
+                <h2 class="card-title">Deposit request log</h2>
+                <span class="demo-badge ms-auto">Demo</span>
+              </header>
+              <div class="card-body page-panel__body">
+                <div class="table-responsive tx-table-wrap">
+                  <table class="table table-vcenter table-nowrap tx-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Request</th>
+                        <th scope="col">Asset</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Submitted</th>
+                      </tr>
+                    </thead>
+                    <tbody id="reportRequestsBody"></tbody>
+                  </table>
+                </div>
+                <div class="tx-empty" id="reportRequestsEmpty" hidden>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.3-1.5L14.4 21l-2.4-1.5L9.6 21l-2.3-1.5L5 21V3Z" /><path d="M9 8h6" /><path d="M9 12h6" /></svg>
+                  <p>No deposit requests yet</p>
+                  <span>Submit a demo deposit to populate this report.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="card page-panel" id="auditCard" hidden>
+              <header class="card-header">
+                <h2 class="card-title">Audit log</h2>
+                <span class="demo-badge ms-auto" id="auditBadge">Admin</span>
+                <select class="toolbar__select audit-filter" id="auditActionFilter" aria-label="Filter audit actions">
+                  <option value="">All actions</option>
+                  <option value="wallet">Wallet</option>
+                  <option value="deposit">Deposits</option>
+                  <option value="user">Users</option>
+                  <option value="setting">Settings</option>
+                </select>
+                <button class="btn btn-light toolbar__export ms-2" type="button" id="exportAudit">Export CSV</button>
+              </header>
+              <div class="card-body page-panel__body">
+                <div class="table-responsive tx-table-wrap">
+                  <table class="table table-vcenter table-nowrap tx-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Time</th>
+                        <th scope="col">Actor</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Entity</th>
+                        <th scope="col">Reason</th>
+                      </tr>
+                    </thead>
+                    <tbody id="auditBody"></tbody>
+                  </table>
+                </div>
+                <div class="tx-empty" id="auditEmpty" hidden>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.3-1.5L14.4 21l-2.4-1.5L9.6 21l-2.3-1.5L5 21V3Z" /><path d="M9 8h6" /><path d="M9 12h6" /><path d="M9 16h4" /></svg>
+                  <p>No audit entries yet</p>
+                  <span>Financial and access changes will appear here.</span>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- ============ Support ============ -->
+          <div id="supportView" hidden>
+            <div class="dashboard-heading">
+              <h1 class="dashboard-title">Support <span>Help center</span></h1>
+              <p class="dashboard-date">Demo support desk · tickets stay in this browser</p>
+            </div>
+
+            <div class="row row-cards">
+              <div class="col-12 col-lg-5">
+                <section class="card page-panel h-100">
+                  <header class="card-header">
+                    <h2 class="card-title">Contact</h2>
+                  </header>
+                  <div class="card-body support-contact">
+                    <span class="support-contact__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>
+                    </span>
+                    <h3>Paripulse Support</h3>
+                    <p>Account, deposit, and access questions. Replies within one business day.</p>
+                    <a class="btn btn-primary" href="mailto:paripulse.support@gmail.com">Email support</a>
+                    <a class="support-contact__mail" href="mailto:paripulse.support@gmail.com">paripulse.support@gmail.com</a>
+                    <p class="deposit-note">Demo environment. Do not send passwords, private keys, or real payment details.</p>
+                  </div>
+                </section>
+              </div>
+              <div class="col-12 col-lg-7">
+                <section class="card page-panel h-100">
+                  <header class="card-header">
+                    <h2 class="card-title">Open a ticket</h2>
+                    <span class="demo-badge ms-auto">Demo</span>
+                  </header>
+                  <div class="card-body">
+                    <p class="request-feedback" id="ticketFeedback" role="status" hidden></p>
+                    <form class="form-grid" id="ticketForm" novalidate>
+                      <label class="form-field">
+                        <span>Subject</span>
+                        <input id="ticketSubject" type="text" maxlength="90" placeholder="Short summary" autocomplete="off" required />
+                      </label>
+                      <label class="form-field">
+                        <span>Category</span>
+                        <select id="ticketCategory">
+                          <option value="Account">Account</option>
+                          <option value="Deposits">Deposits</option>
+                          <option value="Access">Access</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </label>
+                      <label class="form-field form-field--full">
+                        <span>Message</span>
+                        <textarea id="ticketMessage" rows="4" maxlength="600" placeholder="Describe the issue" required></textarea>
+                      </label>
+                      <div class="form-actions form-field--full">
+                        <button class="btn btn-primary" type="submit">Submit ticket</button>
+                      </div>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <section class="card page-panel support-tickets" id="ticketsCard" hidden>
+              <header class="card-header">
+                <h2 class="card-title">Recent tickets</h2>
+                <span class="demo-badge ms-auto">Demo</span>
+              </header>
+              <div class="card-body page-panel__body">
+                <div class="ticket-list" id="ticketList"></div>
+              </div>
+            </section>
+
+            <section class="card page-panel support-faq">
+              <header class="card-header">
+                <h2 class="card-title">Common questions</h2>
+              </header>
+              <div class="card-body">
+                <details>
+                  <summary>How do demo deposits work?</summary>
+                  <p>Open Deposits, choose an amount and asset, then submit a demo receipt. A demo admin approves it from the review queue and the balance updates.</p>
+                </details>
+                <details>
+                  <summary>Is any real money involved?</summary>
+                  <p>No. Every address, balance, and transaction in this dashboard is simulated in your browser. Never send real funds to a demo address.</p>
+                </details>
+                <details>
+                  <summary>Why is my balance stored locally?</summary>
+                  <p>This build uses browser storage until the Firebase backend is connected. Clearing site data or resetting demo data restores the starting values.</p>
+                </details>
+                <details>
+                  <summary>How do I change my password?</summary>
+                  <p>Use Settings → Security to open the password reset flow. Reset emails are sent by Firebase Authentication.</p>
+                </details>
+              </div>
+            </section>
+          </div>
+
+          <!-- ============ Settings ============ -->
+          <div id="settingsView" hidden>
+            <div class="dashboard-heading">
+              <h1 class="dashboard-title">Settings <span>Workspace</span></h1>
+              <p class="dashboard-date">Profile, security, and demo data</p>
+            </div>
+
+            <div class="row row-cards">
+              <div class="col-12 col-lg-7">
+                <section class="card page-panel">
+                  <header class="card-header">
+                    <h2 class="card-title">Profile</h2>
+                  </header>
+                  <div class="card-body">
+                    <p class="request-feedback" id="profileFeedback" role="status" hidden></p>
+                    <form class="form-grid" id="profileForm" novalidate>
+                      <label class="form-field">
+                        <span>Full name</span>
+                        <input id="profileName" type="text" maxlength="80" autocomplete="name" />
+                      </label>
+                      <label class="form-field">
+                        <span>Email</span>
+                        <input id="profileEmail" type="email" autocomplete="email" readonly />
+                      </label>
+                      <label class="form-field">
+                        <span>Phone</span>
+                        <input id="profilePhone" type="tel" maxlength="30" autocomplete="tel" />
+                      </label>
+                      <label class="form-field">
+                        <span>Role</span>
+                        <input id="profileRole" type="text" value="Administrator" readonly />
+                      </label>
+                      <div class="form-actions form-field--full">
+                        <button class="btn btn-primary" type="submit">Save profile</button>
+                      </div>
+                    </form>
+                  </div>
+                </section>
+
+                <section class="card page-panel">
+                  <header class="card-header">
+                    <h2 class="card-title">Notifications</h2>
+                  </header>
+                  <div class="card-body settings-list">
+                    <label class="settings-row">
+                      <span>
+                        <strong>Deposit status emails</strong>
+                        <small>Notify me when a deposit is approved or rejected.</small>
+                      </span>
+                      <input type="checkbox" id="prefDepositEmails" />
+                    </label>
+                    <label class="settings-row">
+                      <span>
+                        <strong>Sign-in alerts</strong>
+                        <small>Email me when a new session signs in.</small>
+                      </span>
+                      <input type="checkbox" id="prefLoginAlerts" />
+                    </label>
+                    <label class="settings-row">
+                      <span>
+                        <strong>Weekly summary</strong>
+                        <small>Send a weekly balance and activity digest.</small>
+                      </span>
+                      <input type="checkbox" id="prefWeeklySummary" />
+                    </label>
+                    <p class="deposit-note">Preferences are saved locally until the backend is connected.</p>
+                  </div>
+                </section>
+              </div>
+
+              <div class="col-12 col-lg-5">
+                <section class="card page-panel">
+                  <header class="card-header">
+                    <h2 class="card-title">Security</h2>
+                  </header>
+                  <div class="card-body settings-list">
+                    <div class="settings-row">
+                      <span>
+                        <strong>Password</strong>
+                        <small>Reset through Firebase Authentication.</small>
+                      </span>
+                      <a class="btn btn-light btn-sm" href="/forgot-password/">Reset</a>
+                    </div>
+                    <div class="settings-row">
+                      <span>
+                        <strong>Two-factor authentication</strong>
+                        <small>Required before real money is enabled.</small>
+                      </span>
+                      <span class="demo-badge">Planned</span>
+                    </div>
+                    <div class="settings-row">
+                      <span>
+                        <strong>Active session</strong>
+                        <small>This browser · demo workspace</small>
+                      </span>
+                      <span class="status-pill status-pill--active">Current</span>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="card page-panel">
+                  <header class="card-header">
+                    <h2 class="card-title">Deposit addresses</h2>
+                  </header>
+                  <div class="card-body">
+                    <p class="deposit-note">Change the receiving address for USDT, Bitcoin, and Ethereum in the Deposits workspace.</p>
+                    <a class="btn btn-light w-100" href="#deposits">Manage deposit addresses</a>
+                  </div>
+                </section>
+
+                <section class="card page-panel">
+                  <header class="card-header">
+                    <h2 class="card-title">Demo data</h2>
+                  </header>
+                  <div class="card-body settings-list">
+                    <div class="settings-row">
+                      <span>
+                        <strong>Export data</strong>
+                        <small>Download wallet, users, and tickets as JSON.</small>
+                      </span>
+                      <button class="btn btn-light btn-sm" type="button" id="exportDemoData">Export</button>
+                    </div>
+                    <div class="settings-row">
+                      <span>
+                        <strong>Reset demo</strong>
+                        <small>Restore the starting balances and remove local changes.</small>
+                      </span>
+                      <button class="btn btn-danger btn-sm" type="button" id="resetDemoData">Reset</button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer footer-transparent d-print-none">
+        <div class="container-fluid">
+          <p class="footer-copy">© 2025–2026 Paripulse Management. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Logout confirmation -->
+  <div class="logout-modal" id="logoutModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="logoutModalTitle">
+    <div class="logout-modal__dialog" role="document">
+      <div class="logout-modal__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><path d="m16 17 5-5-5-5" /><path d="M21 12H9" /></svg>
+      </div>
+      <h3 class="logout-modal__title" id="logoutModalTitle">Log out?</h3>
+      <p class="logout-modal__text">You’ll need to sign in again to access the dashboard.</p>
+      <div class="logout-modal__actions">
+        <button type="button" class="btn btn-light" data-logout-cancel>Stay signed in</button>
+        <a href="/logout/" class="btn btn-danger" data-logout-confirm>Log out</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Demo deposit modal -->
+  <div class="deposit-modal" id="depositModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="depositModalTitle">
+    <div class="deposit-modal__dialog" role="document">
+      <div class="deposit-modal__header">
+        <div class="deposit-modal__heading">
+          <span class="deposit-modal__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M4 21h16" /></svg>
+          </span>
+          <div>
+            <h3 class="deposit-modal__title" id="depositModalTitle">Add funds</h3>
+            <p class="deposit-modal__sub">Demo mode · no real funds</p>
+          </div>
+        </div>
+        <button class="deposit-modal__close" type="button" data-deposit-close aria-label="Close">×</button>
+      </div>
+
+      <div class="deposit-modal__body">
+        <div id="depositFormStep">
+          <div class="demo-banner">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" /><path d="M10 9v5" /><path d="M10 6.5h.01" /></svg>
+            <div>
+              <strong>Simulation only</strong>
+              <span>These funds are for testing and never touch a real wallet.</span>
+            </div>
+          </div>
+
+          <label class="deposit-field-label" for="depositAmount">Amount</label>
+          <div class="deposit-amount">
+            <span class="deposit-amount__symbol">$</span>
+            <input id="depositAmount" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="depositAmountHint" />
+            <span class="deposit-amount__code">USD</span>
+          </div>
+
+          <div class="deposit-quick" role="group" aria-label="Quick amounts">
+            <button type="button" data-amount="100">$100</button>
+            <button type="button" data-amount="250">$250</button>
+            <button type="button" data-amount="500">$500</button>
+            <button type="button" data-amount="1000">$1,000</button>
+          </div>
+          <p class="deposit-field-hint" id="depositAmountHint">Minimum $1.00. Added to your demo balance.</p>
+
+          <span class="deposit-field-label">Pay with</span>
+          <div class="asset-select" id="assetSelect">
+            <button class="asset-select__trigger" type="button" id="depositAssetButton" aria-haspopup="listbox" aria-expanded="false" aria-controls="depositAssetMenu">
+              <span class="asset-mark asset-mark--usdt" id="depositAssetMark" aria-hidden="true">₮</span>
+              <span class="asset-select__copy">
+                <strong id="depositAssetLabel">USDT</strong>
+                <small id="depositAssetNetwork">TRC20 network</small>
+              </span>
+              <svg class="asset-select__chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+            </button>
+
+            <div class="asset-select__menu" id="depositAssetMenu" role="listbox" aria-label="Select asset" hidden>
+              <button class="asset-option is-selected" type="button" role="option" aria-selected="true" data-asset="USDT-TRC20" data-label="USDT" data-network="TRC20 network" data-mark="₮" data-mark-class="asset-mark--usdt">
+                <span class="asset-mark asset-mark--usdt" aria-hidden="true">₮</span>
+                <span><strong>USDT</strong><small>TRC20 network</small></span>
+                <span class="asset-option__check" aria-hidden="true">✓</span>
+              </button>
+              <button class="asset-option" type="button" role="option" aria-selected="false" data-asset="BTC" data-label="Bitcoin" data-network="Bitcoin network" data-mark="₿" data-mark-class="asset-mark--btc">
+                <span class="asset-mark asset-mark--btc" aria-hidden="true">₿</span>
+                <span><strong>Bitcoin</strong><small>Bitcoin network</small></span>
+                <span class="asset-option__check" aria-hidden="true">✓</span>
+              </button>
+              <button class="asset-option" type="button" role="option" aria-selected="false" data-asset="ETH" data-label="Ethereum" data-network="Ethereum network" data-mark="Ξ" data-mark-class="asset-mark--eth">
+                <span class="asset-mark asset-mark--eth" aria-hidden="true">Ξ</span>
+                <span><strong>Ethereum</strong><small>Ethereum network</small></span>
+                <span class="asset-option__check" aria-hidden="true">✓</span>
+              </button>
+            </div>
+
+            <input type="hidden" id="depositAsset" value="USDT-TRC20" />
+          </div>
+
+          <div class="deposit-error" id="depositError" role="alert" hidden></div>
+          <button class="btn btn-primary w-100 deposit-submit" type="button" id="depositContinue">Continue</button>
+        </div>
+
+        <div id="depositPayStep" hidden>
+          <button class="deposit-back" type="button" data-deposit-back>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15 10H5" /><path d="m9 6-4 4 4 4" /></svg>
+            Change amount
+          </button>
+
+          <div class="demo-banner">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" /><path d="M10 9v5" /><path d="M10 6.5h.01" /></svg>
+            <div>
+              <strong>Demo checkout</strong>
+              <span>Do not send real funds to this address.</span>
+            </div>
+          </div>
+
+          <div class="deposit-summary">
+            <span>Amount</span><strong id="depositPayAmount">$100.00</strong>
+            <span>Asset</span><strong id="depositPayAsset">USDT</strong>
+            <span>Network</span><strong id="depositPayNetwork">TRC20</strong>
+          </div>
+
+          <div class="checkout-address">
+            <div class="checkout-address__head">
+              <span>Demo address</span>
+              <span class="demo-pill">Not valid</span>
+            </div>
+            <div class="checkout-address__row">
+              <code id="depositAddress">DEMO-USDT-TRC20-NOT-VALID</code>
+              <button class="checkout-copy" type="button" id="copyDepositAddress">Copy</button>
+            </div>
+          </div>
+
+          <div class="deposit-warning" role="note">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 18 17H2L10 2.5Z" /><path d="M10 7.5v4" /><path d="M10 14.5h.01" /></svg>
+            <div>
+              <strong id="depositWarningTitle">Send only USDT on the TRC20 network.</strong>
+              <span id="depositWarningText">Any other asset or network may be lost permanently. Minimum demo deposit is $1.00. Demo rates may vary.</span>
+            </div>
+          </div>
+
+          <label class="deposit-field-label" for="depositReceipt">Payment receipt / transaction ID</label>
+          <input class="deposit-receipt" id="depositReceipt" type="text" autocomplete="off" placeholder="Paste receipt or tx ID" aria-describedby="depositReceiptHint" />
+          <p class="deposit-field-hint" id="depositReceiptHint">Demo only. Duplicate receipt IDs are rejected.</p>
+
+          <div class="deposit-error" id="depositPayError" role="alert" hidden></div>
+          <button class="btn btn-primary w-100 deposit-submit" type="button" id="depositSubmitRequest">Submit for review</button>
+          <button class="btn btn-light w-100 deposit-secondary" type="button" data-deposit-close>Cancel</button>
+        </div>
+
+        <div id="depositSuccessStep" hidden>
+          <div class="deposit-success-icon deposit-success-icon--pending" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 1.8" /></svg>
+          </div>
+          <p class="deposit-success-eyebrow">Request submitted</p>
+          <h4 class="deposit-success-title">Pending review</h4>
+          <p class="deposit-success-amount" id="depositCreditedAmount">$100.00</p>
+          <p class="deposit-receipt-id" id="depositPendingReceipt"></p>
+          <p class="deposit-modal__copy">An admin will verify the receipt before crediting your demo balance.</p>
+          <p class="deposit-demo-hint">Demo: use the review queue below to approve it.</p>
+          <button class="btn btn-primary w-100 deposit-submit" type="button" id="depositDone">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User detail modal -->
+  <div class="sheet-modal" id="userModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="userModalTitle">
+    <div class="sheet-modal__dialog" role="document">
+      <div class="sheet-modal__head">
+        <span class="user-initials user-initials--lg" id="userModalAvatar">MI</span>
+        <div class="sheet-modal__identity">
+          <h3 id="userModalTitle">User</h3>
+          <p id="userModalEmail"></p>
+        </div>
+        <button class="sheet-modal__close" type="button" id="userModalClose" aria-label="Close">×</button>
+      </div>
+      <div class="sheet-modal__body">
+        <dl class="detail-grid">
+          <div><dt>Role</dt><dd id="userModalRole">—</dd></div>
+          <div><dt>Status</dt><dd id="userModalStatus">—</dd></div>
+          <div><dt>Balance</dt><dd id="userModalBalance">—</dd></div>
+          <div><dt>Joined</dt><dd id="userModalJoined">—</dd></div>
+          <div><dt>Phone</dt><dd id="userModalPhone">—</dd></div>
+          <div><dt>User ID</dt><dd id="userModalId">—</dd></div>
+        </dl>
+        <p class="request-feedback" id="userModalFeedback" role="status" hidden></p>
+        <div class="role-editor" id="userRoleEditor" hidden>
+          <label class="form-field">
+            <span>Change role</span>
+            <select id="userRoleSelect">
+              <option value="user">User</option>
+              <option value="support">Support</option>
+              <option value="admin">Admin</option>
+              <option value="super_admin">Super admin</option>
+            </select>
+          </label>
+          <button class="btn btn-light" type="button" id="userRoleSave">Update role</button>
+        </div>
+        <div class="user-notes" id="userNotesSection" hidden>
+          <div class="user-notes__head">
+            <strong>Internal notes</strong>
+            <span class="demo-badge">Admin</span>
+          </div>
+          <div class="user-notes__list" id="userNotesList"></div>
+          <textarea class="user-note-input" id="userNoteBody" maxlength="500" rows="2" placeholder="Add an internal note (admin only)"></textarea>
+          <button class="btn btn-light" type="button" id="userNoteAdd">Add note</button>
+        </div>
+        <p class="deposit-note">Role and status changes run through Cloud Functions and are written to the audit log.</p>
+      </div>
+      <div class="sheet-modal__foot">
+        <button class="btn btn-light" type="button" id="userModalCancel">Close</button>
+        <button class="btn btn-light" type="button" id="userSendReset" hidden>Send reset email</button>
+        <button class="btn btn-danger" type="button" id="userModalToggle">Block user</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+  <!-- Wallet adjustment modal -->
+  <div class="sheet-modal" id="walletModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="walletModalTitle">
+    <div class="sheet-modal__dialog" role="document">
+      <div class="sheet-modal__head">
+        <span class="user-initials user-initials--lg" id="walletModalAvatar">MI</span>
+        <div class="sheet-modal__identity">
+          <h3 id="walletModalTitle">Wallet</h3>
+          <p id="walletModalEmail"></p>
+        </div>
+        <button class="sheet-modal__close" type="button" id="walletModalClose" aria-label="Close">×</button>
+      </div>
+      <div class="sheet-modal__body">
+        <div class="wallet-balance-line">
+          <span>Current main balance</span>
+          <strong id="walletModalBalance">$0.00</strong>
+        </div>
+        <p class="request-feedback is-error" id="walletAdjustError" role="alert" hidden></p>
+        <div class="form-grid">
+          <label class="form-field">
+            <span>Amount (USD)</span>
+            <input id="walletAdjustAmount" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off" />
+          </label>
+          <label class="form-field">
+            <span>Type</span>
+            <select id="walletAdjustType">
+              <option value="credit">Credit</option>
+              <option value="debit">Debit</option>
+            </select>
+          </label>
+          <label class="form-field form-field--full">
+            <span>Note (optional)</span>
+            <input id="walletAdjustNote" type="text" maxlength="80" placeholder="Reason for adjustment" autocomplete="off" />
+          </label>
+        </div>
+        <p class="deposit-note">Demo adjustment only. Changes are logged in the browser and in the transaction ledger.</p>
+      </div>
+      <div class="sheet-modal__foot">
+        <button class="btn btn-light" type="button" id="walletAdjustCancel">Cancel</button>
+        <button class="btn btn-primary" type="button" id="walletAdjustSave">Save adjustment</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/tabler/js/tabler.min.js"></script>
+  <script src="vendor/firebase/firebase-app-compat.js"></script>
+  <script src="vendor/firebase/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/runtime-config.js"></script>
+  <script src="js/live-data.js?v=20261124-1"></script>
+  <script src="js/logout-modal.js?v=20261124-3"></script>
+  <script src="js/deposits.js?v=20261124-7"></script>
+  <script src="js/pages.js?v=20261124-2"></script>
+  <script src="js/live-dashboard.js?v=20261124-1"></script>
+  <script src="js/live-deposits.js?v=20261124-1"></script>
+  <script src="js/live-admin.js?v=20261124-1"></script>
+  <script src="js/live-finance.js?v=20261124-1"></script>
+  <script src="js/live-support.js?v=20261124-1"></script>
+  <script src="js/audit-log.js?v=20261124-1"></script>
+  <script src="js/router.js?v=20261124-1"></script>
+  <script src="js/app.js?v=20261124"></script>
+</body>
+</html>
+

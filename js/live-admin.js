@@ -289,7 +289,7 @@
 
         var actions = document.createElement("td");
         actions.className = "text-end";
-        if (isAdmin) {
+        if (isAdmin && user.id !== currentUserId()) {
           var adjustButton = document.createElement("button");
           adjustButton.type = "button";
           adjustButton.className = "btn btn-sm btn-light";
@@ -368,6 +368,133 @@
       "request-feedback" + (isError ? " is-error" : "");
   }
 
+  function loadUserNotes(uid) {
+    var list = document.getElementById("userNotesList");
+    if (!list) return;
+
+    list.innerHTML = '<p class="user-notes__empty">Loading…</p>';
+    live
+      .listUserNotes(uid)
+      .then(function (notes) {
+        if (activeUserId !== uid) return;
+        list.innerHTML = "";
+
+        if (!notes.length) {
+          list.innerHTML =
+            '<p class="user-notes__empty">No internal notes yet.</p>';
+          return;
+        }
+
+        notes.forEach(function (note) {
+          var item = document.createElement("div");
+          item.className = "user-note";
+
+          var body = document.createElement("p");
+          body.textContent = note.body || "";
+
+          var meta = document.createElement("small");
+          var creator = userMap[note.createdBy];
+          meta.textContent =
+            (creator ? creator.fullName || creator.email : note.createdBy) +
+            " · " +
+            formatDate(note.createdAt);
+
+          item.appendChild(body);
+          item.appendChild(meta);
+          list.appendChild(item);
+        });
+      })
+      .catch(function (error) {
+        console.error("Could not load user notes:", error);
+        if (activeUserId === uid) {
+          list.innerHTML =
+            '<p class="user-notes__empty">Could not load notes.</p>';
+        }
+      });
+  }
+
+  function addUserNote() {
+    if (!isAdmin || !activeUserId) return;
+
+    var input = document.getElementById("userNoteBody");
+    var button = document.getElementById("userNoteAdd");
+    var body = input ? input.value.trim() : "";
+
+    if (body.length < 1 || body.length > 500) {
+      showUserFeedback("Enter a note between 1 and 500 characters.", true);
+      if (input) input.focus();
+      return;
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.dataset.idleLabel = button.textContent;
+      button.textContent = "Saving…";
+    }
+
+    live
+      .addUserNote({ userId: activeUserId, body: body })
+      .then(function () {
+        if (input) input.value = "";
+        loadUserNotes(activeUserId);
+        showUserFeedback("Internal note added.");
+        refresh();
+      })
+      .catch(function (error) {
+        showUserFeedback(
+          (error && error.message) || "Could not add the note.",
+          true
+        );
+      })
+      .then(function () {
+        if (button) {
+          button.disabled = false;
+          button.textContent = button.dataset.idleLabel || "Add note";
+        }
+      });
+  }
+
+  function sendResetEmail() {
+    var user = userMap[activeUserId];
+    var button = document.getElementById("userSendReset");
+    if (!isAdmin || !user || !user.email) return;
+
+    if (button) {
+      button.disabled = true;
+      button.dataset.idleLabel = button.textContent;
+      button.textContent = "Sending…";
+    }
+
+    var origin = window.location.origin;
+    if (!origin || origin === "null") {
+      origin = "https://paripulsemanagement.com";
+    }
+
+    window.firebase
+      .auth()
+      .sendPasswordResetEmail(user.email, {
+        url: origin + "/reset-password/",
+        handleCodeInApp: true
+      })
+      .then(function () {
+        showUserFeedback("Password reset email sent to " + user.email + ".");
+      })
+      .catch(function (error) {
+        var message =
+          error && error.code === "auth/too-many-requests"
+            ? "Too many reset requests. Wait a few minutes."
+            : "Could not send the reset email.";
+        showUserFeedback(message, true);
+      })
+      .then(function () {
+        if (button) {
+          button.disabled = false;
+          button.textContent =
+            button.dataset.idleLabel || "Send reset email";
+        }
+      });
+  }
+
   function canToggle(user) {
     if (!user || user.id === currentUserId()) return false;
     if (isSuper) return true;
@@ -419,6 +546,24 @@
       var canChangeRole = isSuper && uid !== currentUserId();
       roleEditor.hidden = !canChangeRole;
       if (canChangeRole && roleSelect) roleSelect.value = user.role;
+    }
+
+    var notesSection = document.getElementById("userNotesSection");
+    var notesList = document.getElementById("userNotesList");
+    var noteBody = document.getElementById("userNoteBody");
+    if (notesSection) {
+      notesSection.hidden = !isAdmin;
+      if (isAdmin) {
+        loadUserNotes(uid);
+      } else if (notesList) {
+        notesList.innerHTML = "";
+      }
+      if (noteBody) noteBody.value = "";
+    }
+
+    var resetButton = document.getElementById("userSendReset");
+    if (resetButton) {
+      resetButton.hidden = !isAdmin || !user.email;
     }
 
     if (note) {
@@ -562,7 +707,7 @@
   }
 
   function openWalletModal(uid) {
-    if (!isAdmin) return;
+    if (!isAdmin || uid === currentUserId()) return;
     var user = userMap[uid];
     if (!user) return;
 
@@ -770,6 +915,12 @@
 
   var userRoleSave = document.getElementById("userRoleSave");
   if (userRoleSave) userRoleSave.addEventListener("click", saveUserRole);
+
+  var userNoteAdd = document.getElementById("userNoteAdd");
+  if (userNoteAdd) userNoteAdd.addEventListener("click", addUserNote);
+
+  var userSendReset = document.getElementById("userSendReset");
+  if (userSendReset) userSendReset.addEventListener("click", sendResetEmail);
 
   var walletAdjustSave = document.getElementById("walletAdjustSave");
   if (walletAdjustSave) walletAdjustSave.addEventListener("click", saveAdjustment);
