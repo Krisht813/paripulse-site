@@ -306,8 +306,11 @@
       .verifyPasswordResetCode(oobCode)
       .then(function (email) {
         if (resetSub) {
-          resetSub.innerHTML =
-            'Choose a new password for <strong>' + email.replace(/</g, "&lt;") + "</strong>.";
+          resetSub.textContent = "Choose a new password for ";
+          var account = document.createElement("strong");
+          account.textContent = email;
+          resetSub.appendChild(account);
+          resetSub.appendChild(document.createTextNode("."));
         }
         resetForm.hidden = false;
       })

@@ -64,8 +64,29 @@
     return value == null ? null : value;
   }
 
+  var UNSAFE_TEXT_PATTERN =
+    /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u200B-\u200D\u202A-\u202E\u2066-\u2069\uFEFF]/g;
+
+  function cleanText(value) {
+    return String(value == null ? "" : value)
+      .normalize("NFC")
+      .replace(UNSAFE_TEXT_PATTERN, "")
+      .trim();
+  }
+
+  function copySafe(data) {
+    var output = {};
+    Object.keys(data || {}).forEach(function (key) {
+      if (key === "__proto__" || key === "prototype" || key === "constructor") {
+        return;
+      }
+      output[key] = data[key];
+    });
+    return output;
+  }
+
   function convertTimestamps(data, fields) {
-    var output = Object.assign({}, data);
+    var output = copySafe(data);
     (fields || []).forEach(function (field) {
       if (output[field] != null) {
         output[field] = toISO(output[field]);
@@ -80,18 +101,22 @@
 
   function mapDoc(snapshot) {
     if (!snapshot.exists) return null;
-    return Object.assign(
-      { id: snapshot.id },
-      convertTimestamps(snapshot.data(), fieldsFor(snapshot.ref.parent.id))
+    var output = convertTimestamps(
+      snapshot.data(),
+      fieldsFor(snapshot.ref.parent.id)
     );
+    output.id = snapshot.id;
+    return output;
   }
 
   function mapQuery(snapshot) {
     return snapshot.docs.map(function (item) {
-      return Object.assign(
-        { id: item.id },
-        convertTimestamps(item.data(), fieldsFor(item.ref.parent.id))
+      var output = convertTimestamps(
+        item.data(),
+        fieldsFor(item.ref.parent.id)
       );
+      output.id = item.id;
+      return output;
     });
   }
 
@@ -99,12 +124,17 @@
     if (window.crypto && typeof window.crypto.randomUUID === "function") {
       return window.crypto.randomUUID();
     }
-    return (
-      "key-" +
-      Date.now() +
-      "-" +
-      Math.random().toString(36).slice(2, 10)
-    );
+    if (window.crypto && typeof window.crypto.getRandomValues === "function") {
+      var bytes = new Uint8Array(16);
+      window.crypto.getRandomValues(bytes);
+      var hex = Array.prototype.map
+        .call(bytes, function (byte) {
+          return byte.toString(16).padStart(2, "0");
+        })
+        .join("");
+      return "key-" + hex;
+    }
+    throw new Error("Secure random generation is unavailable in this browser.");
   }
 
   /* ---------- reads ---------- */
@@ -333,9 +363,9 @@
     return ref
       .set({
         userId: user.uid,
-        subject: String(input.subject || "").trim(),
+        subject: cleanText(input.subject),
         category: input.category || "Other",
-        message: String(input.message || "").trim(),
+        message: cleanText(input.message),
         status: "open",
         priority: "normal",
         assignedTo: null,

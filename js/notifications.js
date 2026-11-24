@@ -323,10 +323,13 @@
 
   function showType(type) {
     return function (message, options) {
-      return show(
-        message,
-        Object.assign({}, options || {}, { type: type })
-      );
+      var settings = options || {};
+      return show(message, {
+        type: type,
+        title: settings.title,
+        duration: settings.duration,
+        action: settings.action
+      });
     };
   }
 
