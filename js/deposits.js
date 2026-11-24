@@ -6,6 +6,11 @@
 (function () {
   "use strict";
 
+  var runtime = window.PARIPULSE_RUNTIME || {};
+  if (runtime.dataMode === "firebase") {
+    return;
+  }
+
   var STORAGE_KEY = "paripulse_demo_wallet_v1";
   var DEFAULT_STATE = {
     balanceCents: 100000,
@@ -398,6 +403,13 @@
   }
 
   function render() {
+    if (
+      window.PARIPULSE_RUNTIME &&
+      window.PARIPULSE_RUNTIME.dataMode === "firebase"
+    ) {
+      return;
+    }
+
     renderDashboard();
     renderDepositTable();
     renderRequests();

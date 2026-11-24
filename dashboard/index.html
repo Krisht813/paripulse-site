@@ -166,6 +166,8 @@
             <p class="dashboard-date">Today's Date: <strong id="todayDate">18 Sep 2026</strong></p>
           </div>
 
+          <p class="live-data-note" id="liveDataNote" hidden></p>
+
           <!-- KPI cards -->
           <div class="row row-cards stats-row">
             <div class="col-12 col-sm-6 col-xxl-3">
@@ -307,17 +309,17 @@
                     <li>
                       <span class="balance-dot" style="--dot: #16994a"></span>
                       <span class="balance-label">Bonus Balance</span>
-                      <span class="balance-value">$0.00</span>
+                      <span class="balance-value" id="bonusBalanceValue">$0.00</span>
                     </li>
                     <li>
                       <span class="balance-dot" style="--dot: #2467dc"></span>
                       <span class="balance-label">Commission</span>
-                      <span class="balance-value">$0.00</span>
+                      <span class="balance-value" id="commissionBalanceValue">$0.00</span>
                     </li>
                     <li>
                       <span class="balance-dot" style="--dot: #ef8c00"></span>
                       <span class="balance-label">Others</span>
-                      <span class="balance-value">$0.00</span>
+                      <span class="balance-value" id="otherBalanceValue">$0.00</span>
                     </li>
                   </ul>
                 </div>
@@ -332,6 +334,8 @@
               <h1 class="dashboard-title">Deposits <span class="demo-badge">Demo mode</span></h1>
               <p class="dashboard-date">Simulated payments only — no real funds.</p>
             </div>
+
+            <p class="live-data-note" id="depositsLiveNote" hidden></p>
 
             <div class="row row-cards deposit-layout">
               <div class="col-12 col-lg-4">
@@ -498,6 +502,7 @@
                   </label>
                   <select class="toolbar__select" id="userRoleFilter" aria-label="Filter users by role">
                     <option value="">All roles</option>
+                    <option value="super_admin">Super admin</option>
                     <option value="admin">Admin</option>
                     <option value="support">Support</option>
                     <option value="user">User</option>
@@ -715,12 +720,15 @@
                     <option value="">All types</option>
                     <option value="Deposit">Deposit</option>
                     <option value="Admin credit">Admin credit</option>
+                    <option value="Admin debit">Admin debit</option>
                     <option value="Bonus">Bonus</option>
+                    <option value="Commission">Commission</option>
                     <option value="Adjustment">Adjustment</option>
                   </select>
                   <select class="toolbar__select" id="txStatusFilter" aria-label="Filter transactions by status">
                     <option value="">All statuses</option>
                     <option value="Completed">Completed</option>
+                    <option value="Reversed">Reversed</option>
                     <option value="Pending">Pending</option>
                     <option value="Rejected">Rejected</option>
                   </select>
@@ -1304,6 +1312,19 @@
           <div><dt>Phone</dt><dd id="userModalPhone">—</dd></div>
           <div><dt>User ID</dt><dd id="userModalId">—</dd></div>
         </dl>
+        <p class="request-feedback" id="userModalFeedback" role="status" hidden></p>
+        <div class="role-editor" id="userRoleEditor" hidden>
+          <label class="form-field">
+            <span>Change role</span>
+            <select id="userRoleSelect">
+              <option value="user">User</option>
+              <option value="support">Support</option>
+              <option value="admin">Admin</option>
+              <option value="super_admin">Super admin</option>
+            </select>
+          </label>
+          <button class="btn btn-light" type="button" id="userRoleSave">Update role</button>
+        </div>
         <p class="deposit-note">Demo profile only. Production roles and status changes run through Cloud Functions with audit logs.</p>
       </div>
       <div class="sheet-modal__foot">
@@ -1362,10 +1383,17 @@
   <script src="vendor/firebase/firebase-app-compat.js"></script>
   <script src="vendor/firebase/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js"></script>
-  <script src="js/auth-guard.js"></script>
+  <script src="js/runtime-config.js"></script>
+  <script src="js/live-data.js?v=20261124-1"></script>
+  <script src="js/auth-guard.js?v=20261124-5"></script>
   <script src="js/logout-modal.js?v=20261124-3"></script>
-  <script src="js/deposits.js?v=20261124-6"></script>
-  <script src="js/pages.js?v=20261124-1"></script>
+  <script src="js/deposits.js?v=20261124-7"></script>
+  <script src="js/pages.js?v=20261124-2"></script>
+  <script src="js/live-dashboard.js?v=20261124-1"></script>
+  <script src="js/live-deposits.js?v=20261124-1"></script>
+  <script src="js/live-admin.js?v=20261124-1"></script>
+  <script src="js/live-finance.js?v=20261124-1"></script>
+  <script src="js/live-support.js?v=20261124-1"></script>
   <script src="js/router.js?v=20261124-1"></script>
   <script src="js/app.js?v=20261124"></script>
 </body>

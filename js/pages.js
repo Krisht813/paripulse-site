@@ -11,8 +11,19 @@
   var ADMIN_KEY = "paripulse_demo_admin_v1";
   var PAGE_SIZE = 8;
 
-  var ROLE_LABELS = { admin: "Admin", support: "Support", user: "User" };
+  var ROLE_LABELS = { admin: "Admin", support: "Support", user: "User", super_admin: "Super admin" };
   var STATUS_LABELS = { active: "Active", pending: "Pending", blocked: "Blocked" };
+
+  function liveMode() {
+    return (
+      window.PARIPULSE_RUNTIME &&
+      window.PARIPULSE_RUNTIME.dataMode === "firebase"
+    );
+  }
+
+  function liveProfile() {
+    return window.PARIPULSE_USER && window.PARIPULSE_USER.profile;
+  }
 
   function pad(value) {
     return value < 10 ? "0" + value : String(value);
@@ -362,6 +373,7 @@
      ------------------------------------------------------------ */
 
   function renderUsers() {
+    if (liveMode()) return;
     var users = getUsers();
     var search = document.getElementById("userSearch");
     var roleFilter = document.getElementById("userRoleFilter");
@@ -471,6 +483,7 @@
      ------------------------------------------------------------ */
 
   function renderWallets() {
+    if (liveMode()) return;
     var users = getUsers();
     var body = document.getElementById("walletsTableBody");
 
@@ -555,6 +568,7 @@
   }
 
   function renderTransactions() {
+    if (liveMode()) return;
     var all = getTransactions();
     var totals = transactionTotals(all);
 
@@ -653,6 +667,7 @@
      ------------------------------------------------------------ */
 
   function renderReports() {
+    if (liveMode()) return;
     var period = document.getElementById("reportPeriod");
     var days = period ? Number(period.value) : 0;
     var all = getTransactions();
@@ -838,6 +853,7 @@
      ------------------------------------------------------------ */
 
   function renderSupport() {
+    if (liveMode()) return;
     var admin = loadAdmin();
     var card = document.getElementById("ticketsCard");
     var list = document.getElementById("ticketList");
@@ -886,15 +902,35 @@
     var phone = document.getElementById("profilePhone");
     var role = document.getElementById("profileRole");
 
-    if (name) name.value = profile.name || "";
-    if (email) {
-      email.value =
-        (window.PARIPULSE_USER && window.PARIPULSE_USER.email) ||
-        profile.email ||
-        "";
+    var isLive = liveMode();
+    var live = isLive ? liveProfile() : null;
+
+    if (isLive) {
+      if (name) name.value = (live && live.fullName) || "";
+      if (email) {
+        email.value =
+          (live && live.email) ||
+          (window.PARIPULSE_USER && window.PARIPULSE_USER.email) ||
+          "";
+      }
+      if (phone) phone.value = (live && live.phone) || "";
+      if (role) {
+        role.value =
+          ROLE_LABELS[live && live.role] ||
+          (live && live.role) ||
+          "";
+      }
+    } else {
+      if (name) name.value = profile.name || "";
+      if (email) {
+        email.value =
+          (window.PARIPULSE_USER && window.PARIPULSE_USER.email) ||
+          profile.email ||
+          "";
+      }
+      if (phone) phone.value = profile.phone || "";
+      if (role) role.value = "Administrator";
     }
-    if (phone) phone.value = profile.phone || "";
-    if (role) role.value = "Administrator";
 
     var depositEmails = document.getElementById("prefDepositEmails");
     var loginAlerts = document.getElementById("prefLoginAlerts");
@@ -904,8 +940,11 @@
     if (weeklySummary) weeklySummary.checked = !!admin.prefs.weeklySummary;
 
     var topbarName = document.querySelector(".user-name");
-    if (topbarName && profile.name) {
-      topbarName.textContent = profile.name;
+    var displayName = isLive
+      ? live && live.fullName
+      : profile.name;
+    if (topbarName && displayName) {
+      topbarName.textContent = displayName;
     }
   }
 
@@ -916,6 +955,7 @@
   var activeUserId = null;
 
   function openUserModal(id) {
+    if (liveMode()) return;
     var users = getUsers();
     var user = null;
     users.forEach(function (item) {
@@ -972,6 +1012,7 @@
   }
 
   function toggleActiveUser() {
+    if (liveMode()) return;
     if (!activeUserId) return;
     var admin = loadAdmin();
     var user = null;
@@ -1012,6 +1053,7 @@
   }
 
   function openWalletModal(id) {
+    if (liveMode()) return;
     var users = getUsers();
     var user = null;
     users.forEach(function (item) {
@@ -1064,6 +1106,7 @@
   }
 
   function saveWalletAdjustment() {
+    if (liveMode()) return;
     if (!activeWalletUserId) return;
 
     var amountInput = document.getElementById("walletAdjustAmount");
@@ -1166,6 +1209,7 @@
      ------------------------------------------------------------ */
 
   function exportUsers() {
+    if (liveMode()) return;
     var rows = [
       ["Name", "Email", "Role", "Status", "Balance (USD)", "Joined", "User ID"]
     ];
@@ -1184,6 +1228,7 @@
   }
 
   function exportTransactions() {
+    if (liveMode()) return;
     var rows = [
       ["ID", "User", "Type", "Asset", "Direction", "Amount (USD)", "Status", "Date"]
     ];
@@ -1203,6 +1248,7 @@
   }
 
   function exportReport() {
+    if (liveMode()) return;
     var all = getTransactions();
     var totals = transactionTotals(all);
     var rows = [
@@ -1380,6 +1426,7 @@
     if (ticketForm) {
       ticketForm.addEventListener("submit", function (event) {
         event.preventDefault();
+        if (liveMode()) return;
         var subject = document.getElementById("ticketSubject");
         var category = document.getElementById("ticketCategory");
         var message = document.getElementById("ticketMessage");
@@ -1430,6 +1477,68 @@
         if (nameValue.length < 2) {
           showFeedback("profileFeedback", "Enter your full name.", true);
           if (name) name.focus();
+          return;
+        }
+
+        if (liveMode()) {
+          if (
+            !window.ParipulseLive ||
+            typeof window.ParipulseLive.updateProfile !== "function"
+          ) {
+            showFeedback(
+              "profileFeedback",
+              "Live profile updates are unavailable. Reload and try again.",
+              true
+            );
+            return;
+          }
+
+          var submitButton = profileForm.querySelector('button[type="submit"]');
+          if (submitButton) {
+            submitButton.dataset.idleLabel = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = "Saving…";
+          }
+
+          window.ParipulseLive.updateProfile({
+            fullName: nameValue,
+            phone: phone ? phone.value.trim() : ""
+          })
+            .then(function (result) {
+              var updated = result && result.profile ? result.profile : null;
+              if (updated) {
+                window.PARIPULSE_USER.profile = updated;
+                window.PARIPULSE_USER.displayName = updated.fullName;
+
+                var topbarName = document.querySelector(".user-name");
+                if (topbarName) topbarName.textContent = updated.fullName;
+
+                var emailField = document.getElementById("profileEmail");
+                if (emailField && updated.email) emailField.value = updated.email;
+
+                var roleField = document.getElementById("profileRole");
+                if (roleField) {
+                  roleField.value =
+                    ROLE_LABELS[updated.role] || updated.role || "";
+                }
+              }
+              showFeedback("profileFeedback", "Profile updated.");
+            })
+            .catch(function (error) {
+              showFeedback(
+                "profileFeedback",
+                (error && error.message) || "Could not update your profile.",
+                true
+              );
+            })
+            .then(function () {
+              if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent =
+                  submitButton.dataset.idleLabel || "Save profile";
+              }
+            });
+
           return;
         }
 
@@ -1513,6 +1622,10 @@
     });
 
     window.addEventListener("paripulse:auth", function (event) {
+      if (liveMode()) {
+        renderSettings();
+        return;
+      }
       var email = document.getElementById("profileEmail");
       if (email && event.detail && event.detail.email) {
         email.value = event.detail.email;
