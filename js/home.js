@@ -5,6 +5,19 @@
 (function () {
   "use strict";
 
+  // Keep the URL bar clean if someone lands on /index.html directly.
+  try {
+    if (/\/index\.html$/.test(window.location.pathname)) {
+      window.history.replaceState(
+        null,
+        "",
+        window.location.pathname.replace(/index\.html$/, "")
+      );
+    }
+  } catch (error) {
+    /* History API may be unavailable on file:// */
+  }
+
   var nav = document.getElementById("homeNav");
   var toggle = document.getElementById("homeNavToggle");
 
