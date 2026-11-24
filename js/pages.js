@@ -1250,6 +1250,15 @@
   }
 
   function init() {
+    var today = document.getElementById("todayDate");
+    if (today) {
+      today.textContent = new Date().toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      });
+    }
+
     renderUsers();
     renderWallets();
     renderTransactions();

@@ -271,7 +271,7 @@ body::-webkit-scrollbar {
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: transform 0.22s ease;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html.sidebar-collapsed .sidebar-handle {
@@ -461,6 +461,12 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transition: transform 0.22s ease;
+}
+
+.dropdown.show .user-chevron,
+.user-chip[aria-expanded="true"] .user-chevron {
+  transform: rotate(180deg);
 }
 
 .dropdown-menu {
