@@ -371,11 +371,11 @@
 
     seen.forEach(function (element) {
       var text = (element.textContent || "").trim();
-      var visible = !element.hidden && element.offsetParent !== null;
+      var visible = !element.hidden && text.length > 0;
       var previous = feedbackState.get(element) || { text: "", visible: false };
       feedbackState.set(element, { text: text, visible: visible });
 
-      if (!visible || !text) return;
+      if (!visible) return;
       if (text === previous.text && previous.visible) return;
       if (text.length < 3) return;
 
@@ -393,6 +393,7 @@
 
   function init() {
     ensureStack();
+    document.body.classList.add("pp-notifications-ready");
     seedFeedbackState();
 
     if (window.MutationObserver && document.body) {

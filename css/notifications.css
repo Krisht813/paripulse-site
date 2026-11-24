@@ -220,6 +220,15 @@
   }
 }
 
+/* When the notification runtime is active, inline feedback is mirrored into
+   the toast stack. Keep it in the DOM as a no-JavaScript fallback, but do not
+   render duplicate success/error banners. */
+body.pp-notifications-ready .request-feedback,
+body.pp-notifications-ready .form-feedback,
+body.pp-notifications-ready .auth-alert {
+  display: none !important;
+}
+
 @media (max-width: 575.98px) {
   .pp-toast-stack {
     right: 16px;
