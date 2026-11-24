@@ -342,7 +342,14 @@ input {
   align-items: center;
   overflow: hidden;
   padding: clamp(38px, 5.2vh, 64px) 0 clamp(36px, 4.8vh, 58px);
-  background: #fff;
+  background:
+    radial-gradient(
+      ellipse 30% 70% at 76% 44%,
+      rgba(255, 226, 222, 0.5) 0%,
+      rgba(255, 240, 238, 0.22) 45%,
+      rgba(255, 255, 255, 0) 72%
+    ),
+    #fff;
 }
 
 .hero__inner {
@@ -392,61 +399,6 @@ input {
   display: flex;
   justify-content: flex-end;
   min-width: 0;
-}
-
-.hero__visual::before,
-.hero__visual::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.hero__visual::before {
-  content: "";
-  position: absolute;
-  inset: -8% -26% -8% -28%;
-  z-index: 0;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      56% 52% at 62% 40%,
-      rgba(255, 193, 184, 0.55) 0%,
-      rgba(255, 214, 208, 0.36) 40%,
-      rgba(255, 236, 233, 0) 72%
-    ),
-    radial-gradient(
-      42% 44% at 84% 22%,
-      rgba(255, 175, 163, 0.34) 0%,
-      rgba(255, 211, 205, 0.18) 45%,
-      rgba(255, 236, 233, 0) 70%
-    ),
-    radial-gradient(
-      46% 42% at 44% 82%,
-      rgba(255, 207, 199, 0.38) 0%,
-      rgba(255, 229, 225, 0) 70%
-    );
-  filter: blur(34px);
-  -webkit-mask-image: radial-gradient(
-    ellipse 44% 62% at 50% 50%,
-    #000 0%,
-    #000 46%,
-    rgba(0, 0, 0, 0.5) 64%,
-    transparent 80%
-  );
-  mask-image: radial-gradient(
-    ellipse 44% 62% at 50% 50%,
-    #000 0%,
-    #000 46%,
-    rgba(0, 0, 0, 0.5) 64%,
-    transparent 80%
-  );
-  pointer-events: none;
-}
-
-.hero__visual::after {
-  display: none;
 }
 
 /* ------------------------------------------------------------
