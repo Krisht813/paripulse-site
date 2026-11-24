@@ -406,7 +406,7 @@ input {
 .hero__visual::before {
   content: "";
   position: absolute;
-  inset: -22% -28% -18% -30%;
+  inset: -8% -26% -8% -28%;
   z-index: 0;
   border-radius: 50%;
   background:
@@ -428,6 +428,20 @@ input {
       rgba(255, 229, 225, 0) 70%
     );
   filter: blur(34px);
+  -webkit-mask-image: radial-gradient(
+    ellipse 44% 62% at 50% 50%,
+    #000 0%,
+    #000 46%,
+    rgba(0, 0, 0, 0.5) 64%,
+    transparent 80%
+  );
+  mask-image: radial-gradient(
+    ellipse 44% 62% at 50% 50%,
+    #000 0%,
+    #000 46%,
+    rgba(0, 0, 0, 0.5) 64%,
+    transparent 80%
+  );
   pointer-events: none;
 }
 
