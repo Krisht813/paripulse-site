@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /forgot-password/
+Disallow: /reset-password/
+Disallow: /logout/
+
+Sitemap: https://paripulsemanagement.com/sitemap.xml
