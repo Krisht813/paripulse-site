@@ -886,6 +886,9 @@ input {
   display: block;
   width: 100%;
   height: clamp(52px, 5.2vw, 100px);
+  /* Overlap the body by 1px so the SVG's anti-aliased bottom edge
+     never shows as a light seam above the footer brand. */
+  margin-bottom: -1px;
 }
 
 .home-footer__body {
