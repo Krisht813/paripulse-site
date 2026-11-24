@@ -2509,7 +2509,7 @@ body.deposit-modal-open {
 }
 
 .page-panel .card-body {
-  padding: 18px 20px;
+  padding: 20px;
 }
 
 .page-panel__body {
@@ -3155,14 +3155,14 @@ body.deposit-modal-open {
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .form-field {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .form-field--full {
@@ -3211,6 +3211,7 @@ body.deposit-modal-open {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+  margin-top: 4px;
 }
 
 .form-actions .btn {
@@ -3686,6 +3687,19 @@ body.deposit-modal-open {
   margin-top: 14px;
   padding-top: 14px;
   border-top: 1px solid var(--app-line);
+}
+
+#settingsView .settings-list .settings-row:last-of-type {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+#settingsView .card-body > .deposit-note + .btn {
+  margin-top: 14px;
+}
+
+.page-panel:last-child {
+  margin-bottom: 0;
 }
 
 @media (max-width: 575.98px) {
