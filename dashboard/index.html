@@ -895,6 +895,35 @@
                 </div>
               </div>
             </section>
+
+            <section class="card page-panel" id="auditCard" hidden>
+              <header class="card-header">
+                <h2 class="card-title">Audit log</h2>
+                <span class="demo-badge ms-auto" id="auditBadge">Admin</span>
+                <button class="btn btn-light toolbar__export ms-2" type="button" id="exportAudit">Export CSV</button>
+              </header>
+              <div class="card-body page-panel__body">
+                <div class="table-responsive tx-table-wrap">
+                  <table class="table table-vcenter table-nowrap tx-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Time</th>
+                        <th scope="col">Actor</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Entity</th>
+                        <th scope="col">Reason</th>
+                      </tr>
+                    </thead>
+                    <tbody id="auditBody"></tbody>
+                  </table>
+                </div>
+                <div class="tx-empty" id="auditEmpty" hidden>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.3-1.5L14.4 21l-2.4-1.5L9.6 21l-2.3-1.5L5 21V3Z" /><path d="M9 8h6" /><path d="M9 12h6" /><path d="M9 16h4" /></svg>
+                  <p>No audit entries yet</p>
+                  <span>Financial and access changes will appear here.</span>
+                </div>
+              </div>
+            </section>
           </div>
 
           <!-- ============ Support ============ -->
@@ -1395,6 +1424,7 @@
   <script src="js/live-admin.js?v=20261124-1"></script>
   <script src="js/live-finance.js?v=20261124-1"></script>
   <script src="js/live-support.js?v=20261124-1"></script>
+  <script src="js/audit-log.js?v=20261124-1"></script>
   <script src="js/router.js?v=20261124-1"></script>
   <script src="js/app.js?v=20261124"></script>
 </body>
