@@ -75,6 +75,13 @@
         ? BASE_TITLE + " — Admin Dashboard"
         : TITLES[view] + " — " + BASE_TITLE;
 
+    var activeView = elementFor(view);
+    if (activeView) {
+      activeView.classList.remove("view-enter");
+      void activeView.offsetWidth;
+      activeView.classList.add("view-enter");
+    }
+
     window.dispatchEvent(
       new CustomEvent("paripulse:view", { detail: { view: view } })
     );
