@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0b1222" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261124" />
+  <title>Signing out · Paripulse Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
+  <link rel="stylesheet" href="css/auth.css?v=20261124-1" />
+</head>
+<body class="auth-body">
+  <main class="auth-main" style="min-height:100vh">
+    <div class="auth-card" style="text-align:center">
+      <img src="brand-mark.svg?v=20261124" alt="" width="42" height="42" style="display:inline-block;margin-bottom:20px" />
+      <h2 class="auth-title">Signing out…</h2>
+      <p class="auth-sub">Please wait a moment.</p>
+    </div>
+  </main>
+
+  <script src="vendor/firebase/firebase-app-compat.js"></script>
+  <script src="vendor/firebase/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script>
+    (function () {
+      var config = window.PARIPULSE_FIREBASE_CONFIG || {};
+      var configured =
+        config.apiKey &&
+        config.apiKey.indexOf("REPLACE_") === -1 &&
+        config.projectId &&
+        config.projectId.indexOf("REPLACE_") === -1;
+
+      function done() {
+        window.location.replace("/login/");
+      }
+
+      if (!configured || !window.firebase) {
+        done();
+        return;
+      }
+
+      try {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(config);
+        }
+        firebase.auth().signOut().then(done, done);
+      } catch (error) {
+        console.error(error);
+        done();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -31,8 +31,8 @@
 
   auth.onAuthStateChanged(function (user) {
     if (!user) {
-      var page = window.location.pathname.split("/").pop() || "index.html";
-      window.location.replace("login.html?next=" + encodeURIComponent(page));
+      var next = window.location.pathname + window.location.hash;
+      window.location.replace("/login/?next=" + encodeURIComponent(next));
     }
   });
 })();

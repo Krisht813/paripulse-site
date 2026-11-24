@@ -65,10 +65,41 @@
 
   function safeNext() {
     var next = new URLSearchParams(window.location.search).get("next");
-    if (next && /^[A-Za-z0-9._-]+\.html$/.test(next)) {
-      return next;
+    var hash = "";
+    var hashIndex = next ? next.indexOf("#") : -1;
+
+    if (hashIndex !== -1) {
+      hash = next.slice(hashIndex);
+      next = next.slice(0, hashIndex);
     }
-    return "dashboard.html";
+
+    var legacy = {
+      "dashboard.html": "/dashboard/",
+      "login.html": "/login/",
+      "forgot-password.html": "/forgot-password/",
+      "reset-password.html": "/reset-password/",
+      "logout.html": "/logout/"
+    };
+
+    if (next && legacy[next]) {
+      return legacy[next] + hash;
+    }
+
+    if (next) {
+      var clean = next.replace(/\/+$/, "") + "/";
+      var allowed = [
+        "/dashboard/",
+        "/login/",
+        "/forgot-password/",
+        "/reset-password/",
+        "/logout/"
+      ];
+      if (allowed.indexOf(clean) !== -1) {
+        return clean + hash;
+      }
+    }
+
+    return "/dashboard/" + hash;
   }
 
   function authMessage(error) {
