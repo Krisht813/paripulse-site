@@ -39,11 +39,75 @@
     ETH: "DEMO-ETH-ADDRESS-NOT-VALID"
   };
 
+  function daysAgo(days) {
+    var date = new Date();
+    date.setDate(date.getDate() - days);
+    date.setHours(10, 30, 0, 0);
+    return date.toISOString();
+  }
+
+  function seedTransactions() {
+    return [
+      {
+        id: "DEP-100241",
+        type: "Deposit",
+        user: "Mohsin Iqbal",
+        asset: "USDT · TRC20",
+        amountCents: 50000,
+        status: "Completed",
+        date: daysAgo(75),
+        receiptId: "DEMO-TX-100241"
+      },
+      {
+        id: "DEP-100238",
+        type: "Deposit",
+        user: "Mohsin Iqbal",
+        asset: "Bitcoin",
+        amountCents: 30000,
+        status: "Completed",
+        date: daysAgo(48),
+        receiptId: "DEMO-TX-100238"
+      },
+      {
+        id: "DEP-100234",
+        type: "Deposit",
+        user: "Mohsin Iqbal",
+        asset: "Ethereum",
+        amountCents: 20000,
+        status: "Completed",
+        date: daysAgo(20),
+        receiptId: "DEMO-TX-100234"
+      },
+      {
+        id: "ADJ-100230",
+        type: "Admin credit",
+        user: "Mohsin Iqbal",
+        asset: "USD",
+        amountCents: 10000,
+        status: "Completed",
+        date: daysAgo(12),
+        receiptId: ""
+      },
+      {
+        id: "ADJ-100228",
+        type: "Adjustment",
+        direction: "debit",
+        user: "Mohsin Iqbal",
+        asset: "USD",
+        amountCents: 10000,
+        status: "Completed",
+        date: daysAgo(5),
+        receiptId: ""
+      }
+    ];
+  }
+
   function freshState() {
     return {
       balanceCents: DEFAULT_STATE.balanceCents,
-      transactions: [],
+      transactions: seedTransactions(),
       requests: [],
+      seedVersion: 1,
       addresses: {
         "USDT-TRC20": DEFAULT_ADDRESSES["USDT-TRC20"],
         BTC: DEFAULT_ADDRESSES.BTC,
@@ -79,6 +143,18 @@
           parsed.addresses[key] = DEFAULT_ADDRESSES[key];
         }
       });
+
+      /* Seed the starting ledger once for a fresh demo workspace. */
+      if (
+        !parsed.seedVersion &&
+        parsed.transactions.length === 0 &&
+        parsed.requests.length === 0 &&
+        parsed.balanceCents === DEFAULT_STATE.balanceCents
+      ) {
+        parsed.transactions = seedTransactions();
+        parsed.seedVersion = 1;
+      }
+
       return parsed;
     } catch (error) {
       return freshState();
@@ -130,10 +206,6 @@
     return td;
   }
 
-  var dashboardView = document.getElementById("dashboardView");
-  var depositsView = document.getElementById("depositsView");
-  var navDashboardItem = document.getElementById("navDashboardItem");
-  var navDepositsItem = document.getElementById("navDepositsItem");
   var navDashboard = document.getElementById("navDashboard");
   var navDeposits = document.getElementById("navDeposits");
 
@@ -160,7 +232,16 @@
 
     body.innerHTML = "";
 
-    if (!state.transactions.length) {
+    var deposits = state.transactions
+      .filter(function (tx) {
+        return (tx.type || "Deposit") === "Deposit";
+      })
+      .slice()
+      .sort(function (a, b) {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+
+    if (!deposits.length) {
       var emptyRow = document.createElement("tr");
       var emptyCell = document.createElement("td");
       emptyCell.colSpan = 5;
@@ -170,7 +251,7 @@
       return;
     }
 
-    state.transactions.forEach(function (tx) {
+    deposits.forEach(function (tx) {
       var row = document.createElement("tr");
       row.appendChild(makeCell(tx.id));
       row.appendChild(makeCell(tx.asset));
@@ -200,16 +281,26 @@
     if (recentBody) {
       recentBody.innerHTML = "";
 
-      state.transactions.slice(0, 5).forEach(function (tx) {
-        var row = document.createElement("tr");
-        row.appendChild(makeCell(tx.id));
-        row.appendChild(makeCell("You"));
-        row.appendChild(makeCell("Deposit"));
-        row.appendChild(makeCell(formatUSD(tx.amountCents)));
-        row.appendChild(makeCell(tx.status));
-        row.appendChild(makeCell(formatDate(tx.date)));
-        recentBody.appendChild(row);
-      });
+      state.transactions
+        .slice()
+        .sort(function (a, b) {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        })
+        .slice(0, 5)
+        .forEach(function (tx) {
+          var row = document.createElement("tr");
+          var amount =
+            tx.direction === "debit"
+              ? "-" + formatUSD(tx.amountCents)
+              : formatUSD(tx.amountCents);
+          row.appendChild(makeCell(tx.id));
+          row.appendChild(makeCell(tx.user || "You"));
+          row.appendChild(makeCell(tx.type || "Deposit"));
+          row.appendChild(makeCell(amount));
+          row.appendChild(makeCell(tx.status));
+          row.appendChild(makeCell(formatDate(tx.date)));
+          recentBody.appendChild(row);
+        });
     }
 
     if (txEmpty) {
@@ -334,24 +425,10 @@
         pendingLine.textContent = "";
       }
     }
-  }
 
-  function route() {
-    if (!dashboardView || !depositsView) {
-      return;
-    }
-
-    var showDeposits = window.location.hash === "#deposits";
-
-    dashboardView.hidden = showDeposits;
-    depositsView.hidden = !showDeposits;
-
-    if (navDashboardItem) {
-      navDashboardItem.classList.toggle("active", !showDeposits);
-    }
-    if (navDepositsItem) {
-      navDepositsItem.classList.toggle("active", showDeposits);
-    }
+    window.dispatchEvent(
+      new CustomEvent("paripulse:wallet", { detail: { state: state } })
+    );
   }
 
   function renderAddressSettings() {
@@ -385,9 +462,15 @@
     navDeposits.addEventListener("click", closeMobileDrawer);
   }
 
-  window.addEventListener("hashchange", route);
+  /* Persist the initial demo state so other pages can read it. */
+  saveState();
   render();
-  route();
+
+  /* Reload wallet state after another page (e.g. Wallets) changes it. */
+  window.addEventListener("paripulse:wallet-restore", function () {
+    state = loadState();
+    render();
+  });
 
   /* ---------- Demo deposit modal ---------- */
   var modal = document.getElementById("depositModal");
@@ -736,6 +819,8 @@
 
     var tx = {
       id: "DEP-" + request.id.replace(/^REQ-/, ""),
+      type: "Deposit",
+      user: "Mohsin Iqbal",
       asset: request.asset,
       amountCents: request.amountCents,
       status: "Completed",

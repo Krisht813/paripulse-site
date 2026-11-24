@@ -33,6 +33,17 @@
     if (!user) {
       var next = window.location.pathname + window.location.hash;
       window.location.replace("/login/?next=" + encodeURIComponent(next));
+      return;
     }
+
+    window.PARIPULSE_USER = {
+      uid: user.uid,
+      email: user.email || "",
+      displayName: user.displayName || ""
+    };
+
+    window.dispatchEvent(
+      new CustomEvent("paripulse:auth", { detail: window.PARIPULSE_USER })
+    );
   });
 })();
