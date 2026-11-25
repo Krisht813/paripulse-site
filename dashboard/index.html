@@ -14,12 +14,14 @@
   <link rel="preload" as="script" href="vendor/firebase/firebase-firestore-compat.js" />
   <link rel="stylesheet" href="css/fonts.css?v=20261125-9" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/styles.css?v=20261125-39" />
+  <link rel="stylesheet" href="css/styles.css?v=20261126-2" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
   <link rel="stylesheet" href="css/theme.css?v=20261125-12" />
   <link rel="stylesheet" href="css/phone-field.css?v=20261125-2" />
   <link rel="stylesheet" href="css/notifications.css?v=20261125-11" />
   <link rel="stylesheet" href="css/icons.css?v=20261125-2" />
+  <link rel="stylesheet" href="css/dark.css?v=20261126-5" />
+  <script src="js/theme.js?v=20261126-1"></script>
   <script src="js/error-boundary.js?v=20261125-2"></script>
 </head>
 <body>
@@ -143,6 +145,19 @@
         </button>
 
         <div class="navbar-nav flex-row align-items-center ms-auto">
+          <div class="nav-item">
+            <button class="theme-toggle topbar-theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
+              <span class="theme-toggle__icons" aria-hidden="true">
+                <svg class="icon icon--sun" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="3.4" />
+                  <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" />
+                </svg>
+                <svg class="icon icon--moon" viewBox="0 0 24 24">
+                  <path d="M20.2 14.2A8.6 8.6 0 0 1 9.8 3.8 8.6 8.6 0 1 0 20.2 14.2Z" />
+                </svg>
+              </span>
+            </button>
+          </div>
           <div class="nav-item">
             <button class="pp-notify__trigger" id="notificationTrigger" type="button" aria-label="Notifications" aria-haspopup="dialog" aria-expanded="false" aria-controls="notificationPanel">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8.5a6 6 0 0 0-12 0c0 6.5-3 6.5-3 8.5h18c0-2-3-2-3-8.5" /><path d="M9.5 20h5" /></svg>
@@ -1197,6 +1212,35 @@
                       <input type="checkbox" id="prefWeeklySummary" />
                     </label>
                     <p class="deposit-note" id="preferencesNote">Preferences are saved locally in this demo.</p>
+                  </div>
+                </section>
+
+                <section class="card page-panel">
+                  <header class="card-header">
+                    <h2 class="card-title">Appearance</h2>
+                  </header>
+                  <div class="card-body">
+                    <div class="appearance-row">
+                      <div class="appearance-copy">
+                        <strong>Color mode</strong>
+                        <p>Saved in this browser. Dark mode applies to the dashboard.</p>
+                      </div>
+                      <div class="theme-segmented" role="group" aria-label="Color mode">
+                        <button class="theme-segmented__btn" type="button" data-theme-set="light" aria-pressed="true">
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="3.4" />
+                            <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" />
+                          </svg>
+                          Light
+                        </button>
+                        <button class="theme-segmented__btn" type="button" data-theme-set="dark" aria-pressed="false">
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.2 14.2A8.6 8.6 0 0 1 9.8 3.8 8.6 8.6 0 1 0 20.2 14.2Z" />
+                          </svg>
+                          Dark
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </section>
               </div>

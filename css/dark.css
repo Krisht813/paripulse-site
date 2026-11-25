@@ -1,0 +1,711 @@
+/* ============================================================
+   Paripulse dashboard dark theme
+
+   Loaded only on the dashboard. The public marketing site and
+   auth flow keep their existing light treatment.
+   ============================================================ */
+
+html[data-theme="dark"] {
+  --paper: #0b111b;
+  --paper-deep: #182232;
+  --surface: #121a27;
+  --ink: #f2f4f7;
+  --ink-soft: #d7dee8;
+  --muted: #a7b1c2;
+  --muted-soft: #7f8b9e;
+  --line: #263244;
+  --line-strong: #334155;
+  --accent: #ff6b73;
+  --accent-strong: #ff8188;
+  --accent-soft: rgba(255, 107, 115, 0.14);
+  --navy: #080d15;
+  --positive: #6ee7a8;
+  --warning: #f5c26b;
+  --danger: #ff8c8c;
+
+  --app-bg: #0b111b;
+  --app-line: #263244;
+  --app-text: #f2f4f7;
+  --app-muted: #a7b1c2;
+  --app-muted-2: #7f8b9e;
+
+  --tblr-body-bg: var(--app-bg);
+  --tblr-body-color: var(--app-text);
+  --tblr-border-color: var(--app-line);
+  --tblr-card-bg: var(--surface);
+  --tblr-secondary-bg: #182232;
+  --tblr-tertiary-bg: #1e2a3b;
+  --tblr-muted: #a7b1c2;
+  --tblr-light: #182232;
+  --tblr-dark: #080d15;
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .page,
+html[data-theme="dark"] .page-wrapper,
+html[data-theme="dark"] .page-body {
+  background: var(--app-bg);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .footer {
+  background: var(--surface);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .footer {
+  color: var(--app-muted-2);
+}
+
+html[data-theme="dark"] .topbar-icon-btn {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-muted);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .topbar-icon-btn:hover {
+  background: var(--surface-3, #1e2a3b);
+  border-color: var(--line-strong);
+}
+
+html[data-theme="dark"] .user-chip:hover,
+html[data-theme="dark"] .user-chip[aria-expanded="true"] {
+  background: var(--paper-deep);
+}
+
+html[data-theme="dark"] .user-name,
+html[data-theme="dark"] .dashboard-title,
+html[data-theme="dark"] .card-title,
+html[data-theme="dark"] .stat-value,
+html[data-theme="dark"] .balance-value,
+html[data-theme="dark"] .donut-amount,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .dashboard-title > span:not(.demo-badge),
+html[data-theme="dark"] .dashboard-date,
+html[data-theme="dark"] .live-data-note,
+html[data-theme="dark"] .stat-label,
+html[data-theme="dark"] .stat-caption,
+html[data-theme="dark"] .deposit-note,
+html[data-theme="dark"] .table-foot,
+html[data-theme="dark"] .form-hint,
+html[data-theme="dark"] .phone-hint,
+html[data-theme="dark"] .settings-row small,
+html[data-theme="dark"] .appearance-copy p {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .page-panel,
+html[data-theme="dark"] .panel-card,
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .dropdown-menu,
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .sheet-modal__dialog,
+html[data-theme="dark"] .deposit-modal__dialog,
+html[data-theme="dark"] .logout-modal__dialog,
+html[data-theme="dark"] .pp-notify__panel,
+html[data-theme="dark"] .pp-toast,
+html[data-theme="dark"] .phone-menu,
+html[data-theme="dark"] .asset-select__menu {
+  background: var(--surface);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .card-header,
+html[data-theme="dark"] .panel-card .card-header,
+html[data-theme="dark"] .page-panel .card-header,
+html[data-theme="dark"] .sheet-modal__head,
+html[data-theme="dark"] .sheet-modal__foot,
+html[data-theme="dark"] .deposit-modal__header,
+html[data-theme="dark"] .logout-modal__dialog .logout-modal__title {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .stat-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 14px 30px -22px rgba(0, 0, 0, 0.8);
+}
+
+html[data-theme="dark"] .navbar-vertical.navbar-expand-lg
+  .navbar-nav
+  .nav-item.active
+  > .nav-link,
+html[data-theme="dark"] .navbar-vertical.navbar-expand-lg
+  .navbar-nav
+  .nav-item.active
+  > .nav-link:hover {
+  background: #c8322b;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .btn-primary {
+  border-color: #c8322b;
+  background: #c8322b;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .btn-primary:hover,
+html[data-theme="dark"] .btn-primary:focus {
+  border-color: #a82620;
+  background: #a82620;
+}
+
+html[data-theme="dark"] .btn-danger {
+  border-color: #c8322b;
+  background: #c8322b;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .btn-danger:hover,
+html[data-theme="dark"] .btn-danger:focus {
+  border-color: #a82620;
+  background: #a82620;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .stat-label {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .stat-caption {
+  color: var(--app-muted-2);
+}
+
+html[data-theme="dark"] .deposit-note,
+html[data-theme="dark"] .table-foot {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .table {
+  --tblr-table-color: var(--app-text);
+  --tblr-table-bg: transparent;
+  --tblr-table-border-color: var(--app-line);
+  --tblr-table-striped-bg: rgba(255, 255, 255, 0.025);
+  --tblr-table-hover-bg: rgba(255, 255, 255, 0.04);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .table thead th {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .table tbody td {
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+html[data-theme="dark"] .tx-table thead th {
+  background: var(--paper-deep);
+}
+
+html[data-theme="dark"] .tx-empty {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .tx-empty svg {
+  stroke: var(--app-muted-2);
+}
+
+html[data-theme="dark"] .pager {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .pager__btn {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .pager__btn:hover {
+  background: var(--surface-3, #1e2a3b);
+}
+
+html[data-theme="dark"] .page input:not([type="checkbox"]):not([type="radio"]),
+html[data-theme="dark"] .page select,
+html[data-theme="dark"] .page textarea,
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] .form-select {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .page input::placeholder,
+html[data-theme="dark"] .page textarea::placeholder {
+  color: var(--app-muted-2);
+}
+
+html[data-theme="dark"] .form-field > span,
+html[data-theme="dark"] .phone-label,
+html[data-theme="dark"] .deposit-field-label {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .deposit-receipt {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .checkout-copy {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .checkout-copy:hover {
+  background: var(--surface-3);
+  border-color: var(--line-strong);
+}
+
+html[data-theme="dark"] .request-row,
+html[data-theme="dark"] .ticket-row {
+  background: var(--surface);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .btn-light,
+html[data-theme="dark"] .btn-ghost-light {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .btn-light:hover,
+html[data-theme="dark"] .btn-ghost-light:hover {
+  background: var(--surface-3, #1e2a3b);
+  border-color: var(--line-strong);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .dropdown-menu {
+  box-shadow: 0 18px 44px -24px rgba(0, 0, 0, 0.8);
+}
+
+html[data-theme="dark"] .dropdown-item {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .dropdown-item:hover,
+html[data-theme="dark"] .dropdown-item:focus {
+  background: var(--paper-deep);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .dropdown-divider {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .pp-notify__trigger {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-notify__trigger:hover,
+html[data-theme="dark"] .pp-notify__trigger[aria-expanded="true"] {
+  background: var(--paper-deep);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .pp-notify__filters,
+html[data-theme="dark"] .pp-notify__list,
+html[data-theme="dark"] .pp-notify__foot {
+  background: var(--surface);
+  border-color: var(--app-line);
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-notify__filters button {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-notify__filters button:hover,
+html[data-theme="dark"] .pp-notify__filters button.is-active {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .pp-notify__filters button span {
+  color: var(--app-muted-2);
+}
+
+html[data-theme="dark"] .pp-notify__item {
+  background: var(--surface);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .pp-notify__item:hover {
+  background: var(--paper-deep);
+}
+
+html[data-theme="dark"] .pp-notify__item.is-unread {
+  background: rgba(200, 50, 43, 0.08);
+}
+
+html[data-theme="dark"] .pp-notify__item.is-unread:hover {
+  background: rgba(200, 50, 43, 0.12);
+}
+
+html[data-theme="dark"] .pp-notify__item-title,
+html[data-theme="dark"] .pp-notify__empty h3 {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .pp-notify__item-message,
+html[data-theme="dark"] .pp-notify__item-meta,
+html[data-theme="dark"] .pp-notify__empty p,
+html[data-theme="dark"] .pp-notify__foot {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-notify__item-icon,
+html[data-theme="dark"] .pp-notify__empty-icon {
+  background: var(--paper-deep);
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-notify__item-icon[data-type="success"] {
+  background: rgba(110, 231, 168, 0.1);
+  color: var(--positive);
+}
+
+html[data-theme="dark"] .pp-notify__item-icon[data-type="error"] {
+  background: rgba(255, 140, 140, 0.1);
+  color: var(--danger);
+}
+
+html[data-theme="dark"] .pp-notify__item-icon[data-type="warning"] {
+  background: rgba(245, 194, 107, 0.1);
+  color: var(--warning);
+}
+
+html[data-theme="dark"] .pp-notify__mark {
+  color: var(--accent);
+}
+
+html[data-theme="dark"] .pp-notify__mark:hover,
+html[data-theme="dark"] .pp-notify__close:hover {
+  background: var(--paper-deep);
+}
+
+html[data-theme="dark"] .pp-notify__close {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-notify__foot button {
+  color: var(--danger);
+}
+
+html[data-theme="dark"] .pp-toast-card {
+  background: var(--surface);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .pp-toast__message {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-toast__close {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .pp-toast__close:hover {
+  background: var(--paper-deep);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .demo-badge,
+html[data-theme="dark"] .status-pill {
+  background: var(--paper-deep);
+  color: var(--app-muted);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .demo-badge--warning {
+  background: rgba(245, 194, 107, 0.12);
+  color: var(--warning);
+}
+
+html[data-theme="dark"] .status-pill--active,
+html[data-theme="dark"] .status-pill--approved {
+  background: rgba(110, 231, 168, 0.12);
+  color: var(--positive);
+}
+
+html[data-theme="dark"] .status-pill--pending {
+  background: rgba(245, 194, 107, 0.12);
+  color: var(--warning);
+}
+
+html[data-theme="dark"] .status-pill--blocked,
+html[data-theme="dark"] .status-pill--rejected {
+  background: rgba(255, 140, 140, 0.12);
+  color: var(--danger);
+}
+
+html[data-theme="dark"] .toolbar {
+  background: var(--surface);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .toolbar__select {
+  background-color: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .toolbar__search {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .toolbar__search input {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .toolbar__search svg {
+  color: var(--app-muted-2);
+}
+
+html[data-theme="dark"] .table-responsive,
+html[data-theme="dark"] .tx-table-wrap {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .report-bar__track,
+html[data-theme="dark"] .status-breakdown__track,
+html[data-theme="dark"] .deposit-volume__track {
+  background: var(--paper-deep);
+}
+
+html[data-theme="dark"] .report-bar__label,
+html[data-theme="dark"] .status-breakdown__label {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .status-breakdown,
+html[data-theme="dark"] .report-bars {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .settings-row {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .settings-row strong,
+html[data-theme="dark"] .appearance-copy strong {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .settings-row input[type="checkbox"] {
+  background-color: var(--paper-deep);
+  border-color: var(--line-strong);
+}
+
+html[data-theme="dark"] .theme-segmented {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .theme-segmented__btn[aria-pressed="true"] {
+  background: var(--surface-3);
+  color: var(--app-text);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .phone-field {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .phone-country {
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .phone-country:hover {
+  background: var(--surface-3);
+}
+
+html[data-theme="dark"] .phone-field input {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .phone-dial {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .phone-menu__search {
+  background: var(--surface);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .phone-menu__search input {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .phone-option {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .phone-option:hover,
+html[data-theme="dark"] .phone-option.is-active {
+  background: var(--paper-deep);
+}
+
+html[data-theme="dark"] .phone-option__dial {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .method-settings {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .sheet-modal__dialog,
+html[data-theme="dark"] .deposit-modal__dialog,
+html[data-theme="dark"] .logout-modal__dialog {
+  box-shadow: 0 30px 80px -28px rgba(0, 0, 0, 0.85);
+}
+
+html[data-theme="dark"] .sheet-modal__head,
+html[data-theme="dark"] .sheet-modal__foot,
+html[data-theme="dark"] .deposit-modal__header,
+html[data-theme="dark"] .deposit-modal__body {
+  background: var(--surface);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .sheet-modal__close,
+html[data-theme="dark"] .deposit-modal__close,
+html[data-theme="dark"] .logout-modal__icon {
+  background: var(--paper-deep);
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .detail-grid dt,
+html[data-theme="dark"] .request-meta,
+html[data-theme="dark"] .deposit-summary span,
+html[data-theme="dark"] .checkout-address__head,
+html[data-theme="dark"] .deposit-modal__sub {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .detail-grid dd,
+html[data-theme="dark"] .deposit-summary strong,
+html[data-theme="dark"] .checkout-address code,
+html[data-theme="dark"] .deposit-success-title,
+html[data-theme="dark"] .deposit-success-amount {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .demo-banner,
+html[data-theme="dark"] .deposit-warning,
+html[data-theme="dark"] .demo-checkout,
+html[data-theme="dark"] .deposit-note-box {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .checkout-address,
+html[data-theme="dark"] .deposit-summary,
+html[data-theme="dark"] .deposit-quick button {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .deposit-amount {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] .deposit-amount input {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] .request-feedback {
+  background: rgba(110, 231, 168, 0.1);
+  border-color: rgba(110, 231, 168, 0.22);
+  color: var(--positive);
+}
+
+html[data-theme="dark"] .request-feedback.is-error {
+  background: rgba(255, 140, 140, 0.1);
+  border-color: rgba(255, 140, 140, 0.22);
+  color: var(--danger);
+}
+
+html[data-theme="dark"] .support-contact,
+html[data-theme="dark"] .support-faq {
+  background: var(--surface);
+}
+
+html[data-theme="dark"] details {
+  border-color: var(--app-line);
+}
+
+html[data-theme="dark"] summary {
+  color: var(--app-text);
+}
+
+html[data-theme="dark"] details p {
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .support-faq summary::after {
+  background: var(--paper-deep);
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .audit-detail__json {
+  background: var(--paper-deep);
+  border-color: var(--app-line);
+  color: var(--app-muted);
+}
+
+html[data-theme="dark"] .footer a,
+html[data-theme="dark"] .footer-copy,
+html[data-theme="dark"] .footer-demo {
+  color: var(--app-muted-2);
+}
+
+html[data-theme="dark"] .footer a:hover {
+  color: var(--app-text);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
