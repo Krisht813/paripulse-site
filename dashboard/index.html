@@ -1103,6 +1103,36 @@
                   </div>
                 </section>
 
+                <section class="card page-panel" id="workspaceCard" hidden>
+                  <header class="card-header">
+                    <h2 class="card-title">Workspace controls</h2>
+                  </header>
+                  <div class="card-body">
+                    <p class="request-feedback" id="workspaceFeedback" role="status" hidden></p>
+                    <form class="form-grid" id="workspaceForm" novalidate>
+                      <label class="form-field">
+                        <span>Support email</span>
+                        <input id="workspaceSupportEmail" type="email" maxlength="120" autocomplete="email" />
+                      </label>
+                      <label class="form-field">
+                        <span>Large-deposit threshold (USD)</span>
+                        <input id="workspaceThreshold" type="number" min="0" step="0.01" inputmode="decimal" />
+                      </label>
+                      <label class="settings-row form-field--full">
+                        <span>
+                          <strong>Maintenance mode</strong>
+                          <small>Blocks new deposit requests. Staff can still sign in.</small>
+                        </span>
+                        <input type="checkbox" id="workspaceMaintenance" />
+                      </label>
+                      <p class="deposit-note form-field--full">Deposits above the threshold can only be approved by a super admin. Set 0 to disable.</p>
+                      <div class="form-actions form-field--full">
+                        <button class="btn btn-primary" type="submit">Save workspace settings</button>
+                      </div>
+                    </form>
+                  </div>
+                </section>
+
                 <section class="card page-panel">
                   <header class="card-header">
                     <h2 class="card-title">Notifications</h2>
@@ -1486,6 +1516,7 @@
   <script src="js/live-admin.js?v=20261125-1"></script>
   <script src="js/live-finance.js?v=20261125-1"></script>
   <script src="js/live-support.js?v=20261125-1"></script>
+<script src="js/live-settings.js?v=20261125-1"></script>
   <script src="js/audit-log.js?v=20261124-2"></script>
   <script src="js/router.js?v=20261125-1"></script>
   <script src="js/app.js?v=20261124"></script>
