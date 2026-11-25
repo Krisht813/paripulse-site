@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  var MAX_TOASTS = 4;
+  var MAX_TOASTS = 1;
   var COLLAPSED_STEP = 10;
   var EXPANDED_GAP = 8;
   var DEFAULT_DURATION = 4800;
