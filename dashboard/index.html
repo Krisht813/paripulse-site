@@ -10,9 +10,9 @@
   <title>Dashboard · Paripulse Management</title>
   <link rel="stylesheet" href="css/fonts.css?v=20261125-2" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/styles.css?v=20261124-20" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125-3" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
-  <link rel="stylesheet" href="css/theme.css?v=20261125-4" />
+  <link rel="stylesheet" href="css/theme.css?v=20261125-6" />
   <link rel="stylesheet" href="css/notifications.css?v=20261124-9" />
 </head>
 <body>
@@ -144,9 +144,7 @@
           </div>
           <div class="nav-item dropdown">
             <button class="nav-link user-chip" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="menu" aria-label="Account menu">
-              <span class="avatar avatar-sm user-avatar">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6" /><path d="M4.8 20.4c.8-4 3.7-6.2 7.2-6.2s6.4 2.2 7.2 6.2" /></svg>
-              </span>
+              <span class="avatar avatar-sm user-avatar" aria-hidden="true">M</span>
               <span class="user-meta d-none d-sm-flex">
                 <span class="user-name">Mohsin Iqbal</span>
                 <span class="user-status"><span class="online-dot"></span>Online</span>
@@ -427,6 +425,7 @@
 
                 <div class="method-settings" id="methodSettings" hidden>
                   <h3 class="method-settings__title">Limits &amp; warnings</h3>
+                  <p class="request-feedback" id="methodFeedback" role="status" hidden></p>
                   <div class="form-grid">
                     <label class="form-field">
                       <span>Asset</span>
@@ -455,9 +454,10 @@
                       <span>Warning</span>
                       <textarea id="methodWarning" rows="2" maxlength="300" placeholder="Shown at checkout"></textarea>
                     </label>
+                    <div class="form-actions form-field--full">
+                      <button class="btn btn-primary" type="button" id="saveMethod">Save limits</button>
+                    </div>
                   </div>
-                  <p class="request-feedback" id="methodFeedback" role="status" hidden></p>
-                  <button class="btn btn-primary" type="button" id="saveMethod">Save limits</button>
                 </div>
               </div>
             </section>
@@ -1083,7 +1083,7 @@
                       </label>
                       <label class="form-field">
                         <span>Email</span>
-                        <input id="profileEmail" type="email" autocomplete="email" readonly />
+                        <input id="profileEmail" type="email" autocomplete="email" disabled />
                       </label>
                       <label class="form-field">
                         <span>Phone</span>
@@ -1091,7 +1091,7 @@
                       </label>
                       <label class="form-field">
                         <span>Role</span>
-                        <input id="profileRole" type="text" value="Administrator" readonly />
+                        <input id="profileRole" type="text" value="Administrator" disabled />
                       </label>
                       <div class="form-actions form-field--full">
                         <button class="btn btn-primary" type="submit">Save profile</button>
@@ -1474,10 +1474,10 @@
   <script src="js/notifications.js?v=20261125-2"></script>
   <script src="js/select.js?v=20261125-2"></script>
   <script src="js/live-data.js?v=20261124-4"></script>
-  <script src="js/auth-guard.js?v=20261124-6"></script>
+  <script src="js/auth-guard.js?v=20261125-1"></script>
   <script src="js/logout-modal.js?v=20261124-3"></script>
   <script src="js/deposits.js?v=20261124-9"></script>
-  <script src="js/pages.js?v=20261124-3"></script>
+  <script src="js/pages.js?v=20261125-1"></script>
   <script src="js/live-dashboard.js?v=20261124-2"></script>
   <script src="js/live-deposits.js?v=20261124-3"></script>
   <script src="js/live-admin.js?v=20261124-2"></script>

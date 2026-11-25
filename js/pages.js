@@ -1595,8 +1595,7 @@
         }
         saveAdmin(admin);
 
-        var topbarName = document.querySelector(".user-name");
-        if (topbarName) topbarName.textContent = nameValue;
+        setTopbarUser(nameValue, admin.profile.email);
 
         renderUsers();
         showFeedback("profileFeedback", "Profile saved for this demo workspace.");
@@ -1699,6 +1698,12 @@
       var email = document.getElementById("profileEmail");
       if (email && event.detail && event.detail.email) {
         email.value = event.detail.email;
+      }
+      if (event.detail) {
+        setTopbarUser(
+          event.detail.displayName,
+          event.detail.email || loadAdmin().profile.email
+        );
       }
     });
 

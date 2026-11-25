@@ -984,6 +984,23 @@ body {
   box-shadow: 0 0 0 3px rgba(200, 50, 43, 0.1);
 }
 
+.form-field input:disabled,
+.form-field input[readonly],
+.form-field textarea:disabled,
+.form-field textarea[readonly] {
+  border-color: var(--line);
+  background: #f9fafb;
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.form-field input[readonly]:focus,
+.form-field textarea[readonly]:focus {
+  border-color: var(--line);
+  box-shadow: none;
+}
+
 /* Modals */
 .sheet-modal__dialog,
 .deposit-modal__dialog,

@@ -395,7 +395,8 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 4px 2px 4px 8px !important;
+  padding: 4px 8px 4px 4px !important;
+  border-radius: 8px;
   color: var(--app-text);
 }
 
@@ -404,23 +405,21 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
 }
 
 .user-avatar {
+  --tblr-avatar-border-radius: 8px;
+  --tblr-avatar-box-shadow: none;
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   background: #f2f4f7;
-  border-radius: 50%;
-  color: #475467;
-}
-
-.user-avatar svg {
-  width: 17px;
-  height: 17px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  border: 1px solid var(--app-line);
+  border-radius: 8px;
+  color: #344054;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: none;
 }
 
 .user-meta {
@@ -2481,14 +2480,14 @@ body.deposit-modal-open {
 .address-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .address-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   min-width: 0;
 }
 
@@ -2545,7 +2544,8 @@ body.deposit-modal-open {
     grid-template-columns: 1fr;
   }
 
-  .address-card-foot .btn {
+  .address-card-foot .btn,
+  .method-settings .form-actions .btn {
     width: 100%;
   }
 }
@@ -2875,13 +2875,13 @@ body.deposit-modal-open {
 }
 
 .method-settings {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
   border-top: 1px solid var(--app-line);
 }
 
 .method-settings__title {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   color: var(--app-text);
   font-size: 13px;
   font-weight: 600;
@@ -2889,6 +2889,14 @@ body.deposit-modal-open {
 
 .method-settings .form-field {
   margin-bottom: 0;
+}
+
+.method-settings .form-actions {
+  margin-top: 0;
+}
+
+.method-settings .form-actions .btn {
+  min-height: 38px;
 }
 
 .status-pill--active {
@@ -3275,9 +3283,20 @@ body.deposit-modal-open {
   box-shadow: 0 0 0 3px rgba(225, 29, 46, 0.08);
 }
 
-.form-field input[readonly] {
+.form-field input:disabled,
+.form-field input[readonly],
+.form-field textarea:disabled,
+.form-field textarea[readonly] {
   background: #f9fafb;
   color: var(--app-muted);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.form-field input[readonly]:focus,
+.form-field textarea[readonly]:focus {
+  border-color: var(--app-line);
+  box-shadow: none;
 }
 
 .form-actions {
@@ -3818,6 +3837,7 @@ body.deposit-modal-open {
 /* ---------- Consistent dropdown menus ---------- */
 button.user-chip {
   border: 0;
+  border-radius: 8px;
   background: transparent;
   font-family: inherit;
   cursor: pointer;
