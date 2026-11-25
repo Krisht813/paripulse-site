@@ -437,6 +437,11 @@ a.contact-copy {
   text-decoration: none;
 }
 
+.contact-form[hidden],
+.contact-fallback[hidden] {
+  display: none;
+}
+
 .contact-success {
   display: flex;
   flex-direction: column;
