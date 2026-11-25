@@ -41,10 +41,7 @@
     "walletFeedback",
     "ticketFeedback",
     "profileFeedback",
-    "userModalFeedback",
-    "walletAdjustError",
-    "depositError",
-    "depositPayError"
+    "userModalFeedback"
   ];
 
   var FEEDBACK_TITLES = {
@@ -54,10 +51,7 @@
     walletFeedback: "Wallet",
     ticketFeedback: "Support",
     profileFeedback: "Settings",
-    userModalFeedback: "User",
-    walletAdjustError: "Wallet",
-    depositError: "Deposit",
-    depositPayError: "Deposit"
+    userModalFeedback: "User"
   };
 
   var ICONS = {

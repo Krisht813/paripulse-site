@@ -40,8 +40,8 @@ body.pp-notify-center-open .pp-toast-stack {
   bottom: 0;
   left: 0;
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr) 22px;
-  gap: 10px;
+  grid-template-columns: 32px minmax(0, 1fr) 26px;
+  gap: 12px;
   align-items: start;
   padding: 13px 13px 15px;
   overflow: hidden;
@@ -49,14 +49,14 @@ body.pp-notify-center-open .pp-toast-stack {
   border-radius: 8px;
   background: var(--pp-toast-bg);
   box-shadow:
-    0 18px 42px -24px rgba(23, 26, 31, 0.42),
-    0 2px 6px rgba(23, 26, 31, 0.05);
+    0 16px 36px -18px rgba(23, 26, 31, 0.28),
+    0 2px 6px rgba(23, 26, 31, 0.06);
   color: var(--pp-toast-text);
   pointer-events: auto;
   transform-origin: bottom right;
   transition:
-    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.26s ease,
+    transform 0.28s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.22s cubic-bezier(0.23, 1, 0.32, 1),
     box-shadow 0.2s ease;
   z-index: calc(30 - var(--pp-stack-index, 0));
 }
@@ -126,7 +126,7 @@ body.pp-notify-center-open .pp-toast-stack {
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: 6px;
   background: color-mix(in srgb, var(--pp-accent, var(--pp-toast-info)) 11%, #ffffff);
   color: var(--pp-accent, var(--pp-toast-info));
 }
@@ -149,15 +149,15 @@ body.pp-notify-center-open .pp-toast-stack {
 .pp-toast__title {
   margin: 0 0 2px;
   color: var(--pp-toast-text);
-  font-size: 12.5px;
-  font-weight: 650;
+  font-size: 13px;
+  font-weight: 600;
   line-height: 1.35;
 }
 
 .pp-toast__message {
   margin: 0;
-  color: var(--pp-toast-muted);
-  font-size: 12px;
+  color: #475467;
+  font-size: 12.5px;
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -185,19 +185,29 @@ body.pp-notify-center-open .pp-toast-stack {
 .pp-toast__close {
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   padding: 0;
   border: 0;
   border-radius: 6px;
   background: transparent;
-  color: #98a2b3;
+  color: #667085;
   cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
 .pp-toast__close:hover {
   background: #f2f4f7;
-  color: #475467;
+  color: #171a1f;
+}
+
+.pp-toast__close:active {
+  transform: scale(0.95);
+}
+
+.pp-toast__close:focus-visible {
+  outline: 2px solid #c8322b;
+  outline-offset: 1px;
 }
 
 .pp-toast__close svg {
@@ -658,7 +668,7 @@ body.pp-notifications-ready .deposit-error:not([hidden]) {
   width: 44px;
   height: 44px;
   margin-bottom: 12px;
-  border-radius: 50%;
+  border-radius: 8px;
   background: #f2f4f7;
   color: #667085;
 }
@@ -761,75 +771,13 @@ body.pp-notifications-ready .deposit-error:not([hidden]) {
   .pp-notify__backdrop,
   .pp-notify__panel,
   .pp-notify__item,
-  .pp-notify__trigger {
+  .pp-notify__trigger,
+  .pp-toast__close {
     transition: none;
   }
-}
 
-/* Minimal toast: a dismiss control and the timer only. */
-.pp-toast-stack {
-  width: 44px;
-}
-
-.pp-toast-card {
-  display: flex;
-  left: 0;
-  right: 0;
-  width: 44px;
-  height: 44px;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border-radius: 10px;
-  background: #ffffff;
-}
-
-.pp-toast__icon,
-.pp-toast__action {
-  display: none;
-}
-
-/* Keep the message available to assistive technology without showing it. */
-.pp-toast__body {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  border: 0;
-  white-space: nowrap;
-}
-
-.pp-toast__close {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  color: #667085;
-}
-
-.pp-toast__close:hover {
-  background: #f9fafb;
-  color: #171a1f;
-}
-
-.pp-toast__close svg {
-  width: 14px;
-  height: 14px;
-}
-
-.pp-toast-card::after {
-  height: 2px;
-  opacity: 0.55;
-}
-
-@media (max-width: 575.98px) {
-  .pp-toast-stack {
-    right: 16px;
-    left: auto;
-    width: 44px;
+  .pp-toast__close:active {
+    transform: none;
   }
 }
 

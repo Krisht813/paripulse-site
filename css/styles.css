@@ -1255,14 +1255,14 @@ body.logout-modal-open {
 
 .deposit-modal__dialog {
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   overflow: hidden;
   background: #ffffff;
   border: 1px solid var(--app-line);
-  border-radius: 12px;
-  box-shadow: 0 24px 60px -20px rgba(16, 24, 40, 0.45);
+  border-radius: 8px;
+  box-shadow: 0 24px 60px -20px rgba(16, 24, 40, 0.4);
   transform: translateY(8px) scale(0.98);
-  transition: transform 0.18s ease;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .deposit-modal.is-open .deposit-modal__dialog {
@@ -1274,14 +1274,14 @@ body.logout-modal-open {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 18px 22px;
+  padding: 20px 24px 16px;
   border-bottom: 1px solid var(--app-line);
 }
 
 .deposit-modal__title {
   margin: 0;
   color: var(--app-text);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -1289,25 +1289,44 @@ body.logout-modal-open {
 .deposit-modal__close {
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: 1px solid var(--app-line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: #ffffff;
   color: #667085;
-  font-size: 18px;
-  line-height: 1;
   cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.deposit-modal__close svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .deposit-modal__close:hover {
+  border-color: #d0d5dd;
   background: #f9fafb;
-  color: #344054;
+  color: #171a1f;
+}
+
+.deposit-modal__close:active {
+  transform: scale(0.96);
+}
+
+.deposit-modal__close:focus-visible {
+  outline: 2px solid var(--brand-red);
+  outline-offset: 2px;
 }
 
 .deposit-modal__body {
-  padding: 20px 22px 22px;
+  padding: 20px 24px 24px;
 }
 
 .deposit-modal__copy {
@@ -1370,23 +1389,23 @@ body.logout-modal-open {
 }
 
 .deposit-error {
-  margin-top: 10px;
-  padding: 8px 10px;
-  border: 1px solid #fecdca;
-  border-radius: 6px;
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border: 1px solid #f2c6c2;
+  border-radius: 8px;
   background: #fef3f2;
   color: #b42318;
-  font-size: 11px;
-  line-height: 1.5;
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 .deposit-success-icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   margin-bottom: 14px;
-  border-radius: 50%;
+  border-radius: 8px;
   background: #ecfdf3;
   color: #067647;
   font-size: 22px;
@@ -1638,68 +1657,67 @@ body.deposit-modal-open {
 
 .deposit-modal__sub {
   margin: 3px 0 0;
-  color: var(--app-muted-2);
-  font-size: 10.5px;
+  color: var(--app-muted);
+  font-size: 12.5px;
   line-height: 1.4;
 }
 
 .deposit-modal__header {
   align-items: flex-start;
-  padding: 20px 22px 16px;
+  padding: 20px 24px 16px;
 }
 
 .deposit-modal__close {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   flex: none;
   color: #667085;
-  font-size: 17px;
 }
 
 .demo-banner {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 10px;
   padding: 10px 12px;
-  margin-bottom: 18px;
-  border: 1px solid #fedf89;
+  margin-bottom: 20px;
+  border: 1px solid var(--app-line);
   border-radius: 8px;
-  background: #fffaeb;
-  color: #b54708;
+  background: #f9fafb;
+  color: #3f4650;
 }
 
 .demo-banner svg {
   width: 16px;
   height: 16px;
   flex: none;
-  margin-top: 1px;
+  margin-top: 2px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.5;
+  stroke-width: 1.6;
 }
 
 .demo-banner strong {
   display: block;
-  margin-bottom: 2px;
-  font-size: 10.5px;
+  margin-bottom: 1px;
+  color: var(--app-text);
+  font-size: 12px;
   font-weight: 600;
 }
 
 .demo-banner span {
   display: block;
-  color: #b54708;
-  font-size: 10px;
+  color: #475467;
+  font-size: 12px;
   line-height: 1.45;
-  opacity: 0.85;
 }
 
 .deposit-field-label {
   display: block;
-  margin: 0 0 7px;
-  color: #344054;
-  font-size: 11px;
+  margin: 0 0 8px;
+  color: #3f4650;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -1707,8 +1725,8 @@ body.deposit-modal-open {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 58px;
-  padding: 0 12px;
+  height: 56px;
+  padding: 0 14px;
   border: 1px solid #d0d5dd;
   border-radius: 8px;
   background: #fff;
@@ -1722,7 +1740,7 @@ body.deposit-modal-open {
 
 .deposit-amount__symbol {
   color: #667085;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 500;
 }
 
@@ -1734,7 +1752,7 @@ body.deposit-modal-open {
   outline: 0;
   background: transparent;
   color: var(--app-text);
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.2;
@@ -1747,30 +1765,31 @@ body.deposit-modal-open {
 }
 
 .deposit-amount__code {
-  color: var(--app-muted-2);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.03em;
+  color: #667085;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .deposit-quick {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
+  gap: 8px;
   margin-top: 8px;
 }
 
 .deposit-quick button {
-  height: 30px;
-  padding: 0 6px;
+  height: 36px;
+  padding: 0 8px;
   border: 1px solid var(--app-line);
   border-radius: 6px;
   background: #f9fafb;
-  color: #475467;
-  font-size: 10.5px;
+  color: #3f4650;
+  font-size: 12.5px;
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
 .deposit-quick button:hover {
@@ -1780,30 +1799,31 @@ body.deposit-modal-open {
 }
 
 .deposit-quick button.is-active {
-  border-color: #fecdca;
-  background: #fff1f1;
-  color: var(--brand-red);
+  border-color: #c8322b;
+  background: #fef3f2;
+  color: #9f241f;
+  font-weight: 600;
 }
 
 .deposit-field-hint {
-  margin: 6px 0 18px;
-  color: var(--app-muted-2);
-  font-size: 10px;
+  margin: 8px 0 20px;
+  color: #667085;
+  font-size: 12px;
   line-height: 1.45;
 }
 
 .asset-select {
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .asset-select__trigger {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  min-height: 52px;
-  padding: 8px 12px;
+  min-height: 56px;
+  padding: 10px 12px;
   border: 1px solid #d0d5dd;
   border-radius: 8px;
   background: #fff;
@@ -1830,11 +1850,11 @@ body.deposit-modal-open {
 .asset-mark {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   flex: none;
-  border-radius: 50%;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1;
 }
@@ -1863,14 +1883,14 @@ body.deposit-modal-open {
 
 .asset-select__copy strong {
   color: var(--app-text);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .asset-select__copy small {
   margin-top: 2px;
   color: var(--app-muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .asset-select__chevron {
@@ -1980,14 +2000,14 @@ body.deposit-modal-open {
 
 .asset-option strong {
   color: var(--app-text);
-  font-size: 11.5px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .asset-option small {
   margin-top: 2px;
   color: var(--app-muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .asset-option__check {
@@ -2008,21 +2028,21 @@ body.deposit-modal-open {
 }
 
 .deposit-submit {
-  min-height: 42px;
+  min-height: 44px;
   margin-top: 0;
   border-radius: 8px;
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .deposit-secondary {
-  min-height: 40px;
+  min-height: 42px;
   margin-top: 8px;
   border: 1px solid var(--app-line);
   border-radius: 8px;
   background: #fff;
   color: #344054;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -2080,9 +2100,9 @@ body.deposit-modal-open {
 }
 
 .checkout-address {
-  padding: 12px;
+  padding: 14px 16px;
   margin-bottom: 16px;
-  border: 1px dashed #d0d5dd;
+  border: 1px solid var(--app-line);
   border-radius: 8px;
   background: #f9fafb;
 }
@@ -2093,10 +2113,8 @@ body.deposit-modal-open {
   justify-content: space-between;
   gap: 10px;
   color: var(--app-muted);
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-size: 11.5px;
+  font-weight: 600;
 }
 
 .demo-pill {
@@ -2138,12 +2156,10 @@ body.deposit-modal-open {
 }
 
 .deposit-success-eyebrow {
-  margin: 0 0 5px;
-  color: #067647;
-  font-size: 9.5px;
+  margin: 0 0 4px;
+  color: #2d6a4f;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .deposit-success-title {
@@ -2168,11 +2184,11 @@ body.deposit-modal-open {
 
 @media (max-width: 480px) {
   .deposit-modal__header {
-    padding: 18px 18px 14px;
+    padding: 18px 20px 14px;
   }
 
   .deposit-modal__body {
-    padding: 18px;
+    padding: 18px 20px 20px;
   }
 
   .deposit-amount {
@@ -2180,7 +2196,11 @@ body.deposit-modal-open {
   }
 
   .deposit-amount input {
-    font-size: 23px;
+    font-size: 24px;
+  }
+
+  .deposit-receipt {
+    font-size: 16px;
   }
 }
 
@@ -2461,14 +2481,14 @@ body.deposit-modal-open {
 .deposit-warning strong {
   display: block;
   margin-bottom: 2px;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.45;
 }
 
 .deposit-warning span {
   display: block;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.45;
   opacity: 0.9;
 }

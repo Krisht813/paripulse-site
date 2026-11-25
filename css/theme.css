@@ -934,16 +934,30 @@ body {
 }
 
 .btn-primary {
+  --tblr-btn-focus-box-shadow: none;
   border-color: var(--accent);
   background: var(--accent);
   box-shadow: none;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:hover {
   border-color: var(--accent-strong);
   background: var(--accent-strong);
   box-shadow: none;
+}
+
+.btn-primary:focus:not(:focus-visible) {
+  border-color: var(--accent);
+  background: var(--accent);
+  outline: 0;
+  box-shadow: none;
+}
+
+.btn-primary:focus-visible {
+  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(200, 50, 43, 0.24);
 }
 
 .btn-light {
@@ -1057,6 +1071,118 @@ body {
 
 .deposit-modal__icon {
   display: none;
+}
+
+.deposit-modal__dialog {
+  border-color: var(--line);
+  border-radius: 8px;
+  box-shadow:
+    0 24px 56px -22px rgba(23, 26, 31, 0.36),
+    0 2px 6px rgba(23, 26, 31, 0.06);
+}
+
+.deposit-modal__title {
+  color: var(--ink);
+}
+
+.deposit-modal__sub {
+  color: var(--muted);
+}
+
+.demo-banner {
+  border-color: var(--line);
+  background: #f9fafb;
+  color: var(--ink-soft);
+}
+
+.demo-banner svg {
+  color: var(--muted-soft);
+}
+
+.demo-banner strong {
+  color: var(--ink);
+}
+
+.demo-banner span {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.deposit-amount {
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+
+.deposit-amount:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200, 50, 43, 0.12);
+}
+
+.deposit-quick button {
+  border-color: var(--line);
+  border-radius: 6px;
+  background: #f9fafb;
+  color: var(--ink-soft);
+}
+
+@media (hover: hover) {
+  .deposit-quick button:hover {
+    border-color: var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+}
+
+.deposit-quick button:active {
+  transform: scale(0.97);
+}
+
+.deposit-quick button.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.asset-select__trigger {
+  border-color: var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.asset-select__trigger:focus-visible,
+.asset-select__trigger[aria-expanded="true"] {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200, 50, 43, 0.12);
+}
+
+.asset-mark {
+  border-radius: 6px;
+}
+
+.asset-option.is-selected {
+  background: var(--accent-soft);
+}
+
+.deposit-error {
+  border-color: #f2c6c2;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--danger);
+}
+
+.deposit-summary,
+.checkout-address {
+  border-color: var(--line);
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.deposit-success-icon {
+  border-radius: 8px;
+}
+
+.deposit-success-eyebrow {
+  color: var(--positive);
 }
 
 .detail-grid dt {
