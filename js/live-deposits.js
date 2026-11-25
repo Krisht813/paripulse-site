@@ -594,6 +594,21 @@
     if (!assetMenu || !assetButton) return;
     assetMenu.hidden = false;
     assetButton.setAttribute("aria-expanded", "true");
+
+    var triggerRect = assetButton.getBoundingClientRect();
+    var menuHeight = assetMenu.offsetHeight;
+    var boundary =
+      assetButton.closest(".deposit-modal__dialog") ||
+      assetButton.closest(".sheet-modal__dialog");
+    var bounds = boundary
+      ? boundary.getBoundingClientRect()
+      : { top: 0, bottom: window.innerHeight };
+    var spaceBelow = Math.min(window.innerHeight, bounds.bottom) - triggerRect.bottom;
+    var spaceAbove = triggerRect.top - Math.max(0, bounds.top);
+    var opensUp =
+      menuHeight + 12 > spaceBelow && spaceAbove > menuHeight + 12;
+    assetMenu.classList.toggle("asset-select__menu--up", opensUp);
+
     var selected = assetMenu.querySelector(".asset-option.is-selected");
     if (selected) selected.focus();
   }

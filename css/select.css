@@ -1,0 +1,281 @@
+/* ============================================================
+   Paripulse custom select
+   One listbox and one chevron, everywhere a native select appears.
+   ============================================================ */
+
+.pselect {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  --pselect-height: 36px;
+  --pselect-font-size: 12px;
+  --pselect-option-height: 36px;
+}
+
+.pselect--toolbar,
+.pselect--compact {
+  display: inline-block;
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.pselect--toolbar {
+  min-width: 120px;
+}
+
+.pselect--compact {
+  min-width: 112px;
+}
+
+.pselect--audit {
+  min-width: 120px;
+}
+
+/* The real control stays in the DOM so forms, labels and scripts keep
+   reading and writing the native value. */
+.pselect__native {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.pselect__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: var(--pselect-height);
+  padding: 0 10px;
+  border: 1px solid var(--app-line, #e4e7ec);
+  border-radius: 8px;
+  outline: 0;
+  background: #ffffff;
+  color: #344054;
+  font-family: inherit;
+  font-size: var(--pselect-font-size);
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.pselect__trigger:hover {
+  border-color: #c8ced8;
+}
+
+.pselect__trigger:focus-visible,
+.pselect.is-open .pselect__trigger {
+  border-color: #f3a6ad;
+  box-shadow: 0 0 0 3px rgba(225, 29, 46, 0.08);
+}
+
+.pselect.is-disabled .pselect__trigger {
+  background: #f9fafb;
+  color: #98a2b3;
+  cursor: not-allowed;
+}
+
+.pselect.is-disabled .pselect__chevron {
+  stroke: #b8c0cc;
+}
+
+.pselect__label {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pselect__label.is-placeholder {
+  color: #98a2b3;
+}
+
+.pselect__chevron {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  fill: none;
+  stroke: #667085;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pselect.is-open .pselect__chevron {
+  transform: rotate(180deg);
+}
+
+/* The menu is portalled to <body> so modal overflow and table rows
+   cannot clip it. Position is set inline from the trigger rect. */
+.pselect__menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1090;
+  display: block;
+  min-width: 168px;
+  max-width: calc(100vw - 16px);
+  padding: 5px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--app-line, #e4e7ec);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow:
+    0 18px 40px -20px rgba(16, 24, 40, 0.32),
+    0 2px 6px rgba(16, 24, 40, 0.05);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px) scale(0.985);
+  transform-origin: top center;
+  transition:
+    opacity 0.14s ease,
+    transform 0.16s cubic-bezier(0.23, 1, 0.32, 1),
+    visibility 0.16s ease;
+}
+
+.pselect__menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+
+.pselect__menu.is-flipped {
+  transform-origin: bottom center;
+}
+
+.pselect__menu.is-flipped:not(.is-open) {
+  transform: translateY(4px) scale(0.985);
+}
+
+.pselect__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--pselect-option-height, 36px);
+  padding: 6px 9px;
+  border-radius: 6px;
+  color: #344054;
+  font-family: inherit;
+  font-size: var(--pselect-font-size, 12px);
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pselect__option-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pselect__option:hover,
+.pselect__option.is-active {
+  background: #f2f4f7;
+  color: #101828;
+}
+
+.pselect__option[aria-selected="true"] {
+  background: #fff5f5;
+  color: #101828;
+}
+
+.pselect__option[aria-selected="true"]:hover,
+.pselect__option[aria-selected="true"].is-active {
+  background: #ffecec;
+}
+
+.pselect__option[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.pselect__check {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  fill: none;
+  stroke: var(--brand-red, #e11d2e);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  visibility: hidden;
+}
+
+.pselect__option[aria-selected="true"] .pselect__check {
+  visibility: visible;
+}
+
+.pselect__group {
+  padding: 8px 9px 4px;
+  color: #98a2b3;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---------- Context sizes ---------- */
+
+.pselect--compact .pselect__trigger {
+  min-height: 30px;
+  padding: 0 8px;
+  font-size: 11.5px;
+}
+
+.pselect--contact .pselect__trigger {
+  min-height: 42px;
+  padding: 9px 11px;
+  font-size: 12.5px;
+}
+
+.form-field .pselect__trigger {
+  min-height: 38px;
+  padding: 9px 11px;
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .toolbar .pselect {
+    flex: 1 1 130px;
+    min-width: 0;
+  }
+
+  .toolbar .pselect--audit {
+    flex: 0 1 130px;
+    max-width: 130px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pselect__trigger,
+  .pselect__chevron,
+  .pselect__menu {
+    transition: none;
+  }
+}
