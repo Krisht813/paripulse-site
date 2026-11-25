@@ -121,6 +121,12 @@ body::-webkit-scrollbar {
   letter-spacing: 0.01em;
 }
 
+/* The brand red only clears 3.9:1 on the dark sidebar, so lighten it
+   there to keep the wordmark above the 4.5:1 AA threshold. */
+.navbar-vertical .brand-name {
+  color: #ec404d;
+}
+
 .brand-sub {
   margin-top: 4px;
   color: #d8dde6;
@@ -1861,12 +1867,12 @@ body.deposit-modal-open {
 
 .asset-mark--usdt {
   background: #e8f5f0;
-  color: #0e9f6e;
+  color: #0a7854;
 }
 
 .asset-mark--btc {
   background: #fdf3e1;
-  color: #b7790b;
+  color: #926009;
 }
 
 .asset-mark--eth {
@@ -3426,6 +3432,36 @@ body.deposit-modal-open {
   height: 16px;
   flex: none;
   accent-color: var(--brand-red);
+}
+
+.settings-row__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+/* Inline password change, revealed from the Security card. */
+.password-change {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--app-line);
+}
+
+.password-change .form-field input {
+  width: 100%;
+}
+
+@media (max-width: 575.98px) {
+  .settings-row__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .password-change .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 /* ---------- User detail dialog ---------- */

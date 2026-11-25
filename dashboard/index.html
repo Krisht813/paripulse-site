@@ -13,7 +13,7 @@
   <link rel="preload" as="script" href="vendor/firebase/firebase-firestore-compat.js" />
   <link rel="stylesheet" href="css/fonts.css?v=20261125-9" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/styles.css?v=20261125-24" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125-25" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
   <link rel="stylesheet" href="css/theme.css?v=20261125-9" />
   <link rel="stylesheet" href="css/notifications.css?v=20261125-9" />
@@ -1190,10 +1190,35 @@
                     <div class="settings-row">
                       <span>
                         <strong>Password</strong>
-                        <small>Reset through Firebase Authentication.</small>
+                        <small>Change it here, or reset it by email.</small>
                       </span>
-                      <a class="btn btn-light btn-sm" href="/forgot-password/">Reset</a>
+                      <div class="settings-row__actions">
+                        <button class="btn btn-light btn-sm" type="button" id="passwordChangeToggle" aria-expanded="false" aria-controls="passwordChangeForm">Change</button>
+                        <a class="btn btn-ghost-light btn-sm" href="/forgot-password/">Email reset</a>
+                      </div>
                     </div>
+
+                    <form class="form-grid password-change" id="passwordChangeForm" hidden novalidate>
+                      <p class="request-feedback" id="passwordFeedback" role="status" hidden></p>
+                      <label class="form-field form-field--full">
+                        <span>Current password</span>
+                        <input id="passwordCurrent" type="password" autocomplete="current-password" required />
+                      </label>
+                      <label class="form-field">
+                        <span>New password</span>
+                        <input id="passwordNew" type="password" autocomplete="new-password" minlength="8" required aria-describedby="passwordRules" />
+                      </label>
+                      <label class="form-field">
+                        <span>Confirm new password</span>
+                        <input id="passwordConfirm" type="password" autocomplete="new-password" minlength="8" required />
+                      </label>
+                      <p class="form-hint form-field--full" id="passwordRules">At least 8 characters. You stay signed in afterwards.</p>
+                      <div class="form-actions form-field--full">
+                        <button class="btn btn-primary" type="submit" id="passwordSubmit">Update password</button>
+                        <button class="btn btn-light" type="button" id="passwordCancel">Cancel</button>
+                      </div>
+                    </form>
+
                     <div class="settings-row">
                       <span>
                         <strong>Two-factor authentication</strong>

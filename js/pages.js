@@ -1609,6 +1609,153 @@
       });
     }
 
+    /* ---------- password change (live mode only) ---------- */
+
+    var passwordForm = document.getElementById("passwordChangeForm");
+    if (passwordForm) {
+      var passwordToggle = document.getElementById("passwordChangeToggle");
+      var passwordCancel = document.getElementById("passwordCancel");
+
+      function resetPasswordForm() {
+        passwordForm.reset();
+        passwordForm.hidden = true;
+        if (passwordToggle) {
+          passwordToggle.setAttribute("aria-expanded", "false");
+          passwordToggle.textContent = "Change";
+        }
+        var feedback = document.getElementById("passwordFeedback");
+        if (feedback) feedback.hidden = true;
+      }
+
+      if (passwordToggle) {
+        passwordToggle.addEventListener("click", function () {
+          var open = passwordForm.hidden;
+          passwordForm.hidden = !open;
+          passwordToggle.setAttribute("aria-expanded", open ? "true" : "false");
+          passwordToggle.textContent = open ? "Cancel" : "Change";
+          if (open) {
+            var current = document.getElementById("passwordCurrent");
+            if (current) current.focus();
+          } else {
+            passwordForm.reset();
+          }
+        });
+      }
+
+      if (passwordCancel) {
+        passwordCancel.addEventListener("click", resetPasswordForm);
+      }
+
+      passwordForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var currentInput = document.getElementById("passwordCurrent");
+        var newInput = document.getElementById("passwordNew");
+        var confirmInput = document.getElementById("passwordConfirm");
+        var submit = document.getElementById("passwordSubmit");
+
+        var current = currentInput ? currentInput.value : "";
+        var next = newInput ? newInput.value : "";
+        var confirm = confirmInput ? confirmInput.value : "";
+
+        if (!current) {
+          showFeedback("passwordFeedback", "Enter your current password.", true);
+          if (currentInput) currentInput.focus();
+          return;
+        }
+        if (next.length < 8) {
+          showFeedback(
+            "passwordFeedback",
+            "Your new password must be at least 8 characters.",
+            true
+          );
+          if (newInput) newInput.focus();
+          return;
+        }
+        if (next !== confirm) {
+          showFeedback(
+            "passwordFeedback",
+            "The two new passwords do not match.",
+            true
+          );
+          if (confirmInput) confirmInput.focus();
+          return;
+        }
+        if (next === current) {
+          showFeedback(
+            "passwordFeedback",
+            "Choose a password different from your current one.",
+            true
+          );
+          if (newInput) newInput.focus();
+          return;
+        }
+
+        if (!liveMode() || !window.firebase || !firebase.auth) {
+          showFeedback(
+            "passwordFeedback",
+            "Sign in to the live workspace to change your password.",
+            true
+          );
+          return;
+        }
+
+        var user = firebase.auth().currentUser;
+        if (!user || !user.email) {
+          showFeedback(
+            "passwordFeedback",
+            "Your session expired. Sign in again.",
+            true
+          );
+          return;
+        }
+
+        if (submit) {
+          submit.dataset.idleLabel = submit.textContent;
+          submit.disabled = true;
+          submit.textContent = "Updating…";
+        }
+
+        var credential = firebase.auth.EmailAuthProvider.credential(
+          user.email,
+          current
+        );
+
+        /* Firebase requires a recent sign-in before a password change. */
+        user
+          .reauthenticateWithCredential(credential)
+          .then(function () {
+            return user.updatePassword(next);
+          })
+          .then(function () {
+            showFeedback("passwordFeedback", "Password updated.");
+            window.setTimeout(resetPasswordForm, 1600);
+          })
+          .catch(function (error) {
+            var code = error && error.code ? error.code : "";
+            var message = "Could not update your password.";
+            if (code === "auth/wrong-password" || code === "auth/invalid-credential") {
+              message = "Your current password is incorrect.";
+            } else if (code === "auth/too-many-requests") {
+              message = "Too many attempts. Try again later.";
+            } else if (code === "auth/weak-password") {
+              message = "That password is too weak. Use at least 8 characters.";
+            } else if (code === "auth/requires-recent-login") {
+              message = "Sign in again, then change your password.";
+            } else if (error && error.message) {
+              message = error.message;
+            }
+            showFeedback("passwordFeedback", message, true);
+          })
+          .then(function () {
+            if (submit) {
+              submit.disabled = false;
+              submit.textContent = submit.dataset.idleLabel || "Update password";
+            }
+          });
+      });
+    }
+
     ["prefDepositEmails", "prefLoginAlerts", "prefWeeklySummary"].forEach(function (id) {
       var input = document.getElementById(id);
       if (!input) return;
