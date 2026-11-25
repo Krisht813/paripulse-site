@@ -91,25 +91,30 @@
 }
 
 .contact-copy {
-  min-height: 36px;
+  min-height: 38px;
   flex: none;
-  padding: 0 10px;
+  padding: 0 14px;
   border: 1px solid #d0d5dd;
-  border-radius: 6px;
+  border-radius: 8px;
   background: #ffffff;
-  color: #475467;
+  color: #344054;
   cursor: pointer;
   font-family: inherit;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: border-color 0.14s ease, background-color 0.14s ease, color 0.14s ease, transform 0.14s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
 .contact-copy:hover,
 .contact-copy:focus {
-  border-color: #6e6a61;
-  background: #f9fafb;
+  border-color: #98a2b3;
+  background: #ffffff;
   color: var(--ink);
+}
+
+.contact-copy:active {
+  transform: scale(0.98);
 }
 
 .contact-note {
@@ -425,15 +430,15 @@
 .contact-fallback__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
-a.contact-copy {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.contact-fallback__btn {
+  min-height: 42px;
+  padding: 0 16px;
+  font-size: 13px;
   text-decoration: none;
 }
 
@@ -446,7 +451,8 @@ a.contact-copy {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 6px 0 2px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
 }
 
 .contact-success[hidden] {
@@ -455,7 +461,7 @@ a.contact-copy {
 
 .contact-success__head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
 }
 
@@ -464,17 +470,17 @@ a.contact-copy {
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border: 1px solid #101722;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #101722;
   color: #ffffff;
 }
 
 .contact-success__badge svg {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -483,11 +489,12 @@ a.contact-copy {
 }
 
 .contact-success__eyebrow {
-  margin: 0 0 3px;
+  margin: 0 0 2px;
   color: #c8322b;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
@@ -511,9 +518,9 @@ a.contact-copy {
 .contact-success__meta {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 16px;
   margin: 0;
-  padding: 14px 16px;
+  padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fafbfc;
@@ -537,7 +544,11 @@ a.contact-copy {
 
 .contact-success__actions {
   display: flex;
-  justify-content: flex-start;
+}
+
+.contact-reset {
+  width: 100%;
+  min-height: 46px;
 }
 
 @media (max-width: 520px) {
@@ -547,10 +558,12 @@ a.contact-copy {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contact-submit {
+  .contact-submit,
+  .contact-copy {
     transition: none;
   }
-  .contact-submit:active:not(:disabled) {
+  .contact-submit:active:not(:disabled),
+  .contact-copy:active {
     transform: none;
   }
 }
