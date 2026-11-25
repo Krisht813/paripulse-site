@@ -29,7 +29,7 @@
     ) {
       return false;
     }
-    if (typeof connection.downlink === "number" && connection.downlink < 1.5) {
+    if (typeof connection.downlink === "number" && connection.downlink < 0.8) {
       return false;
     }
     return true;
