@@ -3890,6 +3890,100 @@ html.is-live-loading .page-body > .container-fluid {
   opacity: 0;
 }
 
+/* ---------- Loading skeletons (live mode) ----------
+   Replaces values and table rows with pulsing placeholders until
+   each view's data arrives. */
+@keyframes pp-skel-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.42;
+  }
+}
+
+.pp-skel-line {
+  display: block;
+  height: 12px;
+  border-radius: 5px;
+  background: #eef1f6;
+  animation: pp-skel-pulse 1.6s ease-in-out infinite;
+}
+
+.stat-value .pp-skel-line {
+  height: 22px;
+  margin: 1px 0;
+}
+
+.donut-amount .pp-skel-line {
+  height: 20px;
+}
+
+.balance-value .pp-skel-line {
+  height: 11px;
+}
+
+.pp-skel-line--sm {
+  height: 10px;
+}
+
+.pp-skel-row .pp-skel-line {
+  animation-delay: 0.12s;
+}
+
+.pp-skel-row:nth-child(even) .pp-skel-line {
+  animation-delay: 0.24s;
+}
+
+.pp-skel-ticket {
+  align-items: center;
+}
+
+.pp-skel-ticket .ticket-row__copy {
+  display: grid;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pp-skel-ticket .ticket-row__meta {
+  flex: none;
+}
+
+/* Keep the layout still while values are replaced by placeholders. */
+.pp-skel .stat-label,
+.pp-skel .stat-caption,
+.pp-skel .balance-label,
+.pp-skel .donut-label {
+  opacity: 0.55;
+}
+
+.pp-skel .stat-icon {
+  opacity: 0.3;
+}
+
+.pp-skel .donut-track,
+.pp-skel .donut-value {
+  opacity: 0.25;
+}
+
+.pp-skel .panel-link,
+.pp-skel .stat-trend {
+  opacity: 0.3;
+}
+
+.pp-skel .tx-empty {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-skel-line {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
 .view-enter {
   animation: view-enter 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
