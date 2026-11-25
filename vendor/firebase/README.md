@@ -1,7 +1,7 @@
 # Firebase Web SDK (vendored)
 
 - Version: **10.14.1**
-- Build: compat (`firebase-app-compat.js`, `firebase-auth-compat.js`, `firebase-firestore-compat.js`, `firebase-functions-compat.js`)
+- Build: compat (`firebase-app-compat.js`, `firebase-auth-compat.js`, `firebase-firestore-compat.js`, `firebase-functions-compat.js`, `firebase-app-check-compat.js`)
 - Source: https://www.gstatic.com/firebasejs/10.14.1/
 - License: Apache License 2.0 (Firebase JS SDK)
 
