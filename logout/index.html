@@ -38,6 +38,11 @@
         config.projectId.indexOf("REPLACE_") === -1;
 
       function done() {
+        try {
+          window.sessionStorage.removeItem("paripulse_notification_center_v1");
+        } catch (error) {
+          /* Storage may be unavailable; the redirect still proceeds. */
+        }
         window.location.replace("/login/");
       }
 
