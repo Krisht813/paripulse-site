@@ -500,7 +500,7 @@
 
 .contact-success__head h3 {
   margin: 0;
-  font-family: "Poppins", "Instrument Sans", sans-serif;
+  font-family: "Poppins", "Poppins Fallback", "Instrument Sans", "Instrument Sans Fallback", sans-serif;
   font-size: 19px;
   font-weight: 600;
   letter-spacing: -0.02em;

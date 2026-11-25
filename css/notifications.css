@@ -407,7 +407,7 @@ body.pp-notifications-ready .deposit-error:not([hidden]) {
 .pp-notify__title {
   margin: 0;
   color: var(--pp-toast-text);
-  font-family: "Poppins", "Instrument Sans", system-ui, sans-serif;
+  font-family: "Poppins", "Poppins Fallback", "Instrument Sans", "Instrument Sans Fallback", system-ui, sans-serif;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -686,7 +686,7 @@ body.pp-notifications-ready .deposit-error:not([hidden]) {
 .pp-notify__empty h3 {
   margin: 0 0 4px;
   color: #171a1f;
-  font-family: "Poppins", "Instrument Sans", system-ui, sans-serif;
+  font-family: "Poppins", "Poppins Fallback", "Instrument Sans", "Instrument Sans Fallback", system-ui, sans-serif;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.02em;

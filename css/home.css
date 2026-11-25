@@ -15,8 +15,8 @@
   --brand-red: #e11d2e;
   --brand-red-dark: #c81424;
   --white: #ffffff;
-  --font: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --display: "Poppins", var(--font);
+  --font: "Instrument Sans", "Instrument Sans Fallback", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --display: "Poppins", "Poppins Fallback", var(--font);
 }
 
 *,
