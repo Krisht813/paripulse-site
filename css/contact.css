@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    Paripulse contact page
    ============================================================ */
 
@@ -107,7 +107,7 @@
 
 .contact-copy:hover,
 .contact-copy:focus {
-  border-color: #98a2b3;
+  border-color: #6e6a61;
   background: #f9fafb;
   color: var(--ink);
 }
@@ -202,7 +202,7 @@
 
 .contact-field input::placeholder,
 .contact-field textarea::placeholder {
-  color: #98a2b3;
+  color: #6e6a61;
 }
 
 .contact-field input:focus,
@@ -223,7 +223,7 @@
   align-self: flex-end;
   margin-top: -2px;
   color: var(--muted-2);
-  font-size: 10px;
+  font-size: 11.5px;
 }
 
 .contact-feedback {
@@ -242,7 +242,7 @@
 .contact-form__hint {
   margin: -2px 0 0;
   color: var(--muted-2);
-  font-size: 10.5px;
+  font-size: 12.5px;
   line-height: 1.45;
   text-align: center;
 }
@@ -252,7 +252,7 @@
   padding-top: 16px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 11.5px;
+  font-size: 12.5px;
   line-height: 1.5;
 }
 
@@ -379,11 +379,11 @@
 
 @media (max-width: 520px) {
   .contact-direct__row {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .contact-direct__copy {
-    flex-basis: 100%;
+    flex-basis: auto;
   }
 
   .contact-card {

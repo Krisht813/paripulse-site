@@ -3,16 +3,17 @@
 <head>
   <base href="/">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta name="theme-color" content="#0b1222" />
+  <meta name="theme-color" content="#f3efe6" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261124" />
   <title>Dashboard · Paripulse Management</title>
-  <link rel="stylesheet" href="css/fonts.css?v=20261125-1" />
+  <link rel="stylesheet" href="css/fonts.css?v=20261125-2" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/styles.css?v=20261124-18" />
+  <link rel="stylesheet" href="css/styles.css?v=20261124-20" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
-  <link rel="stylesheet" href="css/notifications.css?v=20261124-4" />
+  <link rel="stylesheet" href="css/theme.css?v=20261125-1" />
+  <link rel="stylesheet" href="css/notifications.css?v=20261124-5" />
 </head>
 <body>
   <div class="page">
@@ -38,7 +39,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="sidebar-menu">
-          <div class="sidebar-label">Main Menu</div>
+          <div class="sidebar-label">Workspace</div>
 
           <ul class="navbar-nav">
             <li class="nav-item active" id="navDashboardItem">
@@ -164,14 +165,14 @@
           <div id="dashboardView">
           <div class="dashboard-heading">
             <h1 class="dashboard-title"><svg class="page-title-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8" /><path d="M5.5 9.3V20a1 1 0 0 0 1 1H10v-5.5h4V21h3.5a1 1 0 0 0 1-1V9.3" /></svg>Dashboard <span>Overview</span></h1>
-            <p class="dashboard-date">Today's Date: <strong id="todayDate">18 Sep 2026</strong></p>
+            <p class="dashboard-date">Today <strong id="todayDate">18 Sep 2026</strong></p>
           </div>
 
           <p class="live-data-note" id="liveDataNote" hidden></p>
 
           <!-- KPI cards -->
           <div class="row row-cards stats-row">
-            <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="col-6 col-md-3">
               <article class="card stat-card stat-card--blue h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -192,7 +193,7 @@
               </article>
             </div>
 
-            <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="col-6 col-md-3">
               <article class="card stat-card stat-card--green h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -209,7 +210,7 @@
               </article>
             </div>
 
-            <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="col-6 col-md-3">
               <article class="card stat-card stat-card--orange h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -226,7 +227,7 @@
               </article>
             </div>
 
-            <div class="col-12 col-sm-6 col-xxl-3">
+            <div class="col-6 col-md-3">
               <article class="card stat-card stat-card--indigo h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -303,22 +304,22 @@
 
                   <ul class="balance-list">
                     <li>
-                      <span class="balance-dot" style="--dot: #1552cc"></span>
+                      <span class="balance-dot" style="--dot: #c8322b"></span>
                       <span class="balance-label">Main Balance</span>
                       <span class="balance-value" id="mainBalanceValue">$1000.00</span>
                     </li>
                     <li>
-                      <span class="balance-dot" style="--dot: #16994a"></span>
+                      <span class="balance-dot" style="--dot: #2d6a4f"></span>
                       <span class="balance-label">Bonus Balance</span>
                       <span class="balance-value" id="bonusBalanceValue">$0.00</span>
                     </li>
                     <li>
-                      <span class="balance-dot" style="--dot: #2467dc"></span>
+                      <span class="balance-dot" style="--dot: #8c8578"></span>
                       <span class="balance-label">Commission</span>
                       <span class="balance-value" id="commissionBalanceValue">$0.00</span>
                     </li>
                     <li>
-                      <span class="balance-dot" style="--dot: #ef8c00"></span>
+                      <span class="balance-dot" style="--dot: #9a5b12"></span>
                       <span class="balance-label">Others</span>
                       <span class="balance-value" id="otherBalanceValue">$0.00</span>
                     </li>
@@ -467,7 +468,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -481,7 +482,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -495,7 +496,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -509,7 +510,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -586,7 +587,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -600,7 +601,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -614,7 +615,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -628,7 +629,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -683,7 +684,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -697,7 +698,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -711,7 +712,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -725,7 +726,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -820,7 +821,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -834,7 +835,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -848,7 +849,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -862,7 +863,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-12 col-sm-6 col-xxl-3">
+              <div class="col-6 col-md-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
