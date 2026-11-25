@@ -375,11 +375,12 @@
                           <th scope="col">Amount</th>
                           <th scope="col">Status</th>
                           <th scope="col">Date</th>
+                          <th scope="col" class="text-end">Actions</th>
                         </tr>
                       </thead>
                       <tbody id="depositRows">
                         <tr id="depositEmpty" hidden>
-                          <td colspan="5">No deposits yet.</td>
+                          <td colspan="6">No deposits yet.</td>
                         </tr>
                       </tbody>
                     </table>
@@ -580,6 +581,11 @@
                   <span>Try a different search or filter.</span>
                 </div>
                 <p class="table-foot" id="usersCount"></p>
+                <div class="pager" id="usersPager" hidden>
+                  <button class="pager__btn" type="button" id="usersPrev">Previous</button>
+                  <span class="pager__info" id="usersPageInfo"></span>
+                  <button class="pager__btn" type="button" id="usersNext">Next</button>
+                </div>
               </div>
             </section>
           </div>
@@ -676,6 +682,11 @@
                   </table>
                 </div>
                 <p class="table-foot">Balances are simulated in this browser and reset with demo data.</p>
+                <div class="pager" id="walletsPager" hidden>
+                  <button class="pager__btn" type="button" id="walletsPrev">Previous</button>
+                  <span class="pager__info" id="walletsPageInfo"></span>
+                  <button class="pager__btn" type="button" id="walletsNext">Next</button>
+                </div>
               </div>
             </section>
           </div>
@@ -957,6 +968,7 @@
                         <th scope="col">Action</th>
                         <th scope="col">Entity</th>
                         <th scope="col">Reason</th>
+                        <th scope="col" class="text-end">Details</th>
                       </tr>
                     </thead>
                     <tbody id="auditBody"></tbody>
@@ -966,6 +978,11 @@
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.3-1.5L14.4 21l-2.4-1.5L9.6 21l-2.3-1.5L5 21V3Z" /><path d="M9 8h6" /><path d="M9 12h6" /><path d="M9 16h4" /></svg>
                   <p>No audit entries yet</p>
                   <span>Financial and access changes will appear here.</span>
+                </div>
+                <div class="pager" id="auditPager" hidden>
+                  <button class="pager__btn" type="button" id="auditPrev">Previous</button>
+                  <span class="pager__info" id="auditPageInfo"></span>
+                  <button class="pager__btn" type="button" id="auditNext">Next</button>
                 </div>
               </div>
             </section>
@@ -1444,12 +1461,79 @@
           <textarea class="user-note-input" id="userNoteBody" maxlength="500" rows="2" placeholder="Add an internal note (admin only)"></textarea>
           <button class="btn btn-light" type="button" id="userNoteAdd">Add note</button>
         </div>
+        <div class="user-activity" id="userActivitySection" hidden>
+          <div class="user-notes__head">
+            <strong>Recent activity</strong>
+            <span class="demo-badge">Admin</span>
+          </div>
+          <div class="user-activity__list" id="userActivityList"></div>
+        </div>
         <p class="deposit-note">Role and status changes run through Cloud Functions and are written to the audit log.</p>
       </div>
       <div class="sheet-modal__foot">
         <button class="btn btn-light" type="button" id="userModalCancel">Close</button>
+        <button class="btn btn-light" type="button" id="userVerifyEmail" hidden>Send verification</button>
         <button class="btn btn-light" type="button" id="userSendReset" hidden>Send reset email</button>
         <button class="btn btn-danger" type="button" id="userModalToggle">Block user</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deposit detail drawer -->
+  <div class="sheet-modal" id="depositDetailModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="depositDetailTitle">
+    <div class="sheet-modal__dialog" role="document">
+      <div class="sheet-modal__head">
+        <div class="sheet-modal__identity">
+          <h3 id="depositDetailTitle">Deposit request</h3>
+          <p id="depositDetailId">—</p>
+        </div>
+        <button class="sheet-modal__close" type="button" data-deposit-detail-close aria-label="Close">×</button>
+      </div>
+      <div class="sheet-modal__body">
+        <dl class="detail-grid">
+          <div><dt>Status</dt><dd id="depositDetailStatus">—</dd></div>
+          <div><dt>Amount</dt><dd id="depositDetailAmount">—</dd></div>
+          <div><dt>Asset</dt><dd id="depositDetailAsset">—</dd></div>
+          <div><dt>Receipt</dt><dd id="depositDetailReceipt">—</dd></div>
+          <div><dt>Requested</dt><dd id="depositDetailRequested">—</dd></div>
+          <div><dt>Reviewed</dt><dd id="depositDetailReviewed">—</dd></div>
+          <div><dt>Transaction</dt><dd id="depositDetailTransaction">—</dd></div>
+          <div><dt>Rejection reason</dt><dd id="depositDetailReason">—</dd></div>
+        </dl>
+        <p class="deposit-note">Receiving address used for this request</p>
+        <p class="request-address" id="depositDetailAddress">—</p>
+      </div>
+      <div class="sheet-modal__foot">
+        <button class="btn btn-light" type="button" data-deposit-detail-close>Close</button>
+        <button class="btn btn-danger" type="button" id="depositDetailCancel" hidden>Cancel request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audit entry detail dialog -->
+  <div class="sheet-modal" id="auditDetailModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="auditDetailTitle">
+    <div class="sheet-modal__dialog" role="document">
+      <div class="sheet-modal__head">
+        <div class="sheet-modal__identity">
+          <h3 id="auditDetailTitle">Audit entry</h3>
+          <p id="auditDetailAction">—</p>
+        </div>
+        <button class="sheet-modal__close" type="button" data-audit-detail-close aria-label="Close">×</button>
+      </div>
+      <div class="sheet-modal__body">
+        <dl class="detail-grid">
+          <div><dt>Time</dt><dd id="auditDetailTime">—</dd></div>
+          <div><dt>Actor</dt><dd id="auditDetailActor">—</dd></div>
+          <div><dt>Entity</dt><dd id="auditDetailEntity">—</dd></div>
+          <div><dt>Reason</dt><dd id="auditDetailReason">—</dd></div>
+        </dl>
+        <p class="deposit-note">Before</p>
+        <pre class="audit-detail__json" id="auditDetailBefore">—</pre>
+        <p class="deposit-note">After</p>
+        <pre class="audit-detail__json" id="auditDetailAfter">—</pre>
+      </div>
+      <div class="sheet-modal__foot">
+        <button class="btn btn-light" type="button" data-audit-detail-close>Close</button>
       </div>
     </div>
   </div>
@@ -1520,6 +1604,7 @@
   <script src="js/audit-log.js?v=20261124-2"></script>
   <script src="js/router.js?v=20261125-1"></script>
   <script src="js/app.js?v=20261124"></script>
+<script src="js/a11y.js?v=20261125-1"></script>
 </body>
 </html>
 

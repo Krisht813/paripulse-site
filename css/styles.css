@@ -2894,6 +2894,55 @@ body.deposit-modal-open {
   border-color: var(--brand-red);
 }
 
+.user-activity {
+  border-top: 1px solid var(--app-line);
+  margin: 14px 0;
+  padding-top: 14px;
+}
+
+.user-activity__list {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.user-activity__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--app-line);
+  color: var(--app-text);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.user-activity__item:last-child {
+  border-bottom: 0;
+}
+
+.user-activity__item span {
+  color: var(--app-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.audit-detail__json {
+  max-height: 160px;
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  overflow: auto;
+  border: 1px solid var(--app-line);
+  border-radius: 8px;
+  background: #f9fafb;
+  color: #344054;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .method-settings {
   margin-top: 20px;
   padding-top: 20px;
