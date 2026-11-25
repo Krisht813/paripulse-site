@@ -1,0 +1,84 @@
+/* ============================================================
+   Icon presentation.
+
+   Loaded after styles.css, theme.css and the page stylesheets so
+   these rules win the cascade everywhere.
+
+   The icons are inline Tabler SVGs on a 24x24 grid. They should read
+   as line art that inherits the surrounding text colour, not as
+   badges sitting on a tinted tile, so every icon container is
+   transparent here. Colour is inherited from the parent, which keeps
+   the icons correct on the light dashboard, the dark sidebar and the
+   auth pages without per-page overrides.
+   ============================================================ */
+
+/* Containers that previously drew a tinted square behind the glyph. */
+.stat-icon,
+.logout-modal__icon,
+.deposit-modal__icon,
+.deposit-success-icon,
+.deposit-success-icon--pending,
+.support-contact__icon,
+.page-title-icon,
+.nav-link-icon {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  color: inherit;
+}
+
+/* Tinted variants used per stat card, and the pending success state,
+   set their own background and colour. Neutralise both. */
+.stat-card--blue .stat-icon,
+.stat-card--green .stat-icon,
+.stat-card--orange .stat-icon,
+.stat-card--indigo .stat-icon,
+.deposit-success-icon--pending {
+  background: none;
+  color: inherit;
+}
+
+/* The inline SVGs must not carry a fill; only strokes. */
+.stat-icon svg,
+.logout-modal__icon svg,
+.deposit-modal__icon svg,
+.deposit-success-icon svg,
+.support-contact__icon svg,
+.page-title-icon svg,
+.nav-link-icon svg {
+  background: none;
+  fill: none;
+  stroke: currentColor;
+}
+
+/* Keep the box the same size so layout does not shift once the
+   background is gone. */
+.stat-icon,
+.logout-modal__icon,
+.deposit-modal__icon,
+.deposit-success-icon,
+.support-contact__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon buttons stay interactive, but lose their tile and border so
+   only the glyph is visible. */
+.topbar-icon-btn {
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.topbar-icon-btn:hover,
+.topbar-icon-btn:focus-visible {
+  background: none;
+  border-color: transparent;
+}
+
+.topbar-icon-btn svg {
+  fill: none;
+  stroke: currentColor;
+}
