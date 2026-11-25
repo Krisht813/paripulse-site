@@ -202,6 +202,50 @@
         text-underline-offset: 2px;
         cursor: pointer;
       }
+      html[data-theme="dark"] .pp-error-boundary {
+        background: rgba(0, 0, 0, 0.64);
+        color: #f2f4f7;
+      }
+      html[data-theme="dark"] .pp-error-card {
+        border-color: #263244;
+        background: #121a27;
+        box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.8);
+      }
+      html[data-theme="dark"] .pp-error-mark {
+        background: rgba(255, 107, 115, 0.12);
+        color: #ff6b73;
+      }
+      html[data-theme="dark"] .pp-error-card h2,
+      html[data-theme="dark"] .pp-error-ref code {
+        color: #f2f4f7;
+      }
+      html[data-theme="dark"] .pp-error-card p {
+        color: #a7b1c2;
+      }
+      html[data-theme="dark"] .pp-error-btn--secondary {
+        background: #182232;
+        border-color: #263244;
+        color: #f2f4f7;
+      }
+      html[data-theme="dark"] .pp-error-btn--secondary:hover {
+        border-color: #334155;
+      }
+      html[data-theme="dark"] .pp-error-ref {
+        border-color: #263244;
+        color: #a7b1c2 !important;
+      }
+      html[data-theme="dark"] .pp-error-ref button {
+        color: #ff6b73;
+      }
+      html[data-theme="dark"] .pp-offline {
+        border-color: #263244;
+        background: #121a27;
+        box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.7);
+        color: #d7dee8;
+      }
+      html[data-theme="dark"] .pp-offline button {
+        color: #a7b1c2;
+      }
       @media (max-width: 520px) {
         .pp-error-actions {
           flex-direction: column;

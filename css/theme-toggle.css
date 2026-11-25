@@ -1,0 +1,119 @@
+/* ============================================================
+   Shared theme toggle
+
+   Used on public, auth and error pages. The dashboard keeps its
+   topbar layout styles and uses the same icon treatment.
+   ============================================================ */
+
+.theme-toggle {
+  position: relative;
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted, #667085);
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--paper-deep, #f2f4f7);
+  color: var(--ink, #171a1f);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent, #c8322b);
+  outline-offset: 2px;
+}
+
+.theme-toggle__icons {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle .icon {
+  position: absolute;
+  inset: 0;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  transition:
+    opacity 0.16s ease,
+    transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html[data-theme="light"] .theme-toggle .icon--sun {
+  opacity: 0;
+  transform: rotate(-70deg) scale(0.55);
+}
+
+html[data-theme="light"] .theme-toggle .icon--moon {
+  opacity: 1;
+  transform: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon--sun {
+  opacity: 1;
+  transform: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon--moon {
+  opacity: 0;
+  transform: rotate(70deg) scale(0.55);
+}
+
+.home-theme-toggle {
+  width: 40px;
+  height: 40px;
+}
+
+.auth-theme-toggle,
+.theme-toggle--floating {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 80;
+  border: 1px solid var(--line, #e4e7ec);
+  background: var(--surface, #ffffff);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+}
+
+.auth-theme-toggle:hover,
+.theme-toggle--floating:hover {
+  background: var(--paper-deep, #f2f4f7);
+}
+
+@media (max-width: 520px) {
+  .auth-theme-toggle,
+  .theme-toggle--floating {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .theme-toggle .icon {
+    transition: none !important;
+  }
+}

@@ -26,7 +26,10 @@
   <link rel="stylesheet" href="css/theme.css?v=20261125-12" />
   <link rel="stylesheet" href="css/notifications.css?v=20261125-11" />
   <link rel="stylesheet" href="css/icons.css?v=20261125-2" />
-  <script src="js/error-boundary.js?v=20261125-2"></script>
+  <script src="js/error-boundary.js?v=20261125-3"></script>
+  <link rel="stylesheet" href="css/theme-toggle.css?v=20261126-1" />
+  <link rel="stylesheet" href="css/dark.css?v=20261126-9" />
+  <script src="js/theme.js?v=20261126-2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -49,6 +52,17 @@
       </nav>
 
       <div class="home-header__actions">
+        <button class="theme-toggle home-theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
+          <span class="theme-toggle__icons" aria-hidden="true">
+            <svg class="icon icon--sun" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3.4" />
+              <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" />
+            </svg>
+            <svg class="icon icon--moon" viewBox="0 0 24 24">
+              <path d="M20.2 14.2A8.6 8.6 0 0 1 9.8 3.8 8.6 8.6 0 1 0 20.2 14.2Z" />
+            </svg>
+          </span>
+        </button>
         <a class="home-btn home-btn--primary home-header__cta" href="/login/">
           Admin Login
           <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11" /><path d="m11 5 5 5-5 5" /></svg>
@@ -79,7 +93,8 @@
         <div class="hero__visual" aria-hidden="true">
           <div class="preview preview--snapshot">
             <!-- Captured from the demo dashboard at 1440x900, cropped above the footer. -->
-            <img class="preview__snapshot" src="assets/home/dashboard-preview.png" width="1240" height="664" alt="" decoding="async" />
+            <img class="preview__snapshot preview__snapshot--light" src="assets/home/dashboard-preview.png" width="1240" height="664" alt="" decoding="async" />
+            <img class="preview__snapshot preview__snapshot--dark" src="assets/home/dashboard-preview-dark.png" width="1240" height="664" alt="" decoding="async" />
           </div>
         </div>
       </div>
