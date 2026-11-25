@@ -418,6 +418,17 @@ input {
     0 42px 80px -32px rgba(16, 24, 40, 0.32);
 }
 
+.preview--snapshot {
+  display: block;
+  grid-template-columns: none;
+}
+
+.preview__snapshot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .preview__side {
   display: flex;
   flex-direction: column;
@@ -785,18 +796,6 @@ input {
   color: var(--navy);
   font-size: 8.5px;
   font-weight: 600;
-}
-
-.preview__dot {
-  width: 5px;
-  height: 5px;
-  flex: none;
-  border-radius: 50%;
-  background: #12b76a;
-}
-
-.preview__dot.is-blue {
-  background: #1d4ed8;
 }
 
 /* ------------------------------------------------------------

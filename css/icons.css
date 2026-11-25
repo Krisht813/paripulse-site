@@ -20,11 +20,24 @@
 .deposit-success-icon--pending,
 .support-contact__icon,
 .page-title-icon,
-.nav-link-icon {
+.nav-link-icon,
+.pp-toast__icon,
+.pp-notify__item-icon,
+.pp-notify__empty-icon {
   background: none;
   border: 0;
   box-shadow: none;
   border-radius: 0;
+}
+
+.stat-icon,
+.logout-modal__icon,
+.deposit-modal__icon,
+.deposit-success-icon,
+.deposit-success-icon--pending,
+.support-contact__icon,
+.page-title-icon,
+.nav-link-icon {
   color: inherit;
 }
 
@@ -37,6 +50,14 @@
 .deposit-success-icon--pending {
   background: none;
   color: inherit;
+}
+
+/* Notification type colours stay on the glyph, not on a tile. */
+.pp-notify__item-icon[data-type="success"],
+.pp-notify__item-icon[data-type="error"],
+.pp-notify__item-icon[data-type="warning"],
+.pp-notify__item-icon[data-type="info"] {
+  background: none;
 }
 
 /* The inline SVGs must not carry a fill; only strokes. */

@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://paripulsemanagement.com/dashboard/" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261124" />
   <title>Dashboard · Paripulse Management</title>
@@ -13,11 +14,13 @@
   <link rel="preload" as="script" href="vendor/firebase/firebase-firestore-compat.js" />
   <link rel="stylesheet" href="css/fonts.css?v=20261125-9" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/styles.css?v=20261125-25" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125-39" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
-  <link rel="stylesheet" href="css/theme.css?v=20261125-11" />
-  <link rel="stylesheet" href="css/notifications.css?v=20261125-9" />
-  <link rel="stylesheet" href="css/icons.css?v=20261125-1" />
+  <link rel="stylesheet" href="css/theme.css?v=20261125-12" />
+  <link rel="stylesheet" href="css/phone-field.css?v=20261125-2" />
+  <link rel="stylesheet" href="css/notifications.css?v=20261125-11" />
+  <link rel="stylesheet" href="css/icons.css?v=20261125-2" />
+  <script src="js/error-boundary.js?v=20261125-2"></script>
 </head>
 <body>
   <div class="page">
@@ -151,15 +154,20 @@
               <span class="avatar avatar-sm user-avatar" aria-hidden="true"></span>
               <span class="user-meta d-none d-sm-flex">
                 <span class="user-name"></span>
-                <span class="user-status"><span class="online-dot"></span>Online</span>
+                <span class="user-status">Online</span>
               </span>
               <svg class="user-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
             </button>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <a class="dropdown-item" href="#settings">Profile</a>
-              <a class="dropdown-item" href="#settings">Account settings</a>
+              <a class="dropdown-item" href="#settings">
+                <svg class="dropdown-item__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 8.58a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" /></svg>
+                Account settings
+              </a>
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item text-danger" type="button" data-logout-trigger>Log out</button>
+              <button class="dropdown-item text-danger" type="button" data-logout-trigger>
+                <svg class="dropdown-item__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><path d="m16 17 5-5-5-5" /><path d="M21 12H9" /></svg>
+                Log out
+              </button>
             </div>
           </div>
         </div>
@@ -180,7 +188,7 @@
 
           <!-- KPI cards -->
           <div class="row row-cards stats-row">
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-xl-3">
               <article class="card stat-card stat-card--blue h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -201,7 +209,7 @@
               </article>
             </div>
 
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-xl-3">
               <article class="card stat-card stat-card--green h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -218,7 +226,7 @@
               </article>
             </div>
 
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-xl-3">
               <article class="card stat-card stat-card--orange h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -235,7 +243,7 @@
               </article>
             </div>
 
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-xl-3">
               <article class="card stat-card stat-card--indigo h-100">
                 <div class="card-body">
                   <div class="stat-copy">
@@ -476,7 +484,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -490,7 +498,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -504,7 +512,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -518,7 +526,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -586,6 +594,7 @@
                   <button class="pager__btn" type="button" id="usersPrev">Previous</button>
                   <span class="pager__info" id="usersPageInfo"></span>
                   <button class="pager__btn" type="button" id="usersNext">Next</button>
+                  <button class="pager__btn" type="button" id="usersLoadMore" hidden>Load more</button>
                 </div>
               </div>
             </section>
@@ -599,7 +608,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -613,7 +622,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -627,7 +636,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -641,7 +650,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -687,6 +696,7 @@
                   <button class="pager__btn" type="button" id="walletsPrev">Previous</button>
                   <span class="pager__info" id="walletsPageInfo"></span>
                   <button class="pager__btn" type="button" id="walletsNext">Next</button>
+                  <button class="pager__btn" type="button" id="walletsLoadMore" hidden>Load more</button>
                 </div>
               </div>
             </section>
@@ -700,7 +710,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -714,7 +724,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -728,7 +738,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -742,7 +752,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -836,7 +846,7 @@
             </div>
 
             <div class="row row-cards stats-row">
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--blue h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -850,7 +860,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--green h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -864,7 +874,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--orange h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -878,7 +888,7 @@
                   </div>
                 </article>
               </div>
-              <div class="col-6 col-md-3">
+              <div class="col-6 col-xl-3">
                 <article class="card stat-card stat-card--indigo h-100">
                   <div class="card-body">
                     <div class="stat-copy">
@@ -911,7 +921,7 @@
                   <header class="card-header">
                     <h2 class="card-title">Request status</h2>
                   </header>
-                  <div class="card-body">
+                  <div class="card-body status-card-body">
                     <div class="status-breakdown" id="reportStatus"></div>
                     <p class="table-foot">Counts include every deposit request stored in this browser.</p>
                   </div>
@@ -957,7 +967,7 @@
                   <option value="user">Users</option>
                   <option value="setting">Settings</option>
                 </select>
-                <button class="btn btn-light toolbar__export ms-2" type="button" id="exportAudit">Export CSV</button>
+                <button class="btn btn-light toolbar__export" type="button" id="exportAudit">Export CSV</button>
               </header>
               <div class="card-body page-panel__body">
                 <div class="table-responsive tx-table-wrap">
@@ -984,6 +994,7 @@
                   <button class="pager__btn" type="button" id="auditPrev">Previous</button>
                   <span class="pager__info" id="auditPageInfo"></span>
                   <button class="pager__btn" type="button" id="auditNext">Next</button>
+                  <button class="pager__btn" type="button" id="auditLoadMore" hidden>Load more</button>
                 </div>
               </div>
             </section>
@@ -1106,11 +1117,19 @@
                         <span>Email</span>
                         <input id="profileEmail" type="email" autocomplete="email" disabled />
                       </label>
-                      <label class="form-field">
-                        <span>Phone</span>
-                        <input id="profilePhone" type="tel" maxlength="30" autocomplete="tel" />
-                      </label>
-                      <label class="form-field">
+                      <div class="form-field form-field--full phone-form-field" id="phoneFormField">
+                        <label class="phone-label" for="profilePhone">Phone</label>
+                        <div class="phone-field" id="phoneField">
+                          <button class="phone-country" id="phoneCountry" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="phoneCountryMenu" aria-label="Country code">
+                            <span class="phone-flag" id="phoneFlag" aria-hidden="true"></span>
+                            <span class="phone-dial" id="phoneDial">+91</span>
+                            <svg class="phone-chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+                          </button>
+                          <input id="profilePhone" type="tel" maxlength="24" autocomplete="tel" inputmode="tel" placeholder="98200 41002" aria-describedby="phoneHint" />
+                        </div>
+                        <p class="phone-hint" id="phoneHint">10 digits, without the country code.</p>
+                      </div>
+                      <label class="form-field form-field--full">
                         <span>Role</span>
                         <input id="profileRole" type="text" value="Administrator" disabled />
                       </label>
@@ -1243,7 +1262,7 @@
                   </header>
                   <div class="card-body">
                     <p class="deposit-note">Change the receiving address for USDT, Bitcoin, and Ethereum in the Deposits workspace.</p>
-                    <a class="btn btn-light w-100" href="#deposits">Manage deposit addresses</a>
+                    <a class="btn btn-light" href="#deposits">Manage deposit addresses</a>
                   </div>
                 </section>
 
@@ -1423,6 +1442,7 @@
           <label class="deposit-field-label" for="depositReceipt">Payment receipt / transaction ID</label>
           <input class="deposit-receipt" id="depositReceipt" type="text" autocomplete="off" placeholder="Paste receipt or tx ID" aria-describedby="depositReceiptHint" />
           <p class="deposit-field-hint" id="depositReceiptHint">Demo only. Duplicate receipt IDs are rejected.</p>
+          <button class="deposit-test-receipt" type="button" id="depositTestReceipt" hidden>Use a test receipt</button>
 
           <div class="deposit-error" id="depositPayError" role="alert" hidden></div>
           <button class="btn btn-primary w-100 deposit-submit" type="button" id="depositSubmitRequest">Submit for review</button>
@@ -1614,23 +1634,24 @@
   <script src="vendor/firebase/firebase-auth-compat.js"></script>
   <script src="vendor/firebase/firebase-app-check-compat.js"></script>
   <script src="js/firebase-config.js?v=20261125-2"></script>
-  <script src="js/runtime-config.js?v=20261125-4"></script>
+  <script src="js/runtime-config.js?v=20261125-6"></script>
   <script src="js/notifications.js?v=20261125-3"></script>
   <script src="js/select.js?v=20261125-2"></script>
-  <script src="js/live-data.js?v=20261125-3"></script>
+  <script src="js/phone-field.js?v=20261125-6"></script>
+  <script src="js/live-data.js?v=20261125-4"></script>
   <script src="js/live-skeleton.js?v=20261125-23"></script>
-  <script src="js/auth-guard.js?v=20261125-3"></script>
+  <script src="js/auth-guard.js?v=20261125-4"></script>
   <script src="js/logout-modal.js?v=20261124-3"></script>
-  <script src="js/deposits.js?v=20261125-2"></script>
-  <script src="js/pages.js?v=20261125-2"></script>
+  <script src="js/deposits.js?v=20261125-3"></script>
+  <script src="js/pages.js?v=20261125-5"></script>
   <script src="js/live-dashboard.js?v=20261125-2"></script>
-  <script src="js/live-deposits.js?v=20261125-3"></script>
-  <script src="js/live-admin.js?v=20261125-2"></script>
+  <script src="js/live-deposits.js?v=20261125-4"></script>
+  <script src="js/live-admin.js?v=20261125-4"></script>
   <script src="js/live-finance.js?v=20261125-2"></script>
   <script src="js/live-support.js?v=20261125-2"></script>
 <script src="js/live-settings.js?v=20261125-2"></script>
-  <script src="js/audit-log.js?v=20261125-2"></script>
-  <script src="js/router.js?v=20261125-1"></script>
+  <script src="js/audit-log.js?v=20261125-4"></script>
+  <script src="js/router.js?v=20261125-2"></script>
   <script src="js/app.js?v=20261124"></script>
 <script src="js/a11y.js?v=20261125-1"></script>
 </body>

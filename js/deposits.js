@@ -523,6 +523,7 @@
   var payAddress = document.getElementById("depositAddress");
   var copyAddressButton = document.getElementById("copyDepositAddress");
   var receiptInput = document.getElementById("depositReceipt");
+  var testReceiptButton = document.getElementById("depositTestReceipt");
   var pendingReceipt = document.getElementById("depositPendingReceipt");
   var creditedAmount = document.getElementById("depositCreditedAmount");
   var warningTitle = document.getElementById("depositWarningTitle");
@@ -532,6 +533,17 @@
   var lastFocused = null;
   var currentAmountCents = 0;
   var currentAssetKey = "USDT-TRC20";
+
+  if (testReceiptButton) {
+    testReceiptButton.hidden = false;
+    testReceiptButton.addEventListener("click", function () {
+      if (!receiptInput) return;
+      receiptInput.value =
+        "DEMO-TX-" + Date.now().toString(36).toUpperCase();
+      receiptInput.focus();
+      clearPayError();
+    });
+  }
 
   function showStep(step) {
     if (formStep) formStep.hidden = step !== "form";

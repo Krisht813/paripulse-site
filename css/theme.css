@@ -874,7 +874,6 @@ body {
   min-height: 0;
   align-items: center;
   justify-content: flex-start;
-  gap: 6px;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -888,54 +887,19 @@ body {
   white-space: nowrap;
 }
 
-.status-pill::before,
-.role-pill::before,
-.request-status::before {
-  width: 6px;
-  height: 6px;
-  flex: none;
-  border-radius: 50%;
-  background: var(--pill-dot, currentColor);
-  opacity: 0.8;
-  content: "";
-}
-
 .status-pill--active,
 .request-status--approved {
-  --pill-dot: var(--positive);
   color: var(--positive);
 }
 
 .status-pill--pending,
 .request-status--pending {
-  --pill-dot: var(--warning);
   color: var(--warning);
 }
 
 .status-pill--blocked,
 .request-status--rejected {
-  --pill-dot: var(--danger);
   color: var(--danger);
-}
-
-.role-pill {
-  --pill-dot: var(--muted-soft);
-}
-
-.role-pill--super_admin {
-  --pill-dot: var(--accent);
-}
-
-.role-pill--admin {
-  --pill-dot: #5c6b7a;
-}
-
-.role-pill--support {
-  --pill-dot: #8c6d3f;
-}
-
-.role-pill--user {
-  --pill-dot: var(--line-strong);
 }
 
 .demo-pill {

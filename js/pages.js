@@ -934,7 +934,6 @@
           (window.PARIPULSE_USER && window.PARIPULSE_USER.email) ||
           "";
       }
-      if (phone) phone.value = (live && live.phone) || "";
       if (role) {
         role.value =
           ROLE_LABELS[live && live.role] ||
@@ -949,8 +948,19 @@
           profile.email ||
           "";
       }
-      if (phone) phone.value = profile.phone || "";
       if (role) role.value = "Administrator";
+    }
+
+    var phoneValue = isLive
+      ? (live && live.phone) || ""
+      : profile.phone || "";
+    if (
+      window.ParipulsePhone &&
+      typeof window.ParipulsePhone.setValue === "function"
+    ) {
+      window.ParipulsePhone.setValue(phoneValue);
+    } else if (phone) {
+      phone.value = phoneValue;
     }
 
     var depositEmails = document.getElementById("prefDepositEmails");
@@ -970,7 +980,7 @@
     var preferencesNote = document.getElementById("preferencesNote");
     if (preferencesNote) {
       preferencesNote.textContent = isLive
-        ? "Preferences are saved to your profile. Email delivery is not enabled yet."
+        ? "Deposit decision emails follow these preferences. Other email delivery is not enabled yet."
         : "Preferences are saved locally in this demo.";
     }
 
@@ -1532,6 +1542,26 @@
           return;
         }
 
+        var phoneValue = phone ? phone.value.trim() : "";
+        if (!window.ParipulsePhone && phoneValue) {
+          var phoneDial = document.getElementById("phoneDial");
+          if (phoneDial) {
+            phoneValue = phoneDial.textContent.trim() + " " + phoneValue;
+          }
+        }
+        if (
+          window.ParipulsePhone &&
+          typeof window.ParipulsePhone.getValue === "function"
+        ) {
+          if (
+            typeof window.ParipulsePhone.validate === "function" &&
+            !window.ParipulsePhone.validate()
+          ) {
+            return;
+          }
+          phoneValue = window.ParipulsePhone.getValue();
+        }
+
         if (liveMode()) {
           if (
             !window.ParipulseLive ||
@@ -1554,7 +1584,7 @@
 
           window.ParipulseLive.updateProfile({
             fullName: nameValue,
-            phone: phone ? phone.value.trim() : ""
+            phone: phoneValue
           })
             .then(function (result) {
               var updated = result && result.profile ? result.profile : null;
@@ -1595,7 +1625,7 @@
 
         var admin = loadAdmin();
         admin.profile.name = nameValue;
-        admin.profile.phone = phone ? phone.value.trim() : "";
+        admin.profile.phone = phoneValue;
         if (admin.users[0]) {
           admin.users[0].name = nameValue;
           admin.users[0].phone = admin.profile.phone;

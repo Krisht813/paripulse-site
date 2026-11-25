@@ -5,25 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#ffffff" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Page not found — Paripulse Management</title>
+  <title>Page not found · Paripulse Management</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/instrument-sans-400-700-latin.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/poppins-600-latin.woff2" crossorigin />
   <link rel="stylesheet" href="/css/fonts.css?v=20261125-9" />
-  <link rel="stylesheet" href="/css/theme.css?v=20261125-11" />
-  <link rel="stylesheet" href="/css/icons.css?v=20261125-1" />
   <style>
     :root {
       --paper: #ffffff;
       --surface: #ffffff;
       --ink: #171a1f;
-      --ink-soft: #344054;
-      --muted: #475467;
+      --ink-soft: #3f4650;
+      --muted: #6e6a61;
       --line: #e4e7ec;
       --accent: #c8322b;
-      --editorial: "Poppins", "Instrument Sans", system-ui, sans-serif;
+      --accent-strong: #9f241f;
+      --display: "Poppins", "Instrument Sans", system-ui, sans-serif;
+      --ui: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
-    * { box-sizing: border-box; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -31,96 +39,372 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 32px 20px;
+      padding: clamp(24px, 5vw, 56px) 20px;
       background: var(--paper);
       color: var(--ink);
-      font-family: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-family: var(--ui);
       -webkit-font-smoothing: antialiased;
     }
-    main {
+
+    .error-shell {
       width: 100%;
       max-width: 560px;
-      border-top: 2px solid var(--accent);
-      padding-top: 28px;
     }
+
     .brand {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 52px;
-      text-decoration: none;
+      margin-bottom: 24px;
       color: var(--ink);
+      text-decoration: none;
     }
-    .brand img { width: 44px; height: 44px; }
-    .brand-copy { display: flex; flex-direction: column; text-align: left; line-height: 1.05; }
-    .brand-name { font-family: "Poppins", sans-serif; font-size: 18px; font-weight: 800; letter-spacing: .02em; }
-    .brand-sub { margin-top: 4px; font-size: 8px; font-weight: 600; letter-spacing: .26em; color: var(--muted); }
-    .code {
+
+    .brand img {
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-name {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-sub {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+    }
+
+    .error-card {
+      padding: clamp(26px, 5vw, 44px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(23, 26, 31, 0.04);
+    }
+
+    .error-code {
       margin: 0;
       color: var(--accent);
-      font-family: var(--editorial);
-      font-size: clamp(96px, 18vw, 168px);
+      font-family: var(--display);
+      font-size: clamp(88px, 17vw, 150px);
       font-weight: 600;
-      line-height: .78;
-      letter-spacing: -0.04em;
+      line-height: 0.82;
+      letter-spacing: -0.05em;
     }
+
+    .error-code.is-word {
+      font-size: clamp(44px, 9vw, 76px);
+      letter-spacing: -0.035em;
+    }
+
     h1 {
-      margin: 28px 0 10px;
-      font-family: var(--editorial);
-      font-size: clamp(32px, 5vw, 46px);
+      margin: 26px 0 10px;
+      font-family: var(--display);
+      font-size: clamp(28px, 4.4vw, 40px);
       font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.02;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
     }
-    p {
-      margin: 0 0 30px;
+
+    h1:focus {
+      outline: none;
+    }
+
+    .error-copy {
+      margin: 0;
       max-width: 44ch;
       color: var(--ink-soft);
       font-size: 15px;
       line-height: 1.65;
     }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .error-path {
+      margin: 14px 0 0;
+      padding: 10px 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8f9fb;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11.5px;
+      line-height: 1.5;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
+      min-height: 44px;
       padding: 0 20px;
+      border: 1px solid transparent;
       border-radius: 8px;
+      font-family: var(--ui);
       font-size: 14px;
       font-weight: 600;
+      line-height: 1;
       text-decoration: none;
-      transition: background .16s cubic-bezier(.23,1,.32,1), border-color .16s cubic-bezier(.23,1,.32,1), color .16s cubic-bezier(.23,1,.32,1), transform .16s cubic-bezier(.23,1,.32,1);
+      cursor: pointer;
+      transition:
+        background-color 0.16s cubic-bezier(0.23, 1, 0.32, 1),
+        border-color 0.16s cubic-bezier(0.23, 1, 0.32, 1),
+        color 0.16s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.16s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    .btn:active { transform: scale(.98); }
-    .btn-primary { background: var(--accent); border: 1px solid var(--accent); color: #fff; }
-    .btn-primary:hover { background: #9f241f; border-color: #9f241f; }
-    .btn-secondary { background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
-    .btn-secondary:hover { border-color: #c8bead; }
-    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    footer { margin-top: 48px; color: var(--muted); font-size: 11.5px; }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-strong);
+      border-color: var(--accent-strong);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .btn-secondary:hover {
+      border-color: #b9c0ca;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .error-help {
+      margin: 24px 0 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .error-help a {
+      color: var(--accent-strong);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .error-help a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 520px) {
+      .error-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn {
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
-  <main>
+  <main class="error-shell" aria-labelledby="errorTitle">
     <a class="brand" href="/" aria-label="Paripulse Management home">
-      <img src="/brand-mark.svg" alt="" width="44" height="44" />
+      <img src="/brand-mark.svg" alt="" width="40" height="40" />
       <span class="brand-copy">
         <span class="brand-name">PARIPULSE</span>
         <span class="brand-sub">MANAGEMENT</span>
       </span>
     </a>
 
-    <p class="code">404</p>
-    <h1>This page isn’t here.</h1>
-    <p>The link may be broken, or the page may have moved. The demo workspace is available from the sign-in page.</p>
+    <section class="error-card">
+      <p class="error-code" id="errorCode">404</p>
+      <h1 id="errorTitle" tabindex="-1">This page isn't here.</h1>
+      <p class="error-copy" id="errorCopy">The link may be broken, or the page may have moved. Head back home or sign in to the demo workspace.</p>
+      <p class="error-path" id="errorPath" hidden></p>
 
-    <div class="actions">
-      <a class="btn btn-primary" href="/">Back to home</a>
-      <a class="btn btn-secondary" href="/login/">Admin login</a>
-    </div>
+      <div class="error-actions">
+        <a class="btn btn-primary" id="errorPrimary" href="/">Back to home</a>
+        <button class="btn btn-primary" id="errorRetry" type="button" hidden>Try again</button>
+        <a class="btn btn-secondary" id="errorSecondary" href="/login/">Admin login</a>
+      </div>
 
-    <footer>© 2025–2026 Paripulse Management. Demo environment — no real funds.</footer>
+      <p class="error-help">Still stuck? <a href="mailto:paripulse.support@gmail.com">Contact support</a> and include what you were doing.</p>
+    </section>
+
+    <footer>&copy; 2025-2026 Paripulse Management. Demo environment. No real funds.</footer>
   </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var STATES = {
+        "404": {
+          code: "404",
+          tab: "Page not found",
+          title: "This page isn't here.",
+          copy: "The link may be broken, or the page may have moved. Head back home or sign in to the demo workspace.",
+          primary: { label: "Back to home", href: "/" },
+          secondary: { label: "Admin login", href: "/login/" },
+          retry: false
+        },
+        "403": {
+          code: "403",
+          tab: "Access denied",
+          title: "You don't have access to this page.",
+          copy: "Sign in with an account that has permission, or return to the home page.",
+          primary: { label: "Admin login", href: "/login/" },
+          secondary: { label: "Back to home", href: "/" },
+          retry: false
+        },
+        "500": {
+          code: "500",
+          tab: "Something went wrong",
+          title: "Something went wrong on our side.",
+          copy: "The page couldn't be loaded. Try again in a moment. If it keeps happening, contact support.",
+          primary: { label: "Reload page", retry: true },
+          secondary: { label: "Back to home", href: "/" },
+          retry: true
+        },
+        offline: {
+          code: "Offline",
+          tab: "Offline",
+          title: "You're offline.",
+          copy: "Check your connection and try again. Pages you already loaded may still be available.",
+          primary: { label: "Try again", retry: true },
+          secondary: { label: "Back to home", href: "/" },
+          retry: true
+        },
+        online: {
+          code: "Online",
+          tab: "Online",
+          title: "You're back online.",
+          copy: "Reload the page to continue where you left off.",
+          primary: { label: "Reload page", retry: true },
+          secondary: { label: "Back to home", href: "/" },
+          retry: true
+        },
+        error: {
+          code: "Error",
+          tab: "Something went wrong",
+          title: "This page hit an unexpected error.",
+          copy: "Reload the page to try again. If the problem continues, contact support and describe what you were doing.",
+          primary: { label: "Reload page", retry: true },
+          secondary: { label: "Back to home", href: "/" },
+          retry: true
+        }
+      };
+
+      var params = new URLSearchParams(window.location.search);
+      var requested = (params.get("code") || "").toLowerCase();
+      var current = STATES[requested] ? requested : "404";
+
+      if (!navigator.onLine) {
+        current = "offline";
+      } else if (!STATES[requested]) {
+        current = /^5\d\d$/.test(requested) ? "500" : "404";
+      }
+
+      var codeEl = document.getElementById("errorCode");
+      var titleEl = document.getElementById("errorTitle");
+      var copyEl = document.getElementById("errorCopy");
+      var pathEl = document.getElementById("errorPath");
+      var primaryEl = document.getElementById("errorPrimary");
+      var retryEl = document.getElementById("errorRetry");
+      var secondaryEl = document.getElementById("errorSecondary");
+
+      function apply(key) {
+        var state = STATES[key] || STATES["404"];
+        current = key;
+
+        codeEl.textContent = state.code;
+        codeEl.classList.toggle("is-word", state.code.length > 3);
+        titleEl.textContent = state.title;
+        copyEl.textContent = state.copy;
+        document.title = state.tab + " · Paripulse Management";
+
+        retryEl.hidden = !state.retry;
+        primaryEl.hidden = !!state.retry;
+        if (state.retry) {
+          retryEl.textContent = state.primary.label;
+        } else {
+          primaryEl.textContent = state.primary.label;
+          primaryEl.setAttribute("href", state.primary.href);
+        }
+        secondaryEl.textContent = state.secondary.label;
+        secondaryEl.setAttribute("href", state.secondary.href);
+
+        var path = window.location.pathname;
+        var isGeneric =
+          path === "/404.html" ||
+          path.indexOf("/404/") === 0 ||
+          path.indexOf("/error/") === 0;
+        if (key === "404" && !isGeneric) {
+          pathEl.textContent = "Requested: " + path;
+          pathEl.hidden = false;
+        } else {
+          pathEl.hidden = true;
+          pathEl.textContent = "";
+        }
+      }
+
+      retryEl.addEventListener("click", function () {
+        window.location.reload();
+      });
+
+      window.addEventListener("online", function () {
+        if (current === "offline") apply("online");
+      });
+
+      apply(current);
+
+      if (titleEl && typeof titleEl.focus === "function") {
+        titleEl.focus({ preventScroll: true });
+      }
+    })();
+  </script>
 </body>
 </html>

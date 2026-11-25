@@ -449,14 +449,6 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
   font-size: 10.5px;
 }
 
-.online-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #12b76a;
-}
-
 .user-chevron {
   width: 14px;
   height: 14px;
@@ -477,6 +469,28 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
 .dropdown-menu {
   font-size: 13px;
   box-shadow: 0 10px 30px -10px rgba(16, 24, 40, 0.24);
+}
+
+.topbar .dropdown-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.dropdown-item__icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  opacity: 0.8;
+}
+
+.topbar .dropdown-menu .dropdown-item.text-danger .dropdown-item__icon {
+  opacity: 1;
 }
 
 /* ============================================================
@@ -789,11 +803,13 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
   white-space: nowrap;
 }
 
-.tx-table > thead > tr > th:first-child {
+.tx-table > thead > tr > th:first-child,
+.tx-table > tbody > tr > td:first-child {
   padding-left: 20px;
 }
 
-.tx-table > thead > tr > th:last-child {
+.tx-table > thead > tr > th:last-child,
+.tx-table > tbody > tr > td:last-child {
   padding-right: 20px;
 }
 
@@ -803,8 +819,8 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 36px 20px 48px;
+  gap: 8px;
+  padding: 24px 20px 28px;
   color: var(--app-muted-2);
 }
 
@@ -839,7 +855,7 @@ html[data-bs-navbar-position="vertical"] .page > .topbar {
   align-items: center;
   justify-content: center;
   gap: 24px;
-  padding: 22px 24px;
+  padding: 20px;
 }
 
 .donut-wrap {
@@ -1181,7 +1197,7 @@ body.logout-modal-open {
   flex: 1;
   flex-direction: column;
   gap: 10px;
-  padding: 24px;
+  padding: 20px;
 }
 
 .deposit-balance {
@@ -1818,6 +1834,29 @@ body.deposit-modal-open {
   line-height: 1.45;
 }
 
+.deposit-test-receipt {
+  margin: -10px 0 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #9f241f;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.deposit-test-receipt:hover {
+  color: #c8322b;
+}
+
+.deposit-test-receipt:focus-visible {
+  outline: 2px solid #c8322b;
+  outline-offset: 3px;
+}
+
 .asset-select {
   position: relative;
   margin-bottom: 20px;
@@ -2225,10 +2264,6 @@ body.deposit-modal-open {
   margin-top: 16px;
 }
 
-.deposit-review-card .card-body {
-  padding-top: 14px;
-}
-
 .request-feedback {
   padding: 9px 12px;
   margin: 0 0 12px;
@@ -2250,6 +2285,7 @@ body.deposit-modal-open {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 16px;
 }
 
 .request-row {
@@ -2507,7 +2543,7 @@ body.deposit-modal-open {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 .address-field {
@@ -2607,16 +2643,38 @@ body.deposit-modal-open {
   letter-spacing: -0.01em;
 }
 
+/* Card rhythm: 20px body padding, 16px intro-to-content, 20px to the card edge. */
 .page-panel .card-body {
   padding: 20px;
 }
 
 .page-panel__body {
-  padding: 0 !important;
+  padding: 20px 0 !important;
 }
 
 .page-panel__body .table-responsive {
   border: 0;
+}
+
+/* An empty table is an empty state, not a header with no rows. */
+.page-panel__body:has(> .tx-empty:not([hidden])) > .table-responsive {
+  display: none;
+}
+
+/* One page stack: heading, rows and cards share the same 16px gap at every width. */
+.page-body .container-fluid > [id$="View"] {
+  display: grid;
+  gap: 16px;
+}
+
+.page-body .container-fluid > [id$="View"] > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-body .container-fluid > [id$="View"] .row-cards {
+  --tblr-gutter-y: 0;
+  row-gap: 16px;
 }
 
 /* ---------- Toolbar ---------- */
@@ -3094,6 +3152,17 @@ body.deposit-modal-open {
   gap: 14px;
 }
 
+.status-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-card-body > .table-foot {
+  margin-top: auto;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--app-line);
+}
+
 .status-breakdown__row {
   display: grid;
   grid-template-columns: 84px minmax(0, 1fr) 34px;
@@ -3441,6 +3510,26 @@ body.deposit-modal-open {
   flex: none;
 }
 
+.settings-row__actions .btn-ghost-light {
+  border-color: transparent;
+  background: transparent;
+  color: var(--accent, #c8322b);
+  box-shadow: none;
+}
+
+.settings-row__actions .btn-ghost-light:hover {
+  border-color: transparent;
+  background: transparent;
+  color: var(--accent-strong, #9f241f);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.settings-row__actions .btn-ghost-light:focus-visible {
+  outline: 2px solid var(--accent, #c8322b);
+  outline-offset: 3px;
+}
+
 /* Inline password change, revealed from the Security card. */
 .password-change {
   padding: 16px 0;
@@ -3624,6 +3713,20 @@ body.deposit-modal-open {
     padding: 16px;
   }
 
+  .page-panel .page-panel__body {
+    padding: 16px 0 !important;
+  }
+
+  .tx-table > thead > tr > th:first-child,
+  .tx-table > tbody > tr > td:first-child {
+    padding-left: 16px;
+  }
+
+  .tx-table > thead > tr > th:last-child,
+  .tx-table > tbody > tr > td:last-child {
+    padding-right: 16px;
+  }
+
   .toolbar {
     padding: 12px 16px;
   }
@@ -3702,6 +3805,14 @@ body.deposit-modal-open {
   min-width: 120px;
   height: 30px;
   padding: 0 8px;
+  font-size: 11.5px;
+}
+
+#auditCard .card-header .toolbar__export {
+  height: 30px;
+  min-height: 30px;
+  margin-left: 0;
+  padding: 0 10px;
   font-size: 11.5px;
 }
 
@@ -3892,7 +4003,7 @@ body.deposit-modal-open {
 }
 
 #settingsView .card-body > .deposit-note + .btn {
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 .page-panel:last-child {
