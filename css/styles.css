@@ -3725,3 +3725,17 @@ body.deposit-modal-open {
     transform: none;
   }
 }
+
+/* Logo links should never show hover/click underlines or tap highlights. */
+.brand,
+.brand:hover,
+.brand:focus,
+.brand:active {
+  border-bottom: 0;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.brand:focus:not(:focus-visible) {
+  outline: none;
+}

@@ -1406,3 +1406,17 @@ input {
     transform: none;
   }
 }
+
+/* Logo links should never show hover/click underlines or tap highlights. */
+.home-brand,
+.home-brand:hover,
+.home-brand:focus,
+.home-brand:active {
+  border-bottom: 0;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-brand:focus:not(:focus-visible) {
+  outline: none;
+}

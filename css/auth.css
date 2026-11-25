@@ -416,3 +416,17 @@ body::-webkit-scrollbar {
     animation: none;
   }
 }
+
+/* Logo links should never show hover/click underlines or tap highlights. */
+.auth-logo,
+.auth-logo:hover,
+.auth-logo:focus,
+.auth-logo:active {
+  border-bottom: 0;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.auth-logo:focus:not(:focus-visible) {
+  outline: none;
+}
