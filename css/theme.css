@@ -501,11 +501,6 @@ body.auth-body {
   text-transform: none;
 }
 
-.auth-card {
-  border-top: 2px solid var(--accent);
-  padding-top: 28px;
-}
-
 .auth-title {
   font-family: var(--editorial);
   font-size: clamp(30px, 2.7vw, 38px);
@@ -1071,10 +1066,6 @@ input[type="radio"] {
 
   .hero h1 {
     font-size: clamp(38px, 11.5vw, 56px);
-  }
-
-  .auth-card {
-    border-top-width: 2px;
   }
 }
 
