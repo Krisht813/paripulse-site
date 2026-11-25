@@ -4,8 +4,8 @@
    ============================================================ */
 
 :root {
-  --pp-toast-bg: #fffdf8;
-  --pp-toast-line: #ded6c7;
+  --pp-toast-bg: #ffffff;
+  --pp-toast-line: #e4e7ec;
   --pp-toast-text: #171a1f;
   --pp-toast-muted: #6e6a61;
   --pp-toast-success: #2d6a4f;

@@ -9,7 +9,7 @@
   --muted: #667085;
   --muted-2: #98a2b3;
   --line: #e4e7ec;
-  --bg: #f7f8fb;
+  --bg: #ffffff;
   --coral: #f65c5c;
   --coral-soft: #fff1f1;
   --brand-red: #e11d2e;
@@ -538,7 +538,7 @@ input {
 .preview__main {
   min-width: 0;
   padding: clamp(17px, 1.4vw, 25px);
-  background: #f7f8fb;
+  background: #ffffff;
 }
 
 .preview__head {
