@@ -22,6 +22,7 @@
   --positive: #2d6a4f;
   --warning: #9a5b12;
   --danger: #b42318;
+  --tblr-font-sans-serif: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --editorial: "Poppins", "Instrument Sans", system-ui, sans-serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -61,6 +62,37 @@
 body {
   background: var(--paper);
   color: var(--ink);
+  font-family: var(--tblr-font-sans-serif);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+select:-webkit-autofill,
+input:autofill {
+  -webkit-text-fill-color: var(--ink) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset !important;
+  box-shadow: 0 0 0 1000px var(--surface) inset !important;
+  caret-color: var(--ink);
+  font-family: var(--tblr-font-sans-serif) !important;
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.auth-card .form-control:-webkit-autofill,
+.auth-card .form-control:-webkit-autofill:hover,
+.auth-card .form-control:-webkit-autofill:active,
+.auth-card .form-control:autofill {
+  font-size: 16px !important;
+}
+
+.auth-card .form-control:-webkit-autofill:focus,
+.auth-card .form-control:autofill:focus {
+  -webkit-text-fill-color: var(--ink) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset, 0 0 0 3px rgba(200, 50, 43, 0.12) !important;
+  box-shadow: 0 0 0 1000px var(--surface) inset, 0 0 0 3px rgba(200, 50, 43, 0.12) !important;
+  font-family: var(--tblr-font-sans-serif) !important;
+  font-size: 16px !important;
 }
 
 ::selection {

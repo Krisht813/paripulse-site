@@ -15,11 +15,13 @@
   <meta property="og:image" content="https://paripulsemanagement.com/assets/paripulse-mark.png" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261124" />
   <title>Contact - Paripulse Management</title>
-  <link rel="stylesheet" href="css/fonts.css?v=20261125-2" />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-600-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-700-latin.woff2" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css?v=20261125-3" />
   <link rel="stylesheet" href="css/home.css?v=20261124-27" />
-  <link rel="stylesheet" href="css/contact.css?v=20261125-9" />
+  <link rel="stylesheet" href="css/contact.css?v=20261125-10" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
-  <link rel="stylesheet" href="css/theme.css?v=20261125-7" />
+  <link rel="stylesheet" href="css/theme.css?v=20261125-8" />
   <link rel="stylesheet" href="css/notifications.css?v=20261125-1" />
 </head>
 <body class="contact-page">
@@ -93,7 +95,11 @@
             <p>Include the account email and any receipt ID. We reply by email, not in the dashboard.</p>
           </header>
 
-          <form id="contactForm" class="contact-form" action="mailto:paripulse.support@gmail.com" method="post" enctype="text/plain" novalidate>
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="contact-hp" aria-hidden="true">
+              <label for="contactWebsite">Website</label>
+              <input id="contactWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
             <div class="contact-form__row">
               <label class="contact-field">
                 <span>Your name</span>
@@ -125,15 +131,46 @@
             <p class="contact-feedback" id="contactFeedback" role="status" hidden></p>
 
             <button class="home-btn home-btn--primary contact-submit" type="submit">
-              Compose email
+              <span class="contact-submit__label">Send message</span>
               <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11" /><path d="m11 5 5 5-5 5" /></svg>
             </button>
-            <p class="contact-form__hint">This opens your email app. Nothing is sent automatically.</p>
+            <p class="contact-form__hint">Sent directly to Paripulse support. We usually reply within one business day.</p>
           </form>
 
+          <div class="contact-success" id="contactSuccess" hidden aria-live="polite">
+            <div class="contact-success__head">
+              <span class="contact-success__badge" aria-hidden="true">
+                <svg viewBox="0 0 20 20"><path d="m5 10.5 3.2 3.2L15 7" /></svg>
+              </span>
+              <div>
+                <p class="contact-success__eyebrow">Dispatched</p>
+                <h3>We received your message.</h3>
+              </div>
+            </div>
+            <p class="contact-success__copy" id="contactSuccessNote">
+              A confirmation copy was sent to your inbox. We reply within one business day.
+            </p>
+            <dl class="contact-success__meta">
+              <div>
+                <dt>Reference</dt>
+                <dd id="contactRef">PP-000000</dd>
+              </div>
+              <div>
+                <dt>Recipient</dt>
+                <dd>paripulse.support@gmail.com</dd>
+              </div>
+            </dl>
+            <div class="contact-success__actions">
+              <button class="contact-copy" id="contactReset" type="button">Send another message</button>
+            </div>
+          </div>
+
           <div class="contact-fallback" id="contactFallback" hidden>
-            <p>If your email app did not open, email us directly:</p>
-            <button class="contact-copy" type="button" data-copy-email="paripulse.support@gmail.com">Copy support email</button>
+            <p>Could not send automatically? Email us directly:</p>
+            <div class="contact-fallback__actions">
+              <a class="contact-copy" id="contactMailto" href="mailto:paripulse.support@gmail.com">Open email app</a>
+              <button class="contact-copy" type="button" data-copy-email="paripulse.support@gmail.com">Copy support email</button>
+            </div>
           </div>
         </section>
       </div>
@@ -202,9 +239,10 @@
     </div>
   </footer>
 
+  <script src="js/runtime-config.js?v=20261124-2"></script>
   <script src="js/notifications.js?v=20261125-3"></script>
   <script src="js/select.js?v=20261125-2"></script>
-  <script src="js/contact.js?v=20261125-2"></script>
+  <script src="js/contact.js?v=20261125-3"></script>
   <script src="js/home.js?v=20261124-4"></script>
 </body>
 </html>
