@@ -1330,14 +1330,16 @@
       renderSettings();
     }
 
-    var wallet = loadWallet();
-    var pending = Array.isArray(wallet.requests)
-      ? wallet.requests.filter(function (request) {
-          return request.status === "pending";
-        }).length
-      : 0;
-    var pendingEl = document.getElementById("pendingRequestsValue");
-    if (pendingEl) pendingEl.textContent = String(pending);
+    if (!liveMode()) {
+      var wallet = loadWallet();
+      var pending = Array.isArray(wallet.requests)
+        ? wallet.requests.filter(function (request) {
+            return request.status === "pending";
+          }).length
+        : 0;
+      var pendingEl = document.getElementById("pendingRequestsValue");
+      if (pendingEl) pendingEl.textContent = String(pending);
+    }
   }
 
   function init() {
@@ -1350,13 +1352,18 @@
       });
     }
 
-    renderUsers();
-    renderWallets();
-    renderTransactions();
-    renderReports();
-    renderSupport();
-    renderSettings();
-    renderView(currentView());
+    if (liveMode()) {
+      var demoDataCard = document.getElementById("demoDataCard");
+      if (demoDataCard) demoDataCard.hidden = true;
+    } else {
+      renderUsers();
+      renderWallets();
+      renderTransactions();
+      renderReports();
+      renderSupport();
+      renderSettings();
+      renderView(currentView());
+    }
 
     var userSearch = document.getElementById("userSearch");
     var userRoleFilter = document.getElementById("userRoleFilter");
@@ -1693,6 +1700,12 @@
     window.addEventListener("paripulse:auth", function (event) {
       if (liveMode()) {
         renderSettings();
+        if (
+          window.ParipulseLive &&
+          typeof window.ParipulseLive.markViewReady === "function"
+        ) {
+          window.ParipulseLive.markViewReady("settings");
+        }
         return;
       }
       var email = document.getElementById("profileEmail");

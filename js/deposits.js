@@ -277,7 +277,9 @@
     var totalTransactions = document.getElementById("totalTransactionsValue");
     var recentBody = document.getElementById("recentTransactionsBody");
     var txEmpty = document.getElementById("txEmpty");
+    var trend = document.querySelector(".stat-trend");
 
+    if (trend) trend.hidden = false;
     if (totalBalance) totalBalance.textContent = balanceText;
     if (donutTotal) donutTotal.textContent = balanceText;
     if (mainBalance) mainBalance.textContent = balanceText;

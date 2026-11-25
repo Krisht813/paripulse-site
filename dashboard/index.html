@@ -8,9 +8,10 @@
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261124" />
   <title>Dashboard · Paripulse Management</title>
+  <link rel="preload" as="script" href="vendor/firebase/firebase-firestore-compat.js" />
   <link rel="stylesheet" href="css/fonts.css?v=20261125-2" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/styles.css?v=20261125-4" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125-5" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
   <link rel="stylesheet" href="css/theme.css?v=20261125-7" />
   <link rel="stylesheet" href="css/notifications.css?v=20261125-1" />
@@ -144,9 +145,9 @@
           </div>
           <div class="nav-item dropdown">
             <button class="nav-link user-chip" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="menu" aria-label="Account menu">
-              <span class="avatar avatar-sm user-avatar" aria-hidden="true">M</span>
+              <span class="avatar avatar-sm user-avatar" aria-hidden="true"></span>
               <span class="user-meta d-none d-sm-flex">
-                <span class="user-name">Mohsin Iqbal</span>
+                <span class="user-name"></span>
                 <span class="user-status"><span class="online-dot"></span>Online</span>
               </span>
               <svg class="user-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
@@ -169,7 +170,7 @@
           <div id="dashboardView">
           <div class="dashboard-heading">
             <h1 class="dashboard-title"><svg class="page-title-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8" /><path d="M5.5 9.3V20a1 1 0 0 0 1 1H10v-5.5h4V21h3.5a1 1 0 0 0 1-1V9.3" /></svg>Dashboard <span>Overview</span></h1>
-            <p class="dashboard-date">Today <strong id="todayDate">18 Sep 2026</strong></p>
+            <p class="dashboard-date">Today <strong id="todayDate"></strong></p>
           </div>
 
           <p class="live-data-note" id="liveDataNote" hidden></p>
@@ -182,8 +183,8 @@
                   <div class="stat-copy">
                     <p class="stat-label">Total Balance</p>
                     <div class="stat-value-row">
-                      <p class="stat-value" id="totalBalanceValue">$1000.00</p>
-                      <span class="stat-trend">
+                      <p class="stat-value" id="totalBalanceValue">—</p>
+                      <span class="stat-trend" hidden>
                         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 11.2 6.2 7.5l2.3 2.3 4.7-4.7" /><path d="M9.6 5.1h3.6v3.6" /></svg>
                         +12.4%
                       </span>
@@ -203,7 +204,7 @@
                   <div class="stat-copy">
                     <p class="stat-label">Total Users</p>
                     <div class="stat-value-row">
-                      <p class="stat-value" id="totalUsersValue">0</p>
+                      <p class="stat-value" id="totalUsersValue">—</p>
                     </div>
                     <p class="stat-caption">Registered Users</p>
                   </div>
@@ -220,7 +221,7 @@
                   <div class="stat-copy">
                     <p class="stat-label">Total Transactions</p>
                     <div class="stat-value-row">
-                      <p class="stat-value" id="totalTransactionsValue">0</p>
+                      <p class="stat-value" id="totalTransactionsValue">—</p>
                     </div>
                     <p class="stat-caption">All Transactions</p>
                   </div>
@@ -237,7 +238,7 @@
                   <div class="stat-copy">
                     <p class="stat-label">Pending Requests</p>
                     <div class="stat-value-row">
-                      <p class="stat-value" id="pendingRequestsValue">0</p>
+                      <p class="stat-value" id="pendingRequestsValue">—</p>
                     </div>
                     <p class="stat-caption">Requires Attention</p>
                   </div>
@@ -276,7 +277,7 @@
                   </table>
                 </div>
 
-                <div class="tx-empty" id="txEmpty">
+                <div class="tx-empty" id="txEmpty" hidden>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M5 3h14v18l-2.3-1.5L14.4 21l-2.4-1.5L9.6 21l-2.3-1.5L5 21V3Z" />
                     <path d="M9 8h6" />
@@ -295,13 +296,13 @@
                 </header>
 
                 <div class="card-body balance-body">
-                  <div class="donut-wrap" role="img" aria-label="Main balance $1000.00 makes up the total balance">
+                  <div class="donut-wrap" role="img" aria-label="Balance breakdown">
                     <svg class="donut" viewBox="0 0 200 200" aria-hidden="true">
                       <circle class="donut-track" cx="100" cy="100" r="74" />
                       <circle class="donut-value" cx="100" cy="100" r="74" />
                     </svg>
                     <div class="donut-center">
-                      <span class="donut-amount" id="donutTotal">$1000.00</span>
+                      <span class="donut-amount" id="donutTotal">—</span>
                       <span class="donut-label">Total Balance</span>
                     </div>
                   </div>
@@ -310,22 +311,22 @@
                     <li>
                       <span class="balance-dot" style="--dot: #c8322b"></span>
                       <span class="balance-label">Main Balance</span>
-                      <span class="balance-value" id="mainBalanceValue">$1000.00</span>
+                      <span class="balance-value" id="mainBalanceValue">—</span>
                     </li>
                     <li>
                       <span class="balance-dot" style="--dot: #2d6a4f"></span>
                       <span class="balance-label">Bonus Balance</span>
-                      <span class="balance-value" id="bonusBalanceValue">$0.00</span>
+                      <span class="balance-value" id="bonusBalanceValue">—</span>
                     </li>
                     <li>
                       <span class="balance-dot" style="--dot: #8c8578"></span>
                       <span class="balance-label">Commission</span>
-                      <span class="balance-value" id="commissionBalanceValue">$0.00</span>
+                      <span class="balance-value" id="commissionBalanceValue">—</span>
                     </li>
                     <li>
                       <span class="balance-dot" style="--dot: #9a5b12"></span>
                       <span class="balance-label">Others</span>
-                      <span class="balance-value" id="otherBalanceValue">$0.00</span>
+                      <span class="balance-value" id="otherBalanceValue">—</span>
                     </li>
                   </ul>
                 </div>
@@ -350,7 +351,7 @@
                     <h2 class="card-title">Available Balance</h2>
                   </header>
                   <div class="card-body deposit-balance-body">
-                    <p class="deposit-balance" id="demoBalance">$1,000.00</p>
+                    <p class="deposit-balance" id="demoBalance">—</p>
                     <p class="deposit-note">Demo credit only. No real crypto is accepted.</p>
                     <p class="deposit-pending" id="demoPending" hidden></p>
                     <button class="btn btn-primary w-100" type="button" id="openDepositModal">Add funds</button>
@@ -375,8 +376,8 @@
                         </tr>
                       </thead>
                       <tbody id="depositRows">
-                        <tr id="depositEmpty">
-                          <td colspan="5">No demo deposits yet.</td>
+                        <tr id="depositEmpty" hidden>
+                          <td colspan="5">No deposits yet.</td>
                         </tr>
                       </tbody>
                     </table>
@@ -476,7 +477,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Total Users</p>
-                      <div class="stat-value-row"><p class="stat-value" id="usersTotalValue">0</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="usersTotalValue">—</p></div>
                       <p class="stat-caption">All accounts</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -490,7 +491,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Active</p>
-                      <div class="stat-value-row"><p class="stat-value" id="usersActiveValue">0</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="usersActiveValue">—</p></div>
                       <p class="stat-caption">Can sign in</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -504,7 +505,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Pending</p>
-                      <div class="stat-value-row"><p class="stat-value" id="usersPendingValue">0</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="usersPendingValue">—</p></div>
                       <p class="stat-caption">Awaiting approval</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -518,7 +519,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Blocked</p>
-                      <div class="stat-value-row"><p class="stat-value" id="usersBlockedValue">0</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="usersBlockedValue">—</p></div>
                       <p class="stat-caption">Access suspended</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -594,7 +595,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Total Held</p>
-                      <div class="stat-value-row"><p class="stat-value" id="walletTotalValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="walletTotalValue">—</p></div>
                       <p class="stat-caption">Across all demo wallets</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -608,7 +609,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Main Balance</p>
-                      <div class="stat-value-row"><p class="stat-value" id="walletMainValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="walletMainValue">—</p></div>
                       <p class="stat-caption">Withdrawable demo credit</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -622,7 +623,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Bonus Balance</p>
-                      <div class="stat-value-row"><p class="stat-value" id="walletBonusValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="walletBonusValue">—</p></div>
                       <p class="stat-caption">Promotional demo credit</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -636,7 +637,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Commission</p>
-                      <div class="stat-value-row"><p class="stat-value" id="walletCommissionValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="walletCommissionValue">—</p></div>
                       <p class="stat-caption">Earned demo commission</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -690,7 +691,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Total Credits</p>
-                      <div class="stat-value-row"><p class="stat-value" id="txCreditsValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="txCreditsValue">—</p></div>
                       <p class="stat-caption">Money in</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -704,7 +705,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Total Debits</p>
-                      <div class="stat-value-row"><p class="stat-value" id="txDebitsValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="txDebitsValue">—</p></div>
                       <p class="stat-caption">Money out</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -718,7 +719,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Net Flow</p>
-                      <div class="stat-value-row"><p class="stat-value" id="txNetValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="txNetValue">—</p></div>
                       <p class="stat-caption">Credits minus debits</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -732,7 +733,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Entries</p>
-                      <div class="stat-value-row"><p class="stat-value" id="txCountValue">0</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="txCountValue">—</p></div>
                       <p class="stat-caption">Ledger rows</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -826,7 +827,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Deposits</p>
-                      <div class="stat-value-row"><p class="stat-value" id="reportDepositsValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="reportDepositsValue">—</p></div>
                       <p class="stat-caption">Approved demo deposits</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -840,7 +841,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Credits</p>
-                      <div class="stat-value-row"><p class="stat-value" id="reportCreditsValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="reportCreditsValue">—</p></div>
                       <p class="stat-caption">All money in</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -854,7 +855,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Debits</p>
-                      <div class="stat-value-row"><p class="stat-value" id="reportDebitsValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="reportDebitsValue">—</p></div>
                       <p class="stat-caption">All money out</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -868,7 +869,7 @@
                   <div class="card-body">
                     <div class="stat-copy">
                       <p class="stat-label">Net Flow</p>
-                      <div class="stat-value-row"><p class="stat-value" id="reportNetValue">$0.00</p></div>
+                      <div class="stat-value-row"><p class="stat-value" id="reportNetValue">—</p></div>
                       <p class="stat-caption">Credits minus debits</p>
                     </div>
                     <span class="stat-icon" aria-hidden="true">
@@ -1171,7 +1172,7 @@
                   </div>
                 </section>
 
-                <section class="card page-panel" id="demoDataCard">
+                <section class="card page-panel" id="demoDataCard" hidden>
                   <header class="card-header">
                     <h2 class="card-title">Demo data</h2>
                   </header>
@@ -1473,18 +1474,18 @@
   <script src="js/runtime-config.js?v=20261124-2"></script>
   <script src="js/notifications.js?v=20261125-3"></script>
   <script src="js/select.js?v=20261125-2"></script>
-  <script src="js/live-data.js?v=20261124-4"></script>
-  <script src="js/auth-guard.js?v=20261125-1"></script>
+  <script src="js/live-data.js?v=20261125-1"></script>
+  <script src="js/auth-guard.js?v=20261125-2"></script>
   <script src="js/logout-modal.js?v=20261124-3"></script>
-  <script src="js/deposits.js?v=20261124-9"></script>
-  <script src="js/pages.js?v=20261125-1"></script>
-  <script src="js/live-dashboard.js?v=20261124-2"></script>
-  <script src="js/live-deposits.js?v=20261125-1"></script>
-  <script src="js/live-admin.js?v=20261124-2"></script>
-  <script src="js/live-finance.js?v=20261124-2"></script>
-  <script src="js/live-support.js?v=20261124-1"></script>
+  <script src="js/deposits.js?v=20261125-1"></script>
+  <script src="js/pages.js?v=20261125-2"></script>
+  <script src="js/live-dashboard.js?v=20261125-1"></script>
+  <script src="js/live-deposits.js?v=20261125-2"></script>
+  <script src="js/live-admin.js?v=20261125-1"></script>
+  <script src="js/live-finance.js?v=20261125-1"></script>
+  <script src="js/live-support.js?v=20261125-1"></script>
   <script src="js/audit-log.js?v=20261124-2"></script>
-  <script src="js/router.js?v=20261124-2"></script>
+  <script src="js/router.js?v=20261125-1"></script>
   <script src="js/app.js?v=20261124"></script>
 </body>
 </html>
