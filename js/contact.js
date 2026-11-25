@@ -17,6 +17,10 @@
 
   function notify(type, message) {
     if (window.ParipulseNotify) {
+      if (type === "error" && feedback) {
+        feedback.textContent = message;
+        feedback.hidden = false;
+      }
       window.ParipulseNotify[type](message, { title: "Contact" });
       return;
     }

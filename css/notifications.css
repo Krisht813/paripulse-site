@@ -229,6 +229,14 @@ body.pp-notifications-ready .deposit-error {
   display: none !important;
 }
 
+/* Toasts are silent now, so errors keep their text inline. */
+body.pp-notifications-ready .request-feedback.is-error:not([hidden]),
+body.pp-notifications-ready .form-feedback.is-error:not([hidden]),
+body.pp-notifications-ready .auth-alert:not([hidden]),
+body.pp-notifications-ready .deposit-error:not([hidden]) {
+  display: block !important;
+}
+
 @media (max-width: 575.98px) {
   .pp-toast-stack {
     right: 16px;
