@@ -14,6 +14,9 @@
   var ERROR_DURATION = 7000;
   var WARNING_DURATION = 6200;
 
+  var CENTER_KEY = "paripulse_notification_center_v1";
+  var CENTER_MAX = 40;
+
   var stack = null;
   var items = [];
   var sequence = 0;
@@ -23,6 +26,13 @@
   var observer = null;
   var scanTimer = null;
   var feedbackState = new WeakMap();
+
+  var centerRecords = [];
+  var centerFilter = "all";
+  var centerUi = null;
+  var centerOpen = false;
+  var centerLastFocus = null;
+  var centerCloseTimer = 0;
 
   var FEEDBACK_IDS = [
     "requestFeedback",
@@ -298,6 +308,8 @@
       el: null
     };
 
+    addToCenter(type, text, settings);
+
     var card = buildCard(record);
     if (duration === 0) card.classList.add("is-sticky");
 
@@ -332,7 +344,9 @@
         type: type,
         title: settings.title,
         duration: settings.duration,
-        action: settings.action
+        action: settings.action,
+        center: settings.center,
+        href: settings.href
       });
     };
   }
@@ -395,10 +409,441 @@
     scanTimer = window.setTimeout(scanFeedback, 60);
   }
 
+  function safeHref(value) {
+    if (typeof value !== "string") return "";
+    var href = value.trim();
+    if (!href) return "";
+    return /^(#|\/(?!\/)|\.{1,2}\/)/.test(href) ? href : "";
+  }
+
+  function normaliseRecord(record) {
+    if (!record || typeof record !== "object") return null;
+    var message =
+      typeof record.message === "string" ? record.message.trim() : "";
+    if (!message) return null;
+    var createdAt = Number(record.createdAt);
+    if (!Number.isFinite(createdAt)) createdAt = Date.now();
+    return {
+      id:
+        typeof record.id === "string" && record.id
+          ? record.id
+          : "pp-note-" + (sequence += 1),
+      type: normaliseType(record.type),
+      title:
+        typeof record.title === "string" ? record.title.trim() : "",
+      message: message,
+      createdAt: createdAt,
+      read: record.read === true,
+      href: safeHref(record.href)
+    };
+  }
+
+  function loadCenter() {
+    try {
+      var raw = window.sessionStorage.getItem(CENTER_KEY);
+      if (!raw) return;
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return;
+      centerRecords = parsed
+        .map(normaliseRecord)
+        .filter(Boolean)
+        .slice(0, CENTER_MAX);
+    } catch (error) {
+      centerRecords = [];
+    }
+  }
+
+  function saveCenter() {
+    try {
+      window.sessionStorage.setItem(
+        CENTER_KEY,
+        JSON.stringify(centerRecords.slice(0, CENTER_MAX))
+      );
+    } catch (error) {
+      /* Storage can be unavailable or full; the current tab still works. */
+    }
+  }
+
+  function unreadCount() {
+    return centerRecords.reduce(function (total, record) {
+      return total + (record.read ? 0 : 1);
+    }, 0);
+  }
+
+  function relativeTime(timestamp) {
+    var diff = Math.max(0, Date.now() - timestamp);
+    if (diff < 45000) return "Just now";
+    if (diff < 3600000) return Math.max(1, Math.round(diff / 60000)) + " min ago";
+    if (diff < 86400000) return Math.max(1, Math.round(diff / 3600000)) + " hr ago";
+    if (diff < 604800000) return Math.max(1, Math.round(diff / 86400000)) + "d ago";
+    return new Date(timestamp).toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric"
+    });
+  }
+
+  function ensureCenterUi() {
+    if (centerUi) return centerUi;
+    var trigger = document.getElementById("notificationTrigger");
+    if (!trigger) return null;
+
+    var backdrop = document.createElement("div");
+    backdrop.className = "pp-notify__backdrop";
+    backdrop.hidden = true;
+
+    var panel = document.createElement("section");
+    panel.className = "pp-notify__panel";
+    panel.id = "notificationPanel";
+    panel.hidden = true;
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+    panel.setAttribute("aria-labelledby", "notificationPanelTitle");
+    panel.innerHTML = [
+      '<header class="pp-notify__head">',
+      '  <div class="pp-notify__heading">',
+      '    <h2 class="pp-notify__title" id="notificationPanelTitle">Notifications</h2>',
+      '    <p class="pp-notify__summary" id="notificationSummary" aria-live="polite">All caught up</p>',
+      "  </div>",
+      '  <div class="pp-notify__head-actions">',
+      '    <button class="pp-notify__mark" id="notificationMarkAll" type="button">Mark all read</button>',
+      '    <button class="pp-notify__close" id="notificationClose" type="button" aria-label="Close notifications">',
+      '      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"/><path d="m18 6-12 12"/></svg>',
+      "    </button>",
+      "  </div>",
+      "</header>",
+      '<div class="pp-notify__filters" role="group" aria-label="Filter notifications">',
+      '  <button class="is-active" type="button" data-filter="all" aria-pressed="true">All <span data-count="all">0</span></button>',
+      '  <button type="button" data-filter="unread" aria-pressed="false">Unread <span data-count="unread">0</span></button>',
+      "</div>",
+      '<div class="pp-notify__list" id="notificationList"></div>',
+      '<footer class="pp-notify__foot">',
+      "  <span>Session history</span>",
+      '  <button id="notificationClear" type="button">Clear all</button>',
+      "</footer>"
+    ].join("");
+
+    document.body.appendChild(backdrop);
+    document.body.appendChild(panel);
+
+    centerUi = {
+      trigger: trigger,
+      badge: document.getElementById("notificationBadge"),
+      backdrop: backdrop,
+      panel: panel,
+      list: panel.querySelector("#notificationList"),
+      summary: panel.querySelector("#notificationSummary"),
+      markAll: panel.querySelector("#notificationMarkAll"),
+      clear: panel.querySelector("#notificationClear"),
+      close: panel.querySelector("#notificationClose"),
+      filters: panel.querySelectorAll("[data-filter]")
+    };
+
+    trigger.addEventListener("click", function () {
+      if (centerOpen) closeCenter();
+      else openCenter();
+    });
+
+    centerUi.close.addEventListener("click", function () {
+      closeCenter();
+    });
+
+    backdrop.addEventListener("click", function () {
+      closeCenter();
+    });
+
+    centerUi.markAll.addEventListener("click", markAllRead);
+    centerUi.clear.addEventListener("click", clearCenter);
+
+    Array.prototype.forEach.call(centerUi.filters, function (button) {
+      button.addEventListener("click", function () {
+        centerFilter = button.getAttribute("data-filter") || "all";
+        renderCenter();
+      });
+    });
+
+    panel.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeCenter();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      var focusable = panel.querySelectorAll(
+        'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    return centerUi;
+  }
+
+  function buildEmptyState() {
+    var wrap = document.createElement("div");
+    wrap.className = "pp-notify__empty";
+    wrap.innerHTML =
+      '<span class="pp-notify__empty-icon" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24"><path d="M18 8.5a6 6 0 0 0-12 0c0 6.5-3 6.5-3 8.5h18c0-2-3-2-3-8.5"/><path d="M9.5 20h5"/></svg>' +
+      "</span>";
+    var heading = document.createElement("h3");
+    var text = document.createElement("p");
+    if (centerFilter === "unread" && centerRecords.length) {
+      heading.textContent = "No unread notifications";
+      text.textContent = "You have read everything in this session.";
+    } else {
+      heading.textContent = "You're all caught up";
+      text.textContent = "New activity will appear here.";
+    }
+    wrap.appendChild(heading);
+    wrap.appendChild(text);
+    return wrap;
+  }
+
+  function renderItem(record) {
+    var isLink = Boolean(record.href);
+    var item = document.createElement(isLink ? "a" : "button");
+    item.className = "pp-notify__item" + (record.read ? "" : " is-unread");
+    item.setAttribute("data-id", record.id);
+    if (isLink) {
+      item.href = record.href;
+    } else {
+      item.type = "button";
+    }
+
+    var icon = document.createElement("span");
+    icon.className = "pp-notify__item-icon";
+    icon.dataset.type = record.type;
+    icon.innerHTML = ICONS[record.type];
+
+    var body = document.createElement("span");
+    body.className = "pp-notify__item-body";
+
+    if (record.title) {
+      var title = document.createElement("span");
+      title.className = "pp-notify__item-title";
+      title.textContent = record.title;
+      body.appendChild(title);
+    }
+
+    var message = document.createElement("span");
+    message.className = "pp-notify__item-message";
+    message.textContent = record.message;
+    body.appendChild(message);
+
+    var meta = document.createElement("span");
+    meta.className = "pp-notify__item-meta";
+    meta.textContent = relativeTime(record.createdAt);
+    body.appendChild(meta);
+
+    if (!record.read) {
+      var sr = document.createElement("span");
+      sr.className = "pp-sr-only";
+      sr.textContent = "Unread. ";
+      item.appendChild(sr);
+    }
+
+    item.appendChild(icon);
+    item.appendChild(body);
+
+    if (!record.read) {
+      var dot = document.createElement("span");
+      dot.className = "pp-notify__unread-dot";
+      dot.setAttribute("aria-hidden", "true");
+      item.appendChild(dot);
+    }
+
+    item.addEventListener("click", function (event) {
+      markRead(record.id);
+      if (isLink) {
+        event.preventDefault();
+        closeCenter(false);
+        window.location.assign(record.href);
+      } else {
+        event.preventDefault();
+      }
+    });
+
+    return item;
+  }
+
+  function renderCenter() {
+    var ui = ensureCenterUi();
+    if (!ui) return;
+
+    var unread = unreadCount();
+    var total = centerRecords.length;
+
+    if (ui.badge) {
+      ui.badge.hidden = unread === 0;
+      ui.badge.textContent = unread > 9 ? "9+" : String(unread);
+    }
+    ui.trigger.setAttribute(
+      "aria-label",
+      unread ? "Notifications, " + unread + " unread" : "Notifications"
+    );
+    ui.summary.textContent = unread ? unread + " unread" : "All caught up";
+
+    ui.markAll.disabled = unread === 0;
+    ui.clear.disabled = total === 0;
+
+    Array.prototype.forEach.call(ui.filters, function (button) {
+      var filter = button.getAttribute("data-filter");
+      var active = filter === centerFilter;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+      var count = button.querySelector("[data-count]");
+      if (count) {
+        count.textContent =
+          filter === "unread" ? String(unread) : String(total);
+      }
+    });
+
+    var scrollTop = ui.list.scrollTop;
+    ui.list.innerHTML = "";
+    var visible = centerRecords.filter(function (record) {
+      return centerFilter !== "unread" || !record.read;
+    });
+
+    if (!visible.length) {
+      ui.list.appendChild(buildEmptyState());
+    } else {
+      visible.forEach(function (record) {
+        ui.list.appendChild(renderItem(record));
+      });
+    }
+    ui.list.scrollTop = scrollTop;
+  }
+
+  function markRead(id) {
+    var changed = false;
+    centerRecords.forEach(function (record) {
+      if (record.id === id && !record.read) {
+        record.read = true;
+        changed = true;
+      }
+    });
+    if (changed) {
+      saveCenter();
+      renderCenter();
+    }
+  }
+
+  function markAllRead() {
+    var changed = false;
+    centerRecords.forEach(function (record) {
+      if (!record.read) {
+        record.read = true;
+        changed = true;
+      }
+    });
+    if (changed) {
+      saveCenter();
+      renderCenter();
+    }
+  }
+
+  function clearCenter() {
+    if (!centerRecords.length) return;
+    centerRecords = [];
+    saveCenter();
+    renderCenter();
+  }
+
+  function openCenter() {
+    var ui = ensureCenterUi();
+    if (!ui || centerOpen) return;
+    window.clearTimeout(centerCloseTimer);
+    centerLastFocus = document.activeElement;
+    centerOpen = true;
+    renderCenter();
+    ui.backdrop.hidden = false;
+    ui.panel.hidden = false;
+    ui.trigger.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    document.body.classList.add("pp-notify-center-open");
+    window.requestAnimationFrame(function () {
+      ui.backdrop.classList.add("is-open");
+      ui.panel.classList.add("is-open");
+    });
+    ui.close.focus();
+  }
+
+  function closeCenter(returnFocus) {
+    var ui = centerUi;
+    if (!ui || !centerOpen) return;
+    centerOpen = false;
+    ui.trigger.setAttribute("aria-expanded", "false");
+    ui.backdrop.classList.remove("is-open");
+    ui.panel.classList.remove("is-open");
+    document.body.style.overflow = "";
+    document.body.classList.remove("pp-notify-center-open");
+    if (returnFocus !== false && centerLastFocus && centerLastFocus.focus) {
+      centerLastFocus.focus();
+    }
+    window.clearTimeout(centerCloseTimer);
+    centerCloseTimer = window.setTimeout(function () {
+      if (!centerOpen) {
+        ui.backdrop.hidden = true;
+        ui.panel.hidden = true;
+      }
+    }, 180);
+  }
+
+  function addToCenter(type, message, settings) {
+    if (settings.center === false) return;
+    if (type === "error" && settings.center !== true) return;
+
+    var now = Date.now();
+    var title = settings.title ? String(settings.title).trim() : "";
+    var href = safeHref(settings.href);
+
+    if (
+      centerRecords[0] &&
+      centerRecords[0].type === type &&
+      centerRecords[0].message === message &&
+      now - centerRecords[0].createdAt < 4000
+    ) {
+      centerRecords[0].createdAt = now;
+      centerRecords[0].read = false;
+      centerRecords[0].title = title;
+      centerRecords[0].href = href;
+    } else {
+      centerRecords.unshift({
+        id: "pp-note-" + (sequence += 1) + "-" + now,
+        type: type,
+        title: title,
+        message: message,
+        createdAt: now,
+        read: false,
+        href: href
+      });
+    }
+
+    centerRecords = centerRecords.slice(0, CENTER_MAX);
+    saveCenter();
+    renderCenter();
+    window.dispatchEvent(
+      new CustomEvent("paripulse:notifications", {
+        detail: { total: centerRecords.length, unread: unreadCount() }
+      })
+    );
+  }
+
   function init() {
     ensureStack();
     document.body.classList.add("pp-notifications-ready");
     seedFeedbackState();
+    loadCenter();
+    ensureCenterUi();
+    renderCenter();
 
     if (window.MutationObserver && document.body) {
       observer = new MutationObserver(scheduleScan);
@@ -428,6 +873,13 @@
   api.info = showType("info");
   api.dismiss = dismiss;
   api.dismissAll = dismissAll;
+  api.center = {
+    open: openCenter,
+    close: closeCenter,
+    markAllRead: markAllRead,
+    clear: clearCenter,
+    unreadCount: unreadCount
+  };
 
   window.ParipulseNotify = api;
 
