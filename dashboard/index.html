@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
   <link rel="stylesheet" href="css/styles.css?v=20261124-20" />
   <link rel="stylesheet" href="css/select.css?v=20261125-2" />
-  <link rel="stylesheet" href="css/theme.css?v=20261125-3" />
-  <link rel="stylesheet" href="css/notifications.css?v=20261124-8" />
+  <link rel="stylesheet" href="css/theme.css?v=20261125-4" />
+  <link rel="stylesheet" href="css/notifications.css?v=20261124-9" />
 </head>
 <body>
   <div class="page">
@@ -339,7 +339,7 @@
           <!-- ============ Deposits demo ============ -->
           <div id="depositsView" hidden>
             <div class="dashboard-heading">
-              <h1 class="dashboard-title"><svg class="page-title-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M4 21h16" /></svg>Deposits <span class="demo-badge">Demo mode</span></h1>
+              <h1 class="dashboard-title"><svg class="page-title-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M4 21h16" /></svg>Deposits</h1>
               <p class="dashboard-date">Simulated payments only — no real funds.</p>
             </div>
 
@@ -364,7 +364,6 @@
                 <section class="card panel-card deposit-list-card h-100">
                   <header class="card-header">
                     <h2 class="card-title">Deposit Transactions</h2>
-                    <span class="demo-badge ms-auto">Demo</span>
                   </header>
                   <div class="table-responsive tx-table-wrap">
                     <table class="table table-vcenter table-nowrap tx-table deposit-table">
@@ -392,7 +391,6 @@
             <section class="card panel-card deposit-review-card" id="depositReviewCard" hidden>
               <header class="card-header">
                 <h2 class="card-title">Deposit requests</h2>
-                <span class="demo-badge ms-auto">Demo admin</span>
               </header>
               <div class="card-body">
                 <p class="deposit-note">In production this queue is admin-only, with role checks and audit logs.</p>
@@ -404,7 +402,6 @@
             <section class="card panel-card deposit-address-card" id="depositAddressCard">
               <header class="card-header">
                 <h2 class="card-title">Deposit addresses</h2>
-                <span class="demo-badge ms-auto">Demo admin</span>
               </header>
               <div class="card-body">
                 <p class="deposit-note">Change the receiving address for each asset. Requests already submitted keep the address they used.</p>
@@ -535,7 +532,6 @@
             <section class="card page-panel">
               <header class="card-header">
                 <h2 class="card-title">All users</h2>
-                <span class="demo-badge ms-auto">Demo</span>
               </header>
               <div class="card-body page-panel__body">
                 <div class="toolbar">
@@ -654,7 +650,6 @@
             <section class="card page-panel">
               <header class="card-header">
                 <h2 class="card-title">Wallet balances</h2>
-                <span class="demo-badge ms-auto">Demo</span>
               </header>
               <div class="card-body page-panel__body">
                 <div class="wallet-feedback-wrap">
@@ -751,7 +746,6 @@
             <section class="card page-panel">
               <header class="card-header">
                 <h2 class="card-title">All transactions</h2>
-                <span class="demo-badge ms-auto">Demo</span>
               </header>
               <div class="card-body page-panel__body">
                 <div class="toolbar">
@@ -913,7 +907,6 @@
             <section class="card page-panel">
               <header class="card-header">
                 <h2 class="card-title">Deposit request log</h2>
-                <span class="demo-badge ms-auto">Demo</span>
               </header>
               <div class="card-body page-panel__body">
                 <div class="table-responsive tx-table-wrap">
@@ -1004,7 +997,6 @@
                 <section class="card page-panel h-100">
                   <header class="card-header">
                     <h2 class="card-title">Open a ticket</h2>
-                    <span class="demo-badge ms-auto">Demo</span>
                   </header>
                   <div class="card-body">
                     <p class="request-feedback" id="ticketFeedback" role="status" hidden></p>
@@ -1038,7 +1030,6 @@
             <section class="card page-panel support-tickets" id="ticketsCard" hidden>
               <header class="card-header">
                 <h2 class="card-title">Recent tickets</h2>
-                <span class="demo-badge ms-auto">Demo</span>
               </header>
               <div class="card-body page-panel__body">
                 <div class="ticket-list" id="ticketList"></div>
@@ -1158,7 +1149,7 @@
                         <strong>Two-factor authentication</strong>
                         <small>Required before real money is enabled.</small>
                       </span>
-                      <span class="demo-badge">Planned</span>
+                      <span class="demo-badge demo-badge--warning">Planned</span>
                     </div>
                     <div class="settings-row">
                       <span>

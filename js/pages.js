@@ -14,6 +14,22 @@
   var ROLE_LABELS = { admin: "Admin", support: "Support", user: "User", super_admin: "Super admin" };
   var STATUS_LABELS = { active: "Active", pending: "Pending", blocked: "Blocked" };
 
+  function firstLetter(name, email) {
+    var source = String(name || email || "").trim();
+    return source ? source.charAt(0).toUpperCase() : "?";
+  }
+
+  function setTopbarUser(name, email) {
+    var topbarName = document.querySelector(".user-name");
+    if (topbarName && name) {
+      topbarName.textContent = name;
+    }
+    var avatar = document.querySelector(".user-avatar");
+    if (avatar && (name || email)) {
+      avatar.textContent = firstLetter(name, email);
+    }
+  }
+
   function liveMode() {
     return (
       window.PARIPULSE_RUNTIME &&
@@ -968,13 +984,13 @@
     var demoDataCard = document.getElementById("demoDataCard");
     if (demoDataCard) demoDataCard.hidden = isLive;
 
-    var topbarName = document.querySelector(".user-name");
     var displayName = isLive
       ? live && live.fullName
       : profile.name;
-    if (topbarName && displayName) {
-      topbarName.textContent = displayName;
-    }
+    var displayEmail = isLive
+      ? (live && live.email) || (window.PARIPULSE_USER && window.PARIPULSE_USER.email)
+      : (window.PARIPULSE_USER && window.PARIPULSE_USER.email) || profile.email;
+    setTopbarUser(displayName, displayEmail);
   }
 
   /* ------------------------------------------------------------
@@ -1539,8 +1555,7 @@
                 window.PARIPULSE_USER.profile = updated;
                 window.PARIPULSE_USER.displayName = updated.fullName;
 
-                var topbarName = document.querySelector(".user-name");
-                if (topbarName) topbarName.textContent = updated.fullName;
+                setTopbarUser(updated.fullName, updated.email);
 
                 var emailField = document.getElementById("profileEmail");
                 if (emailField && updated.email) emailField.value = updated.email;

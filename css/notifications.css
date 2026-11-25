@@ -477,8 +477,8 @@ body.pp-notifications-ready .deposit-error:not([hidden]) {
 
 .pp-notify__filters {
   display: flex;
-  gap: 6px;
-  padding: 10px 18px;
+  gap: 18px;
+  padding: 0 18px;
   border-bottom: 1px solid var(--pp-toast-line);
   background: #ffffff;
 }
@@ -487,10 +487,11 @@ body.pp-notifications-ready .deposit-error:not([hidden]) {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 30px;
-  padding: 0 9px;
-  border: 1px solid transparent;
-  border-radius: 6px;
+  min-height: 38px;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
   background: transparent;
   color: var(--pp-toast-muted);
   cursor: pointer;
@@ -499,13 +500,12 @@ body.pp-notifications-ready .deposit-error:not([hidden]) {
 }
 
 .pp-notify__filters button:hover {
-  background: #f9fafb;
   color: #171a1f;
 }
 
 .pp-notify__filters button.is-active {
-  border-color: var(--pp-toast-line);
-  background: #f2f4f7;
+  border-bottom-color: #c8322b;
+  background: transparent;
   color: #171a1f;
 }
 
