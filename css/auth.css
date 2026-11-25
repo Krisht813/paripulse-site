@@ -590,6 +590,233 @@ body::-webkit-scrollbar {
   }
 }
 
+/* ============================================================
+   Boot veil
+
+   The shell stays hidden until the HTML, CSS, fonts and the
+   poster are ready, so the first thing the user sees is the
+   finished layout instead of a half-painted one. The class is
+   set by an inline script before CSS loads, and the failsafe
+   reveals the page even if that script never runs.
+   ============================================================ */
+
+.boot-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: var(--auth-bg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+html.pp-booting .boot-veil {
+  opacity: 1;
+  visibility: visible;
+  animation: pp-boot-veil-out 0.5s ease 2.6s forwards;
+}
+
+.auth-shell {
+  transition: opacity 0.45s ease;
+}
+
+html.pp-booting .auth-shell {
+  opacity: 0;
+  animation: pp-boot-shell-failsafe 0.4s ease 2.6s forwards;
+}
+
+@keyframes pp-boot-veil-out {
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes pp-boot-shell-failsafe {
+  to { opacity: 1; }
+}
+
+/* /* ============================================================
+   Sign-in button states
+
+   The button itself carries the whole signing-in story: a sheen
+   sweep while the request runs, a check on success, and a short
+   shake on failure. Nothing covers the form, so the user keeps
+   their place on the page.
+   ============================================================ */
+
+.auth-card .btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.14s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Only reserve icon spacing when an icon is actually visible, so the
+   idle label stays optically centred. */
+.auth-card .btn-primary.is-loading,
+.auth-card .btn-primary.is-success {
+  gap: 8px;
+}
+
+.auth-card .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    transparent 18%,
+    rgba(255, 255, 255, 0.34) 48%,
+    transparent 78%
+  );
+  transform: translateX(-130%);
+  opacity: 0;
+}
+
+.auth-card .btn-primary.is-loading::after {
+  opacity: 1;
+  animation: pp-btn-sheen 1.15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.auth-card .btn-primary:active:not(:disabled) {
+  transform: scale(0.988);
+}
+
+.auth-card .btn-primary:focus-visible {
+  outline: 2px solid var(--auth-red);
+  outline-offset: 2px;
+}
+
+/* ---------- spinner ---------- */
+
+.btn-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-spinner {
+  display: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.38);
+  border-top-color: #ffffff;
+  animation: pp-btn-spin 0.62s linear infinite;
+}
+
+.auth-card .btn-primary.is-loading .btn-spinner {
+  display: inline-block;
+}
+
+.btn-tick {
+  display: none;
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.btn-tick path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 19;
+  stroke-dashoffset: 19;
+}
+
+.btn-label {
+  display: inline-block;
+  transform: translateZ(0);
+}
+
+/* ---------- success ---------- */
+
+.auth-card .btn-primary.is-success {
+  border-color: #0f9d58;
+  background: #12b76a;
+  color: #ffffff;
+}
+
+.auth-card .btn-primary.is-success .btn-spinner {
+  display: none;
+}
+
+.auth-card .btn-primary.is-success .btn-tick {
+  display: inline-block;
+  animation: pp-btn-tick-pop 0.44s cubic-bezier(0.22, 1.35, 0.4, 1) both;
+}
+
+.auth-card .btn-primary.is-success .btn-tick path {
+  animation: pp-btn-check 0.42s cubic-bezier(0.55, 0.05, 0.35, 1) 0.08s forwards;
+}
+
+.auth-card .btn-primary.is-success::after {
+  opacity: 0;
+}
+
+/* ---------- error ---------- */
+
+.auth-card .btn-primary.is-error {
+  animation: pp-btn-shake 0.36s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes pp-btn-sheen {
+  0% { transform: translateX(-130%); }
+  100% { transform: translateX(130%); }
+}
+
+@keyframes pp-btn-spin {
+  to { transform: rotate(1turn); }
+}
+
+@keyframes pp-btn-check {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pp-btn-tick-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  62% {
+    opacity: 1;
+    transform: scale(1.16);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pp-btn-shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(3px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+/* Screen-reader status for the button state. */
+.btn-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 /* ---------- Minimal entrance motion ---------- */
 .auth-card {
   animation: auth-rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -621,6 +848,22 @@ body::-webkit-scrollbar {
 
   .password-toggle:active {
     transform: translateY(-50%);
+  }
+
+  .auth-card .btn-primary,
+  .auth-card .btn-primary::after,
+  .btn-spinner,
+  .btn-tick,
+  .btn-tick path {
+    animation: none;
+  }
+
+  .btn-tick path {
+    stroke-dashoffset: 0;
+  }
+
+  .auth-card .btn-primary.is-error {
+    animation: none;
   }
 }
 

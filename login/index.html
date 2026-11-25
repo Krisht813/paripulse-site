@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#ffffff" />
+  <script>document.documentElement.classList.add("pp-booting");</script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261124" />
   <title>Sign in · Paripulse Management</title>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-600-latin.woff2" crossorigin />
@@ -13,11 +14,13 @@
   <link rel="preload" as="image" href="assets/login/ocean-waves-poster.jpg?v=20261125-2" fetchpriority="high" />
   <link rel="stylesheet" href="css/fonts.css?v=20261125-9" />
   <link rel="stylesheet" href="vendor/tabler/css/tabler.min.css" />
-  <link rel="stylesheet" href="css/auth.css?v=20261125-9" />
+  <link rel="stylesheet" href="css/auth.css?v=20261125-17" />
   <link rel="stylesheet" href="css/theme.css?v=20261125-9" />
   <link rel="stylesheet" href="css/notifications.css?v=20261125-9" />
 </head>
 <body class="auth-body">
+  <div class="boot-veil" aria-hidden="true"></div>
+
   <div class="auth-shell">
     <aside class="auth-brand">
       <div class="auth-brand__media" aria-hidden="true">
@@ -57,7 +60,7 @@
 
         <div id="authAlert" class="alert auth-alert" role="alert" hidden></div>
 
-        <form id="loginForm" novalidate>
+        <form id="loginForm" method="post" action="" novalidate>
           <div class="mb-3">
             <label class="form-label" for="loginEmail">Email address</label>
             <input class="form-control" type="email" id="loginEmail" name="email" autocomplete="email" placeholder="you@paripulse.com" required />
@@ -89,12 +92,20 @@
             <a href="/forgot-password/">Forgot password?</a>
           </div>
 
-          <button class="btn btn-primary w-100" type="submit" id="loginSubmit">Sign in</button>
+          <button class="btn btn-primary w-100" type="submit" id="loginSubmit">
+            <span class="btn-state">
+              <span class="btn-spinner" aria-hidden="true"></span>
+              <svg class="btn-tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4.3 4.3L18.6 8" /></svg>
+            </span>
+            <span class="btn-label">Sign in</span>
+          </button>
+          <p class="btn-status" id="loginStatus" role="status" aria-live="polite"></p>
         </form>
 
         <p class="auth-help">Access is invite-only. Contact your administrator if you need an account.</p>
         <p class="auth-legal">By signing in you agree to the <a href="/terms/">Terms</a> and <a href="/privacy/">Privacy Policy</a>.</p>
         <p class="auth-copyright-mobile">© 2025–2026 Paripulse Management. All rights reserved.</p>
+
       </div>
     </main>
   </div>
@@ -103,6 +114,43 @@
   <script src="vendor/firebase/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js?v=20261125-2"></script>
   <script src="js/notifications.js?v=20261125-3"></script>
-  <script src="js/auth.js?v=20261125-3"></script>
+  <script src="js/auth.js?v=20261125-12"></script>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains("pp-booting")) return;
+      var revealed = false;
+
+      function reveal() {
+        if (revealed) return;
+        revealed = true;
+        root.classList.remove("pp-booting");
+        var veil = document.querySelector(".boot-veil");
+        if (!veil) return;
+        veil.addEventListener("transitionend", function () {
+          veil.remove();
+        }, { once: true });
+        window.setTimeout(function () {
+          if (veil.parentNode) veil.remove();
+        }, 700);
+      }
+
+      function whenReady() {
+        var fonts = document.fonts && document.fonts.ready
+          ? document.fonts.ready
+          : Promise.resolve();
+        fonts.then(function () {
+          window.requestAnimationFrame(function () {
+            window.setTimeout(reveal, 60);
+          });
+        }).catch(reveal);
+      }
+
+      if (document.readyState === "complete") whenReady();
+      else window.addEventListener("load", whenReady, { once: true });
+
+      window.setTimeout(reveal, 2400);
+    })();
+  </script>
 </body>
 </html>
