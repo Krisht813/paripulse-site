@@ -249,7 +249,7 @@
     if (!deposits.length) {
       var emptyRow = document.createElement("tr");
       var emptyCell = document.createElement("td");
-      emptyCell.colSpan = 5;
+      emptyCell.colSpan = 6;
       emptyCell.textContent = "No completed deposits yet.";
       emptyRow.appendChild(emptyCell);
       body.appendChild(emptyRow);
@@ -263,6 +263,11 @@
       row.appendChild(makeCell(formatUSD(tx.amountCents)));
       row.appendChild(makeCell(tx.status));
       row.appendChild(makeCell(formatDate(tx.date)));
+
+      var actions = document.createElement("td");
+      actions.className = "text-end";
+      row.appendChild(actions);
+
       body.appendChild(row);
     });
   }
