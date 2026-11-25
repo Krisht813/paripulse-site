@@ -1,0 +1,175 @@
+/* ============================================================
+   Paripulse legal and policy pages
+   ============================================================ */
+
+.legal-main {
+  flex: 1;
+  padding: clamp(48px, 6vw, 88px) 0 clamp(64px, 8vw, 112px);
+  background: var(--bg);
+}
+
+.legal-shell {
+  max-width: 900px;
+}
+
+.legal-header {
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.legal-header h1 {
+  margin: 0;
+  color: var(--navy);
+  font-family: var(--display);
+  font-size: clamp(34px, 4.2vw, 54px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.legal-meta {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.legal-intro {
+  max-width: 68ch;
+  margin: 24px 0 0;
+  color: #475467;
+  font-size: 15px;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.legal-body {
+  max-width: 76ch;
+}
+
+.legal-body h2 {
+  margin: 38px 0 10px;
+  color: var(--navy);
+  font-family: var(--display);
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.legal-body h3 {
+  margin: 22px 0 8px;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.legal-body p,
+.legal-body li {
+  color: #475467;
+  font-size: 13.5px;
+  line-height: 1.78;
+}
+
+.legal-body p {
+  margin: 0 0 14px;
+}
+
+.legal-body ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.legal-body li {
+  margin-bottom: 7px;
+}
+
+.legal-body a {
+  color: var(--brand-red);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.legal-body a:hover {
+  color: var(--brand-red-dark);
+}
+
+.legal-callout {
+  margin: 26px 0;
+  padding: 18px 20px;
+  border: 1px solid #f1d4d7;
+  border-radius: 8px;
+  background: #fff7f7;
+}
+
+.legal-callout p {
+  margin: 0;
+  color: #7a271a;
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.legal-callout strong {
+  color: #7a271a;
+}
+
+.legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 46px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.legal-nav a {
+  color: #475467;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.legal-nav a:hover {
+  color: var(--brand-red);
+}
+
+.legal-credits {
+  margin: 26px 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.legal-credits li {
+  margin: 0;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.legal-credits strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.legal-credits span,
+.legal-credits a {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .legal-main {
+    padding: 36px 0 64px;
+  }
+
+  .legal-body p,
+  .legal-body li {
+    font-size: 13px;
+    line-height: 1.72;
+  }
+}

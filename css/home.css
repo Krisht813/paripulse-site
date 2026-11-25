@@ -940,6 +940,61 @@ input {
   font-size: clamp(12px, 0.78vw, 15px);
 }
 
+.home-demo-note {
+  max-width: 52ch;
+  margin: 16px 0 0;
+  padding: 9px 11px;
+  border: 1px solid #f1d4d7;
+  border-radius: 8px;
+  background: #fff7f7;
+  color: #7a271a;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.home-demo-note strong {
+  color: #7a271a;
+  font-weight: 600;
+}
+
+.home-footer__legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 16px clamp(24px, 3.1vw, 60px) 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.home-footer__legal p {
+  max-width: 74ch;
+  margin: 0;
+  color: #8b95a8;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.home-footer__legal nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-left: auto;
+}
+
+.home-footer__legal a {
+  color: #c3cad7;
+  font-size: 11.5px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-footer__legal a:hover {
+  color: #ffffff;
+}
+
 /* ------------------------------------------------------------
    Focus
    ------------------------------------------------------------ */
@@ -1191,6 +1246,16 @@ input {
     width: 100%;
     margin-left: 0;
     font-size: 11.5px;
+  }
+
+  .home-footer__legal {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 24px;
+  }
+
+  .home-footer__legal nav {
+    margin-left: 0;
   }
 
   /* Compact preview: drop the sidebar so the data stays readable */
