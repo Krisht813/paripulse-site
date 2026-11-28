@@ -4422,3 +4422,30 @@ html[data-theme="dark"] .theme-toggle .icon--moon {
     justify-content: flex-start;
   }
 }
+
+/* Create-user modal: quiet label and 4px-grid rhythm inside the sheet. */
+#createUserModal .form-field {
+  display: block;
+  margin: 0 0 16px;
+}
+
+#createUserModal .form-field > span {
+  display: block;
+  margin-bottom: 6px;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+#createUserModal .form-field .form-control,
+#createUserModal .form-field .form-select {
+  width: 100%;
+}
+
+#createUserModal .request-feedback {
+  margin: 0 0 12px;
+}
+
+#createUserModal .btn {
+  margin-top: 4px;
+}
