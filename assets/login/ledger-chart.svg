@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Abstract ledger and balance chart">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b111b"/>
+      <stop offset="0.55" stop-color="#0e1522"/>
+      <stop offset="1" stop-color="#111a29"/>
+    </linearGradient>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8322b" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#c8322b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f26a63"/>
+      <stop offset="1" stop-color="#c8322b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#c8322b" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#c8322b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0V80" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  <circle cx="1480" cy="300" r="420" fill="url(#glow)"/>
+
+  <!-- balance area chart -->
+  <path d="M120 820 L300 760 L470 790 L640 690 L810 720 L980 610 L1150 640 L1320 520 L1490 560 L1660 430 L1820 470 L1820 980 L120 980 Z" fill="url(#area)"/>
+  <path d="M120 820 L300 760 L470 790 L640 690 L810 720 L980 610 L1150 640 L1320 520 L1490 560 L1660 430 L1820 470" fill="none" stroke="url(#line)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ledger rows -->
+  <g stroke="#ffffff" stroke-opacity="0.07" stroke-width="1">
+    <path d="M120 900H1820"/>
+    <path d="M120 940H1820"/>
+  </g>
+
+  <!-- value bars -->
+  <g fill="#ffffff" fill-opacity="0.10">
+    <rect x="150" y="640" width="26" height="180" rx="6"/>
+    <rect x="200" y="700" width="26" height="120" rx="6"/>
+    <rect x="250" y="670" width="26" height="150" rx="6"/>
+    <rect x="300" y="720" width="26" height="100" rx="6"/>
+  </g>
+
+  <!-- data points -->
+  <g fill="#0b111b" stroke="#f26a63" stroke-width="4">
+    <circle cx="640" cy="690" r="9"/>
+    <circle cx="980" cy="610" r="9"/>
+    <circle cx="1320" cy="520" r="9"/>
+    <circle cx="1660" cy="430" r="9"/>
+  </g>
+
+  <!-- faint currency marks -->
+  <g fill="#ffffff" fill-opacity="0.05" font-family="Poppins, Arial, sans-serif" font-weight="700">
+    <text x="1420" y="180" font-size="220">$</text>
+    <text x="120" y="240" font-size="120">$</text>
+  </g>
+</svg>
