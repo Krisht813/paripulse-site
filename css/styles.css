@@ -4449,3 +4449,33 @@ html[data-theme="dark"] .theme-toggle .icon--moon {
 #createUserModal .btn {
   margin-top: 4px;
 }
+
+/* Settings: shimmer the fields themselves instead of grey boxes. */
+#settingsView.pp-skel .form-field > span,
+#settingsView.pp-skel .phone-label {
+  color: transparent;
+  background: #eef1f6;
+  border-radius: 5px;
+  animation: pp-skel-pulse 1.6s ease-in-out infinite;
+}
+
+#settingsView.pp-skel input,
+#settingsView.pp-skel select,
+#settingsView.pp-skel textarea,
+#settingsView.pp-skel .phone-country {
+  color: transparent !important;
+  background-color: #eef1f6 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  animation: pp-skel-pulse 1.6s ease-in-out infinite;
+}
+
+html[data-theme="dark"] #settingsView.pp-skel .form-field > span,
+html[data-theme="dark"] #settingsView.pp-skel .phone-label,
+html[data-theme="dark"] #settingsView.pp-skel input,
+html[data-theme="dark"] #settingsView.pp-skel select,
+html[data-theme="dark"] #settingsView.pp-skel textarea,
+html[data-theme="dark"] #settingsView.pp-skel .phone-country {
+  background-color: var(--paper-deep) !important;
+  background: var(--paper-deep);
+}
