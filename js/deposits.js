@@ -710,7 +710,10 @@
     if (payAmount) payAmount.textContent = formatUSD(currentAmountCents);
     if (payAsset) payAsset.textContent = asset.label;
     if (payNetwork) payNetwork.textContent = asset.network;
-    if (payAddress) payAddress.textContent = getAddress(currentAssetKey);
+    if (payAddress) {
+      payAddress.textContent = getAddress(currentAssetKey);
+      if (window.ParipulseDepositQr) window.ParipulseDepositQr.render(payAddress.textContent);
+    }
 
     if (warningTitle) {
       warningTitle.textContent =

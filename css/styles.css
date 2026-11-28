@@ -4489,3 +4489,33 @@ html[data-theme="dark"] #settingsView.pp-skel .phone-country {
 #settingsView.pp-skel .phone-country svg {
   visibility: hidden;
 }
+
+/* Deposit QR: sits under the address, quiet until the address is set. */
+.checkout-qr {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 0;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e4e7ec;
+  border-radius: 10px;
+}
+
+.checkout-qr img {
+  display: block;
+  width: 148px;
+  height: 148px;
+  image-rendering: pixelated;
+}
+
+.checkout-qr-fallback {
+  margin: 12px 0 0;
+  color: #667085;
+  font-size: 12px;
+  text-align: center;
+}
+
+html[data-theme="dark"] .checkout-qr {
+  background: #ffffff;
+  border-color: #e4e7ec;
+}
