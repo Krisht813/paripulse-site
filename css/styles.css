@@ -4479,3 +4479,13 @@ html[data-theme="dark"] #settingsView.pp-skel .phone-country {
   background-color: var(--paper-deep) !important;
   background: var(--paper-deep);
 }
+
+#settingsView.pp-skel input::placeholder {
+  color: transparent !important;
+}
+
+#settingsView.pp-skel .phone-country .phone-flag,
+#settingsView.pp-skel .phone-country .phone-dial,
+#settingsView.pp-skel .phone-country svg {
+  visibility: hidden;
+}
