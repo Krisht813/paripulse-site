@@ -490,7 +490,7 @@
         filtered.length +
         " of " +
         users.length +
-        " demo users. Accounts are simulated.";
+        " accounts in this workspace.";
     }
 
     var dashboardTotal = document.getElementById("totalUsersValue");
