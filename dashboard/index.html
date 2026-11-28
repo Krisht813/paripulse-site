@@ -581,6 +581,7 @@
                     <option value="blocked">Blocked</option>
                   </select>
                   <button class="btn btn-light toolbar__export" type="button" id="exportUsers">Export CSV</button>
+                  <button class="btn btn-primary" type="button" id="addUserButton" hidden>Add user</button>
                 </div>
 
                 <div class="table-responsive tx-table-wrap">
@@ -1510,6 +1511,39 @@
   </div>
 
   <!-- User detail modal -->
+  <div class="sheet-modal" id="createUserModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="createUserTitle">
+    <div class="sheet-modal__dialog" role="document">
+      <div class="sheet-modal__head">
+        <div class="sheet-modal__identity">
+          <h3 id="createUserTitle">Add user</h3>
+          <p>Creates the account and emails a set-password link.</p>
+        </div>
+        <button class="sheet-modal__close" type="button" id="createUserClose" aria-label="Close">×</button>
+      </div>
+      <div class="sheet-modal__body">
+        <label class="form-field">
+          <span>Full name</span>
+          <input class="form-control" type="text" id="createUserName" maxlength="80" autocomplete="off" />
+        </label>
+        <label class="form-field">
+          <span>Email address</span>
+          <input class="form-control" type="email" id="createUserEmail" maxlength="160" autocomplete="off" />
+        </label>
+        <label class="form-field">
+          <span>Role</span>
+          <select class="form-select" id="createUserRole">
+            <option value="user">User</option>
+            <option value="support">Support</option>
+            <option value="admin">Admin</option>
+            <option value="super_admin">Super admin</option>
+          </select>
+        </label>
+        <p class="request-feedback" id="createUserFeedback" role="status" hidden></p>
+        <button class="btn btn-primary w-100" type="button" id="createUserSubmit">Create account</button>
+      </div>
+    </div>
+  </div>
+
   <div class="sheet-modal" id="userModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="userModalTitle">
     <div class="sheet-modal__dialog" role="document">
       <div class="sheet-modal__head">
@@ -1690,7 +1724,7 @@
   <script src="js/pages.js?v=20261125-5"></script>
   <script src="js/live-dashboard.js?v=20261125-2"></script>
   <script src="js/live-deposits.js?v=20261125-4"></script>
-  <script src="js/live-admin.js?v=20261125-4"></script>
+  <script src="js/live-admin.js?v=20261128-1"></script>
   <script src="js/live-finance.js?v=20261125-2"></script>
   <script src="js/live-support.js?v=20261125-2"></script>
 <script src="js/live-settings.js?v=20261125-2"></script>
