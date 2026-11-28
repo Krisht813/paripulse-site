@@ -22,26 +22,26 @@
       label: "USDT",
       network: "TRC20",
       display: "USDT · TRC20",
-      address: "DEMO-USDT-TRC20-NOT-VALID"
+      address: "TBZGpP3nwLMtsP6jQjC5woWqvy7fR3Kv9k"
     },
     BTC: {
       label: "Bitcoin",
       network: "Bitcoin",
       display: "Bitcoin",
-      address: "DEMO-BTC-ADDRESS-NOT-VALID"
+      address: "bc1qauhmw59z4xtrsaxskuflt6f5m3xlhn3rnkjkq3"
     },
     ETH: {
       label: "Ethereum",
       network: "Ethereum",
       display: "Ethereum",
-      address: "DEMO-ETH-ADDRESS-NOT-VALID"
+      address: "0xDeE70C2685bd51Ac0eAd1C20C2b7989CD155796B"
     }
   };
 
   var DEFAULT_ADDRESSES = {
-    "USDT-TRC20": "DEMO-USDT-TRC20-NOT-VALID",
-    BTC: "DEMO-BTC-ADDRESS-NOT-VALID",
-    ETH: "DEMO-ETH-ADDRESS-NOT-VALID"
+    "USDT-TRC20": "TBZGpP3nwLMtsP6jQjC5woWqvy7fR3Kv9k",
+    BTC: "bc1qauhmw59z4xtrsaxskuflt6f5m3xlhn3rnkjkq3",
+    ETH: "0xDeE70C2685bd51Ac0eAd1C20C2b7989CD155796B"
   };
 
   function daysAgo(days) {
@@ -694,13 +694,13 @@
       return;
     }
     if (amount > 100000) {
-      showError("Demo limit is $100,000.");
+      showError("Limit is $100,000.");
       return;
     }
 
     currentAmountCents = Math.round(amount * 100);
     if (currentAmountCents < 100) {
-      showError("Minimum demo deposit is $1.00.");
+      showError("Minimum deposit is $1.00.");
       return;
     }
 
@@ -721,7 +721,7 @@
     }
     if (warningText) {
       warningText.textContent =
-        "Any other asset or network may be lost permanently. Minimum demo deposit is $1.00. Demo rates may vary.";
+        "Any other asset or network will be lost permanently. Credits are applied after an admin verifies the transaction.";
     }
 
     if (receiptInput) receiptInput.value = "";
