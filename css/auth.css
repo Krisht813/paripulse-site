@@ -499,13 +499,13 @@ body::-webkit-scrollbar {
 
   .auth-brand {
     display: flex;
-    height: 144px;
-    min-height: 144px;
+    height: 176px;
+    min-height: 176px;
     padding: 16px 20px;
   }
 
   .auth-brand__poster {
-    object-position: center 22%;
+    object-position: center 42%;
   }
 
   .auth-brand__media::after {
@@ -536,10 +536,7 @@ body::-webkit-scrollbar {
   }
 
   .auth-pitch .auth-eyebrow {
-    margin: 0;
-    color: #e8e2d6;
-    font-size: 11.5px;
-    letter-spacing: 0;
+    display: none;
   }
 
   .auth-foot {
